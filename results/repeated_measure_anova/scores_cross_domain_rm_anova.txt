@@ -1,0 +1,105 @@
+
+Error: fold
+          Df  Sum Sq  Mean Sq F value Pr(>F)
+Residuals 15 0.09215 0.006143               
+
+Error: fold:decoder
+          Df  Sum Sq Mean Sq F value   Pr(>F)    
+decoder    2 0.14798 0.07399   84.43 4.77e-13 ***
+Residuals 30 0.02629 0.00088                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:accuracy_train
+               Df  Sum Sq Mean Sq F value   Pr(>F)    
+accuracy_train  1 0.07839 0.07839   37.82 1.86e-05 ***
+Residuals      15 0.03109 0.00207                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:accuracy_test
+              Df    Sum Sq   Mean Sq F value Pr(>F)
+accuracy_test  1 0.0001044 1.045e-04   1.543  0.233
+Residuals     15 0.0010156 6.771e-05               
+
+Error: fold:source
+          Df  Sum Sq  Mean Sq F value   Pr(>F)    
+source     2 0.05833 0.029163   53.27 1.34e-10 ***
+Residuals 30 0.01642 0.000547                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:decoder:accuracy_train
+                       Df  Sum Sq  Mean Sq F value   Pr(>F)    
+decoder:accuracy_train  2 0.02189 0.010944   23.91 6.17e-07 ***
+Residuals              30 0.01373 0.000458                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:decoder:accuracy_test
+                      Df    Sum Sq   Mean Sq F value Pr(>F)
+decoder:accuracy_test  2 0.0000648 3.239e-05   0.756  0.478
+Residuals             30 0.0012850 4.283e-05               
+
+Error: fold:accuracy_train:accuracy_test
+                             Df   Sum Sq  Mean Sq F value   Pr(>F)    
+accuracy_train:accuracy_test  1 0.005899 0.005899   62.38 1.01e-06 ***
+Residuals                    15 0.001419 0.000095                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:decoder:source
+               Df   Sum Sq   Mean Sq F value   Pr(>F)    
+decoder:source  4 0.003676 0.0009191   5.309 0.000997 ***
+Residuals      60 0.010388 0.0001731                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:accuracy_train:source
+                      Df  Sum Sq  Mean Sq F value   Pr(>F)    
+accuracy_train:source  2 0.03607 0.018037   50.29 2.62e-10 ***
+Residuals             30 0.01076 0.000359                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:accuracy_test:source
+                     Df  Sum Sq  Mean Sq F value Pr(>F)    
+accuracy_test:source  2 0.04010 0.020051     383 <2e-16 ***
+Residuals            30 0.00157 0.000052                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:decoder:accuracy_train:accuracy_test
+                                     Df    Sum Sq   Mean Sq F value   Pr(>F)    
+decoder:accuracy_train:accuracy_test  2 0.0011369 0.0005684   28.85 1.03e-07 ***
+Residuals                            30 0.0005911 0.0000197                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:decoder:accuracy_train:source
+                              Df   Sum Sq   Mean Sq F value   Pr(>F)    
+decoder:accuracy_train:source  4 0.011547 0.0028868    25.8 1.84e-12 ***
+Residuals                     60 0.006714 0.0001119                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:decoder:accuracy_test:source
+                             Df  Sum Sq   Mean Sq F value   Pr(>F)    
+decoder:accuracy_test:source  4 0.00111 2.775e-04   8.164 2.52e-05 ***
+Residuals                    60 0.00204 3.399e-05                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:accuracy_train:accuracy_test:source
+                                    Df   Sum Sq  Mean Sq F value   Pr(>F)    
+accuracy_train:accuracy_test:source  2 0.007845 0.003923   67.57 7.75e-12 ***
+Residuals                           30 0.001742 0.000058                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: fold:decoder:accuracy_train:accuracy_test:source
+                                            Df   Sum Sq   Mean Sq F value   Pr(>F)    
+decoder:accuracy_train:accuracy_test:source  4 0.001713 0.0004282   25.72 1.95e-12 ***
+Residuals                                   60 0.000999 0.0000166                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

@@ -1,0 +1,64 @@
+                                                            Sum Sq      Mean Sq NumDF     DenDF      F value
+decoder                                               1.203114e-01 6.015571e-02     2 263.05797 1.545805e+02
+condition                                             6.513071e-02 6.513071e-02     1 263.05797 1.673647e+02
+domain                                                7.256432e-05 3.628216e-05     2  13.04903 9.323332e-02
+accuracy_train                                        2.585767e-02 2.585767e-02     1 263.05797 6.644579e+01
+accuracy_test                                         5.023657e-04 5.023657e-04     1 264.19751 1.290916e+00
+decoder:condition                                     1.700240e-03 8.501198e-04     2 263.05797 2.184530e+00
+decoder:domain                                        2.381967e-03 5.954919e-04     4 263.05797 1.530220e+00
+condition:domain                                      4.282098e-03 2.141049e-03     2 263.05797 5.501798e+00
+decoder:accuracy_train                                4.782370e-03 2.391185e-03     2 263.05797 6.144566e+00
+condition:accuracy_train                              3.668392e-05 3.668392e-05     1 263.05797 9.426572e-02
+domain:accuracy_train                                 1.807488e-02 9.037440e-03     2 263.05797 2.322327e+01
+decoder:accuracy_test                                 3.672556e-04 1.836278e-04     2 263.05797 4.718635e-01
+condition:accuracy_test                               3.164471e-04 3.164471e-04     1 263.05797 8.131658e-01
+domain:accuracy_test                                  1.506909e-02 7.534544e-03     2 264.17132 1.936132e+01
+accuracy_train:accuracy_test                          3.474254e-03 3.474254e-03     1 263.05797 8.927699e+00
+decoder:condition:domain                              1.191386e-04 2.978464e-05     4 263.05797 7.653682e-02
+decoder:condition:accuracy_train                      2.341479e-05 1.170739e-05     2 263.05797 3.008418e-02
+decoder:domain:accuracy_train                         7.537347e-03 1.884337e-03     4 263.05797 4.842131e+00
+condition:domain:accuracy_train                       1.677962e-04 8.389808e-05     2 263.05797 2.155907e-01
+decoder:condition:accuracy_test                       1.301740e-05 6.508700e-06     2 263.05797 1.672524e-02
+decoder:domain:accuracy_test                          1.014635e-03 2.536587e-04     4 263.05797 6.518201e-01
+condition:domain:accuracy_test                        2.518718e-04 1.259359e-04     2 263.05797 3.236142e-01
+decoder:accuracy_train:accuracy_test                  1.046664e-03 5.233321e-04     2 263.05797 1.344793e+00
+condition:accuracy_train:accuracy_test                2.262760e-05 2.262760e-05     1 263.05797 5.814554e-02
+domain:accuracy_train:accuracy_test                   4.591646e-04 2.295823e-04     2 263.05797 5.899516e-01
+decoder:condition:domain:accuracy_train               5.656596e-05 1.414149e-05     4 263.05797 3.633902e-02
+decoder:condition:domain:accuracy_test                6.405907e-05 1.601477e-05     4 263.05797 4.115273e-02
+decoder:condition:accuracy_train:accuracy_test        2.411540e-05 1.205770e-05     2 263.05797 3.098435e-02
+decoder:domain:accuracy_train:accuracy_test           1.492712e-04 3.731779e-05     4 263.05797 9.589454e-02
+condition:domain:accuracy_train:accuracy_test         3.738497e-06 1.869248e-06     2 263.05797 4.803359e-03
+decoder:condition:domain:accuracy_train:accuracy_test 4.562415e-06 1.140604e-06     4 263.05797 2.930980e-03
+                                                            Pr(>F)
+decoder                                               4.050798e-45
+condition                                             5.853817e-30
+domain                                                9.115822e-01
+accuracy_train                                        1.473090e-14
+accuracy_test                                         2.569088e-01
+decoder:condition                                     1.145679e-01
+decoder:domain                                        1.937138e-01
+condition:domain                                      4.562702e-03
+decoder:accuracy_train                                2.465505e-03
+condition:accuracy_train                              7.590656e-01
+domain:accuracy_train                                 5.152424e-10
+decoder:accuracy_test                                 6.243656e-01
+condition:accuracy_test                               3.680108e-01
+domain:accuracy_test                                  1.423832e-08
+accuracy_train:accuracy_test                          3.074161e-03
+decoder:condition:domain                              9.893493e-01
+decoder:condition:accuracy_train                      9.703672e-01
+decoder:domain:accuracy_train                         8.763584e-04
+condition:domain:accuracy_train                       8.062075e-01
+decoder:condition:accuracy_test                       9.834149e-01
+decoder:domain:accuracy_test                          6.260651e-01
+condition:domain:accuracy_test                        7.238169e-01
+decoder:accuracy_train:accuracy_test                  2.623792e-01
+condition:accuracy_train:accuracy_test                8.096392e-01
+domain:accuracy_train:accuracy_test                   5.550859e-01
+decoder:condition:domain:accuracy_train               9.974662e-01
+decoder:condition:domain:accuracy_test                9.967714e-01
+decoder:condition:accuracy_train:accuracy_test        9.694943e-01
+decoder:domain:accuracy_train:accuracy_test           9.837061e-01
+condition:domain:accuracy_train:accuracy_test         9.952082e-01
+decoder:condition:domain:accuracy_train:accuracy_test 9.999828e-01

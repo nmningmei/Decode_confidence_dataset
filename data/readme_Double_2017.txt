@@ -1,0 +1,6 @@
+Contributors:Kit S. Double (kit.double@education.ox.ac.uk)Damian P. Birney (damian.birney@sydney.edu.au)CitationExperiment 1 Kit S. Double & Damian P. Birney (2017) Are you sure about that? Eliciting confidence ratings may influence performance on Raven's progressive matrices, Thinking & Reasoning, 23:2, 190-206, DOI: 10.1080/13546783.2017.1289121StimulusA computerised 20-item set drawn from the Ravens’ Advanced Progressive Matrices Task. Each item presents a matrix reasoning problem and 8 possible response options. The items used were the same for all participants and consisted of the odd-numbered items from the original 36-item version as well as the two hardest even-numbered items. Items were presented in ascending difficulty.Confidence ScaleParticipants rated their confidence on a 6-point scale ranging from 0% to 100% (0%, 20%, 40%, 60%, 80%, 100%) that asked: “How confident are you in your previous answer?” The ratings were displayed after a participant's response and participants could neither view nor change their earlier question/answer when making the rating.Manipulations: No manipulations
+Block size: 20 items, 1 blockFeedback: No feedback was providedSubject population: First year psychology studentsResponse device: keyboardExperiment setting: In lab
+
+Training: 2 example items shown with answers
+
+Location: Sydney, Australia

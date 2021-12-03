@@ -1,0 +1,16 @@
+                                                     Sum Sq      Mean Sq NumDF DenDF      F value       Pr(>F)
+decoder                                        2.117451e-02 1.058725e-02     2   345 2.126723e+01 1.951018e-09
+condition                                      3.435577e-01 3.435577e-01     1   345 6.901244e+02 2.556868e-84
+accuracy_train                                 9.334078e-04 9.334078e-04     1   345 1.874991e+00 1.717953e-01
+accuracy_test                                  4.076362e-03 4.076362e-03     1   345 8.188427e+00 4.473012e-03
+decoder:condition                              4.107660e-03 2.053830e-03     2   345 4.125648e+00 1.695682e-02
+decoder:accuracy_train                         2.374108e-04 1.187054e-04     2   345 2.384504e-01 7.879775e-01
+condition:accuracy_train                       3.275306e-07 3.275306e-07     1   345 6.579298e-04 9.795512e-01
+decoder:accuracy_test                          6.590024e-04 3.295012e-04     2   345 6.618883e-01 5.165301e-01
+condition:accuracy_test                        3.386451e-03 3.386451e-03     1   345 6.802561e+00 9.498415e-03
+accuracy_train:accuracy_test                   1.732439e-02 1.732439e-02     1   345 3.480051e+01 8.720346e-09
+decoder:condition:accuracy_train               1.936196e-05 9.680980e-06     2   345 1.944675e-02 9.807422e-01
+decoder:condition:accuracy_test                2.095103e-05 1.047551e-05     2   345 2.104278e-02 9.791783e-01
+decoder:accuracy_train:accuracy_test           3.381264e-02 1.690632e-02     2   345 3.396072e+01 3.440824e-14
+condition:accuracy_train:accuracy_test         5.230488e-07 5.230488e-07     1   345 1.050679e-03 9.741605e-01
+decoder:condition:accuracy_train:accuracy_test 6.760409e-05 3.380205e-05     2   345 6.790014e-02 9.343663e-01
