@@ -18,7 +18,7 @@ from sklearn.metrics import explained_variance_score
 
 model_name          = 'SVM'
 experiment_type     = 'LOO'
-target_attributes   = 'confidence'
+target_attributes   = 'confidence' # change folder name
 split_data          = 'no-split'
 data_dir            = '../data'
 model_dir           = '../models/{}_{}_{}_{}'.format(*[model_name,experiment_type,target_attributes,split_data])
@@ -37,7 +37,7 @@ debug               = True
 df_def          = pd.read_csv(working_df_name,)
 
 # pick one of the csv files
-filename = '../data/4-point/data_Bang_2019_Exp1.csv'
+filename = '../data/4-point/data_Bang_2019_Exp1.csv' # change file name
 df_sub = df_def[df_def['filename'] == filename]
 df_sub = check_column_type(df_sub)
 
