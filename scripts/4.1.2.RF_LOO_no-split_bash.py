@@ -61,14 +61,14 @@ for jj,folder_name in enumerate(['confidence','accuracy','confidence-accuracy'])
         new_batch_script_name = os.path.join(bash_folder,f'LOO{jj+1}{ii+1}')
         content = f"""#!/bin/bash
 #SBATCH --partition=regular
-#SBATCH --job-name=RSA{ii}
+#SBATCH --job-name={experiment[-1]}{ii+1}
 #SBATCH --cpus-per-task={core}
 #SBATCH --nodes={node}
 #SBATCH --ntasks-per-node=1
 #SBATCH --time={cput}:00:00
 #SBATCH --mem-per-cpu={mem}G
-#SBATCH --output=outputs/out_{ii}.txt
-#SBATCH --error=outputs/err_{ii}.txt
+#SBATCH --output=outputs/out_{ii+1}.txt
+#SBATCH --error=outputs/err_{ii+1}.txt
 #SBATCH --mail-user=nmei@bcbl.eu
 
 source /scratch/ningmei/.bashrc

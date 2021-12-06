@@ -67,8 +67,9 @@ results             = dict(
                            )
 for ii in range(n_features):
     results[f'features T-{n_features - ii}'] = []
-
+print(cv.get_n_splits(features,targets,groups=groups))
 for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
+    print(f'fold {fold}')
     # leave out test data
     X_,y_           = features[train_],targets[train_]
     X_test, y_test  = features[test]  ,targets[test]
