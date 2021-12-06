@@ -86,7 +86,7 @@ python3 "{new_script_name.split('/')[-1]}"
             f.write(content)
             f.close()
         
-        collections.append("qsub LOO{jj+1}{ii+1}")
+        collections.append("sbatch LOO{jj+1}{ii+1}")
     
     with open(f'{bash_folder}/qsub_jobs.py','w') as f:
         f.write("""import os\nimport time""")
@@ -94,9 +94,9 @@ python3 "{new_script_name.split('/')[-1]}"
     with open(f'{bash_folder}/qsub_jobs.py','a') as f:
         for ii,line in enumerate(collections):
             if ii == 0:
-                f.write(f'\nos.system("qsub LOO{jj+1}{ii+1}")\n')
+                f.write(f'\nos.system("sbatch LOO{jj+1}{ii+1}")\n')
             else:
-                f.write(f'time.sleep(.3)\nos.system("qsub LOO{jj+1}{ii+1}")\n')
+                f.write(f'time.sleep(.3)\nos.system("sbatch LOO{jj+1}{ii+1}")\n')
         f.close()
             
 
