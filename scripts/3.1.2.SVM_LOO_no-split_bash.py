@@ -17,8 +17,8 @@ for jj,folder_name in enumerate(['confidence','accuracy','confidence-accuracy'])
     df_def              = pd.read_csv(working_df_name,)
     node                = 1
     core                = 16
-    mem                 = 5 * core * node
-    cput                = 24 * core * node
+    mem                 = 4
+    cput                = 24
     
     bash_folder = '{}_{}_{}'.format(*experiment)
     with open('../.gitignore','r') as f:
