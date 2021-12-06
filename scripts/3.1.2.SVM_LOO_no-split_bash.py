@@ -79,7 +79,7 @@ cd $SLURM_SUBMIT_DIR
 
 pwd
 echo {filename}
-python3 "{new_script_name}"
+python3 "{new_script_name.split('/')[-1]}"
 """
 
         with open(new_batch_script_name,'w') as f:
