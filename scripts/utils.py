@@ -72,12 +72,12 @@ def preprocess(working_data,
         else:
             df_temp['accuracy'] = np.array(df_temp['Stimulus'].values == df_temp['Response'].values,dtype = int)
         df_temp['filename'] = f
-        if target_columns[0] == 'metaAdequacy':
-            t.set_description('add metaAdequacy,concatinating')
-            df_temp['metaAdequacy'] = df_temp.apply(meta_adequacy,axis = 1)
+        if len(target_columns) == 2:
+            df_temp = df_temp[np.concatenate([['Subj_idx','filename',],target_columns])]
+        elif 'accuracy' not in target_columns:
+            df_temp = df_temp[np.concatenate([['Subj_idx','filename','accuracy'],target_columns])]
         else:
-            t.set_description('add confidence,concatinating')
-        df_temp = df_temp[np.concatenate([['Subj_idx','filename','accuracy'],target_columns])]
+            df_temp = df_temp[['Subj_idx','filename','accuracy']]
         df_for_concat.append(df_temp)
     df_concat = pd.concat(df_for_concat)
     
@@ -87,8 +87,12 @@ def preprocess(working_data,
               targets   = [],
               accuracy  = [],
               )
-    for ii in range(time_steps):
-        df[f'feature{ii + 1}'] = []
+    if len(target_columns) == 1:
+        for ii in range(time_steps):
+            df[f'feature{ii + 1}'] = []
+    elif len(target_columns) == 2:
+        for ii in range(time_steps * 2):
+            df[f'feature{ii + 1}'] = []
     
     t = tqdm(df_concat.groupby(['Subj_idx','filename']),)
     for (sub,filename), df_sub in t:
@@ -109,33 +113,40 @@ def preprocess(working_data,
             df["filename"   ].append(filename)
             df["targets"    ].append(targets_.flatten()[0])
             df["accuracy"   ].append(accuracy_)
-            [df[f"feature{ii + 1}"].append(f) for ii,f in enumerate(features_.flatten())]
+            if len(target_columns) == 1:
+                features_ = features_.flatten()
+            elif len(target_columns) == 2:
+                features_ = np.hstack([features_[0,:,0],features_[0,:,1]])
+            [df[f"feature{ii + 1}"].append(f) for ii,f in enumerate(features_)]
             
     df = pd.DataFrame(df)
     # re-order the columns
     df = df[np.concatenate([
              ['filename', 'sub','accuracy'],
-             [f'feature{ii + 1}' for ii in range(time_steps)],
+             [f'feature{ii + 1}' for ii in range(time_steps * len(target_columns))],
              ['targets']
              ])]
-    """
-    REMOVING FEATURES AND TARGETS DIFFERENT FROM 1-4
-    """
-    df_temp = df.dropna()
-    ###################### parallelize the for-loop to multiple CPUs ############################
-    ###################### it is faster than df_temp.apply           ############################
-    def detect(row):
-        col_names   = np.concatenate([[f'feature{ii+1}' for ii in range(time_steps)],['targets']])
-        values      = np.array([row[col_name] for col_name in col_names])
-        return np.logical_and(values < 5, values > 0)
-    
-    idx_within_range = Parallel(n_jobs  = n_jobs,
-                                verbose = verbose,
-                                )(delayed(detect)(**{'row':row})for ii,row in df_temp.iterrows())
-    #############################################################################################
-    # ALL df_pepe columns must be true(1) & sum up to 8
-    idx     = np.sum(idx_within_range,axis = 1) == (time_steps + 1)
-    df_def  = df_temp.loc[idx,:]
+    if 'Confidence' in target_columns:
+        """
+        REMOVING FEATURES AND TARGETS DIFFERENT FROM 1-4
+        """
+        df_temp = df.dropna()
+        ###################### parallelize the for-loop to multiple CPUs ############################
+        ###################### it is faster than df_temp.apply           ############################
+        def detect(row):
+            col_names   = np.concatenate([[f'feature{ii+1}' for ii in range(time_steps)],['targets']])
+            values      = np.array([row[col_name] for col_name in col_names])
+            return np.logical_and(values < 5, values > 0)
+        
+        idx_within_range = Parallel(n_jobs  = n_jobs,
+                                    verbose = verbose,
+                                    )(delayed(detect)(**{'row':row})for ii,row in df_temp.iterrows())
+        #############################################################################################
+        # ALL df_pepe columns must be true(1) & sum up to 8
+        idx     = np.sum(idx_within_range,axis = 1) == (time_steps + 1)
+        df_def  = df_temp.loc[idx,:]
+    else:
+        df_def = df.dropna()
     return df_def
 
 def str2int(x):
@@ -229,170 +240,24 @@ def convert_object_to_float(df):
                 print(f'column {name} contains strings')
     return df
 
+def build_SVMRegressor():
+    from sklearn.svm import LinearSVR
+    svm = LinearSVR(random_state = 12345,)
+    return svm
+
 def build_RF(n_jobs             = 1,
-             learning_rate      = 1e-1,
              max_depth          = 3,
-             n_estimators       = 100,
-             objective          = 'binary:logistic',
-             subsample          = 0.9,
-             colsample_bytree   = 0.9,
-             reg_alpha          = 0,
-             reg_lambda         = 1,
-             importance_type    = 'gain',
-             sklearnlib         = True,
-             ):
-    if sklearnlib:
-        from sklearn.ensemble import RandomForestClassifier
-        rf = RandomForestClassifier(n_estimators    = n_estimators,
-                                    criterion       = 'entropy',
-                                    n_jobs          = n_jobs,
-                                    class_weight    = 'balanced',
-                                    random_state    = 12345,
-                                    )
-        return rf
-    else:
-        from xgboost import XGBClassifier
-        xgb = XGBClassifier(
-                            learning_rate                           = learning_rate,
-                            max_depth                               = max_depth,
-                            n_estimators                            = n_estimators,
-                            objective                               = objective,
-                            booster                                 = 'gbtree', # default
-                            subsample                               = subsample,
-                            colsample_bytree                        = colsample_bytree,
-                            reg_alpha                               = reg_alpha,
-                            reg_lambda                              = reg_lambda,
-                            random_state                            = 12345, # not default
-                            importance_type                         = importance_type,
-                            n_jobs                                  = n_jobs,# default to be 1
-                                                  )
-        return xgb
-
-
-def _get_RF_feature_importance(randomforestclassifier,
-                              features,
-                              targets,
-                              idx,
-                              results,
-                              feature_properties = 'feature importance',
-                              time_steps = 7,
-                              n_repeats = 10,
-                              n_jobs = -1,
-                              random_state = 12345,
-                              ):
-    """
-    Parameters
-    --------------
-    randomforestclassifier : sklearn.ensemble.RandomForestClassifier, should already be fit
-        a trained random forest classifier object
-    features : numpy.ndarray
-        the feature matrix
-    targets : numpy.ndarray or list
-        the target vector
-    idx : numpy.ndarray or list
-        indicies for selecting instances to feed the feature importance calculation
-        function
-    results : dict
-        to record the results
-    feature_properties : str, default = "feature importance"
-        we used to use something else, I forget what they are
-    time_steps : int, default = 7
-    n_repeats : Number of times to permute a feature
-    n_jobs : int or None, default = -1
-        number of CPUs used for the calculation, -1 means all CPUs
-    random_state : int, RandomState instance
-        control for reproducibility
-    
-    Returns
-    -------------------
-    feature_importance : sklearn.utils.Bunch
-        Dictionary-like object, with the following attributes.
-        importances_mean ndarray, shape (n_features, )
-            Mean of feature importance over n_repeats.
-        importances_std ndarray, shape (n_features, )
-            Standard deviation over n_repeats.
-        importances ndarray, shape (n_features, n_repeats)
-            Raw permutation importance scores.
-    results : Dict
-        the dictionary for the results
-    feature_importance_mean : numpy.ndarray
-    """
-    print('permutation feature importance...')
-    try:
-        from sklearn.inspection import permutation_importance
-        from sklearn.metrics import make_scorer
-    except:
-        print('why, IT?')
-    scorer = make_scorer(scoring_func,needs_proba=True,**{'confidence_range':4,'need_normalize':True,'return_mean_score':True})
-    feature_importance = permutation_importance(randomforestclassifier,
-                                                features[idx],
-                                                targets[idx],
-                                                scoring         = scorer,
-                                                n_repeats       = n_repeats,
-                                                n_jobs          = n_jobs,
-                                                random_state    = random_state,
-                                                )
-    feature_importance_mean = feature_importance['importances_mean']
-    
-    [results[f'{feature_properties} T-{time_steps - ii}'].append(feature_importance_mean[ii]) for ii in range(time_steps)]
-    return feature_importance,results,feature_importance_mean
-
-def append_dprime_metadprime(df,df_metadprime):
-    temp = []
-    for (filename,sub_name),df_sub in tqdm(df.groupby(['filename','sub']),desc='dprime'):
-        df_sub
-        idx_ = np.logical_and(df_metadprime['sub_names' ] == sub_name,
-                              df_metadprime['file'      ] == filename.split('/')[-1],)
-        row = df_metadprime[idx_]
-        if len(row) > 0:
-            df_sub['metadprime'] = row['metadprime'].values[0]
-            df_sub['dprime'    ] = row['dprime'    ].values[0]
-            temp.append(df_sub)
-    df = pd.concat(temp)
-    return df
-
-def label_high_low(df,n_jobs = 1):
-    """
-    to determine the high and low metacognition, the M-ratio should be used
-    M-ratio = frac{meta-d'}{d'}
-    """
-    df['m-ratio'] = df['metadprime'] / (df['dprime']  + 1e-12)
-    df_temp = df.groupby(['filename','sub']).mean().reset_index()
-    m_ratio = df_temp['metadprime'].values / (df_temp['dprime'].values + 1e-12)
-    criterion = np.median(m_ratio)
-    df['level']  = df['m-ratio'].apply(lambda x: 'high' if x >= criterion else 'low')
-
-    return df
-
-def _build_Regression(time_steps = 7,confidence_range = 4,model_name = 'temp.h5'):
-    # reset the GPU memory
-    tf.keras.backend.clear_session()
-    try:
-        tf.random.set_random_seed(12345) # tf 1.0
-    except:
-        tf.random.set_seed(12345) # tf 2.0
-    # build a regression model
-    inputs                  = layers.Input(shape     = (time_steps*confidence_range,),# time steps by features 
-                                           name      = 'inputs')
-    outputs                 = layers.Dense(confidence_range,
-                                           kernel_regularizer   = regularizers.l2(),
-                                           name                 = "output",
-                                           activation           = "softmax")(inputs)
-    model                   = Model(inputs,
-                                    outputs)
-    
-    model.compile(optimizer     = optimizers.SGD(lr = 1e-4),
-                  loss          = losses.binary_crossentropy,
-                  metrics       = ['mse'])
-    # early stopping
-    callbacks = make_CallBackList(model_name    = model_name,
-                                  monitor       = 'val_loss',
-                                  mode          = 'min',
-                                  verbose       = 0,
-                                  min_delta     = 1e-4,
-                                  patience      = 5,
-                                  frequency     = 1,)
-    return model,callbacks
+             n_estimators       = 100,):
+    from sklearn.ensemble import RandomForestRegressor
+    rf = RandomForestRegressor(n_estimators     = n_estimators,
+                               # criterion        = 'squred_error',
+                               max_depth        = max_depth,
+                               n_jobs           = n_jobs,
+                               bootstrap        = True,
+                               oob_score        = True,
+                               random_state     = 12345,
+                               )
+    return rf
 
 def build_RNN(time_steps = 7,confidence_range = 4,model_name = 'temp.h5'):
     # reset the GPU memory
@@ -430,38 +295,32 @@ def build_RNN(time_steps = 7,confidence_range = 4,model_name = 'temp.h5'):
                                   frequency     = 1,)
     return model,callbacks
 
-def scoring_func(y_true,
-                 y_pred,
-                 confidence_range = 4,
-                 need_normalize = False,
-                 one_hot_y_true = False,):
-    try:
-        to_categorical(y_true - 1, num_classes = confidence_range)
-    except:
-        from tensorflow.keras.utils import to_categorical
+def append_dprime_metadprime(df,df_metadprime):
+    temp = []
+    for (filename,sub_name),df_sub in tqdm(df.groupby(['filename','sub']),desc='dprime'):
+        df_sub
+        idx_ = np.logical_and(df_metadprime['sub_names' ] == sub_name,
+                              df_metadprime['file'      ] == filename.split('/')[-1],)
+        row = df_metadprime[idx_]
+        if len(row) > 0:
+            df_sub['metadprime'] = row['metadprime'].values[0]
+            df_sub['dprime'    ] = row['dprime'    ].values[0]
+            temp.append(df_sub)
+    df = pd.concat(temp)
+    return df
+
+def label_high_low(df,n_jobs = 1):
     """
-    Customized scoring function
-    
-    Parameters
-    ---------------
-    y_true : list or numpy.ndarray, shape (n_samples, confidence_range)
-    y_pred : list or numpy.ndarray, shape (n_samples, confidence_range)
-    confidence_range : int
-    
-    Return
-    ---------------
-    score : list, shape (confidence_range,)
+    to determine the high and low metacognition, the M-ratio should be used
+    M-ratio = frac{meta-d'}{d'}
     """
-    if need_normalize:
-        y_pred = softmax(np.array(y_pred),axis = 1)
-    if one_hot_y_true:
-        y_true = to_categorical(y_true - 1, num_classes = confidence_range)
-    # print(y_pred.shape)
-    y_true = np.concatenate([y_true,np.eye(confidence_range)])
-    # there is a logical problem but it works
-    y_pred = np.concatenate([y_pred,np.ones((confidence_range,confidence_range))/confidence_range])
-    score = roc_auc_score(y_true,y_pred)
-    return score
+    df['m-ratio'] = df['metadprime'] / (df['dprime']  + 1e-12)
+    df_temp = df.groupby(['filename','sub']).mean().reset_index()
+    m_ratio = df_temp['metadprime'].values / (df_temp['dprime'].values + 1e-12)
+    criterion = np.median(m_ratio)
+    df['level']  = df['m-ratio'].apply(lambda x: 'high' if x >= criterion else 'low')
+
+    return df
 
 def resample_ttest(x,
                    baseline         = 0.5,
@@ -692,13 +551,6 @@ def get_array_from_dataframe(df,column_name):
                             ' ').split(' ') if len(item) > 0],
                     dtype = 'float32')
 
-def get_properties(model,decoder = 'SVM'):
-    if decoder == 'SVM':
-        properties = np.concatenate([est.base_estimator.coef_[np.newaxis] for est in model.steps[-1][-1].calibrated_classifiers_]).mean(0)
-    elif decoder == 'RF':
-        pass
-    return properties
-
 def set_line_lims(dict_condition,ylims = [(-0.325,0.325),(-0.675,0.675)]):
     lims = {list(dict_condition.values())[1]:dict(xticks = np.arange(-3,0),
                      xticklabels = np.arange(-7,-4),
@@ -716,91 +568,91 @@ def get_groupby_average():
                        }
     return groupby_average
 
-def load_results(data_type      = 'confidence', # confidence or adequacy
-                 within_cross   = 'LOO', # LOO or cross_domain
-                 working_data   = [],
-                 dict_rename    = {0:'incorrect trials',1:'correct trials'},
-                 dict_condition = {'past':'T-7,T-6,T-5','recent':'T-3,T-2,T-1'}):
-    # measure: confidence, within perceptual domain decoding
-    if (data_type == 'confidence') and (within_cross == 'LOO'):
-        df                      = []
-        for f in working_data:
-            temp                    = pd.read_csv(f)
-            study_name              = re.findall('\(([^)]+)',f)[0]
-            temp['study_name']      = study_name
-            temp['decoder']         = f.split('/')[-1].split(' ')[0]
-            condition               = f.split(' ')[1]
-            if dict_condition is not None:
-                temp['condition']   = dict_condition[condition]
-            df.append(temp)
-        df                      = pd.concat(df)
+# def load_results(data_type      = 'confidence', # confidence or adequacy
+#                  within_cross   = 'LOO', # LOO or cross_domain
+#                  working_data   = [],
+#                  dict_rename    = {0:'incorrect trials',1:'correct trials'},
+#                  dict_condition = {'past':'T-7,T-6,T-5','recent':'T-3,T-2,T-1'}):
+#     # measure: confidence, within perceptual domain decoding
+#     if (data_type == 'confidence') and (within_cross == 'LOO'):
+#         df                      = []
+#         for f in working_data:
+#             temp                    = pd.read_csv(f)
+#             study_name              = re.findall('\(([^)]+)',f)[0]
+#             temp['study_name']      = study_name
+#             temp['decoder']         = f.split('/')[-1].split(' ')[0]
+#             condition               = f.split(' ')[1]
+#             if dict_condition is not None:
+#                 temp['condition']   = dict_condition[condition]
+#             df.append(temp)
+#         df                      = pd.concat(df)
         
-        for col_name in ['accuracy_train','accuracy_test']:
-            df[col_name]        = df[col_name].map(dict_rename)
-        groupby                 = get_groupby_average()[data_type][within_cross]
+#         for col_name in ['accuracy_train','accuracy_test']:
+#             df[col_name]        = df[col_name].map(dict_rename)
+#         groupby                 = get_groupby_average()[data_type][within_cross]
         
-        if dict_condition is not None:
-            groupby.append('condition')
+#         if dict_condition is not None:
+#             groupby.append('condition')
         
-        # averge within each study
-        df_ave                  = df.groupby(groupby).mean().reset_index()
-        return df_ave
-    # measure: adequacy, within perceptual domain decoding
-    elif (data_type == 'adequacy') and (within_cross == 'LOO'):
-        df                      = []
-        for f in working_data:
-            temp                    = pd.read_csv(f)
-            study_name              = re.findall('\(([^)]+)',f)[0]
-            temp['study_name']      = study_name
-            temp['decoder']         = f.split('/')[-1].split(' ')[0]
-            condition               = f.split(' ')[1]
-            if dict_condition is not None:
-                temp['condition']   = dict_condition[condition]
-            df.append(temp)
-        df                      = pd.concat(df)
+#         # averge within each study
+#         df_ave                  = df.groupby(groupby).mean().reset_index()
+#         return df_ave
+#     # measure: adequacy, within perceptual domain decoding
+#     elif (data_type == 'adequacy') and (within_cross == 'LOO'):
+#         df                      = []
+#         for f in working_data:
+#             temp                    = pd.read_csv(f)
+#             study_name              = re.findall('\(([^)]+)',f)[0]
+#             temp['study_name']      = study_name
+#             temp['decoder']         = f.split('/')[-1].split(' ')[0]
+#             condition               = f.split(' ')[1]
+#             if dict_condition is not None:
+#                 temp['condition']   = dict_condition[condition]
+#             df.append(temp)
+#         df                      = pd.concat(df)
         
-        groupby                 = get_groupby_average()[data_type][within_cross]
-        if dict_condition is not None:
-            groupby.append('condition')
-        # averge within each study
-        df_ave                  = df.groupby(groupby).mean().reset_index()
-        return df_ave
-    # measure: confidence, cross domain decoding
-    elif (data_type == 'confidence') and (within_cross == 'cross_domain'):
-        df                      = []
-        for f in working_data:
-            temp                    = pd.read_csv(f)
-            temp['decoder']         = f.split('/')[-1].split('_')[0]
-            condition               = f.split('_')[-1].split(' ')[0]
-            if dict_condition is not None:
-                temp['condition']   = dict_condition[condition]
-            df.append(temp)
-        df                          = pd.concat(df)
+#         groupby                 = get_groupby_average()[data_type][within_cross]
+#         if dict_condition is not None:
+#             groupby.append('condition')
+#         # averge within each study
+#         df_ave                  = df.groupby(groupby).mean().reset_index()
+#         return df_ave
+#     # measure: confidence, cross domain decoding
+#     elif (data_type == 'confidence') and (within_cross == 'cross_domain'):
+#         df                      = []
+#         for f in working_data:
+#             temp                    = pd.read_csv(f)
+#             temp['decoder']         = f.split('/')[-1].split('_')[0]
+#             condition               = f.split('_')[-1].split(' ')[0]
+#             if dict_condition is not None:
+#                 temp['condition']   = dict_condition[condition]
+#             df.append(temp)
+#         df                          = pd.concat(df)
         
-        for col_name in ['accuracy_train','accuracy_test']:
-            df[col_name]        = df[col_name].map(dict_rename)
+#         for col_name in ['accuracy_train','accuracy_test']:
+#             df[col_name]        = df[col_name].map(dict_rename)
         
-        groupby                 = get_groupby_average()[data_type][within_cross]
-        if dict_condition is not None:
-            groupby.append('condition')
-        # averge within each study
-        df_ave                  = df.groupby(groupby).mean().reset_index()
-        return df_ave
-    # measure: adequacy, cross domain decoding
-    elif (data_type == 'adequacy') and (within_cross == 'cross_domain'):
-        df                      = []
-        for f in working_data:
-            temp                    = pd.read_csv(f)
-            temp['decoder']         = f.split('/')[-1].split('_')[0]
-            condition               = f.split('_')[-1].split(' ')[0]
-            if dict_condition is not None:
-                temp['condition']   = dict_condition[condition]
-            df.append(temp)
-        df                          = pd.concat(df)
+#         groupby                 = get_groupby_average()[data_type][within_cross]
+#         if dict_condition is not None:
+#             groupby.append('condition')
+#         # averge within each study
+#         df_ave                  = df.groupby(groupby).mean().reset_index()
+#         return df_ave
+#     # measure: adequacy, cross domain decoding
+#     elif (data_type == 'adequacy') and (within_cross == 'cross_domain'):
+#         df                      = []
+#         for f in working_data:
+#             temp                    = pd.read_csv(f)
+#             temp['decoder']         = f.split('/')[-1].split('_')[0]
+#             condition               = f.split('_')[-1].split(' ')[0]
+#             if dict_condition is not None:
+#                 temp['condition']   = dict_condition[condition]
+#             df.append(temp)
+#         df                          = pd.concat(df)
         
-        groupby                     = get_groupby_average()[data_type][within_cross]
-        if dict_condition is not None:
-            groupby.append('condition')
-        # averge within each study
-        df_ave                      = df.groupby(groupby).mean().reset_index()
-        return df_ave
+#         groupby                     = get_groupby_average()[data_type][within_cross]
+#         if dict_condition is not None:
+#             groupby.append('condition')
+#         # averge within each study
+#         df_ave                      = df.groupby(groupby).mean().reset_index()
+#         return df_ave
