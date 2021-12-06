@@ -12,11 +12,12 @@ from glob import glob
 import pandas as pd
 import numpy as np
 
-from utils import check_column_type,build_SVMRegressor
+from utils import check_column_type,build_RF
 from sklearn.model_selection import LeaveOneGroupOut,GridSearchCV
 from sklearn.metrics import explained_variance_score
+from sklearn.inspection import permutation_importance
 
-model_name          = 'SVM'
+model_name          = 'RF'
 experiment_type     = 'LOO'
 target_attributes   = 'confidence' # change folder name
 split_data          = 'no-split'
@@ -75,11 +76,9 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     acc_train_      = accuraies[train_]
     
     # make the model
-    model = GridSearchCV(build_SVMRegressor(),
-                         {'C':np.logspace(0,10,11),
-                          'loss':['epsilon_insensitive', # L1 loss
-                                  'squared_epsilon_insensitive',# L2 loss
-                                  ]},
+    model = GridSearchCV(build_RF(),
+                        {'n_estimators':np.logspace(0,3,4).astype(int),
+                          'max_depth':np.arange(X_.shape[1] * 2) + 1},
                          scoring    = 'explained_variance',
                          n_jobs     = -1,
                          cv         = 5,
@@ -93,7 +92,13 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     scores = explained_variance_score(y_test,y_pred,)
     
     # get the weights
-    properties = model.best_estimator_.coef_
+    properties = permutation_importance(model.best_estimator_,
+                                        X_test,
+                                        y_test,
+                                        scoring = 'explained_variance',
+                                        n_repeats = 5,
+                                        n_jobs = -1,
+                                        random_state = 12345)
     # get parameters
     params = model.best_estimator_.get_params()
     
@@ -103,7 +108,7 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     results['n_sample'].append(X_test.shape[0])
     results['source'].append('same')
     results['sub_name'].append(np.unique(groups[test])[0])
-    [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties)]
+    [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties['importances_mean'])]
     results['best_params'].append('|'.join(f'{key}:{value}' for key,value in params.items()))
     results['feature_type'].append(target_attributes)
     

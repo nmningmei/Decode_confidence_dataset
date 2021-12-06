@@ -247,14 +247,16 @@ def build_SVMRegressor():
 
 def build_RF(n_jobs             = 1,
              max_depth          = 3,
-             n_estimators       = 100,):
+             n_estimators       = 100,
+             oob_score          = True,
+             bootstrap          = True):
     from sklearn.ensemble import RandomForestRegressor
     rf = RandomForestRegressor(n_estimators     = n_estimators,
                                # criterion        = 'squred_error',
                                max_depth        = max_depth,
                                n_jobs           = n_jobs,
-                               bootstrap        = True,
-                               oob_score        = True,
+                               bootstrap        = bootstrap,
+                               oob_score        = oob_score,
                                random_state     = 12345,
                                )
     return rf
