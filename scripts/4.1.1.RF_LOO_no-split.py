@@ -14,7 +14,7 @@ import numpy as np
 
 from utils import check_column_type,build_RF
 from sklearn.model_selection import LeaveOneGroupOut,GridSearchCV
-from sklearn.metrics import explained_variance_score
+from sklearn.metrics import explained_variance_score,r2_score
 from sklearn.inspection import permutation_importance
 
 model_name          = 'RF'
@@ -59,6 +59,7 @@ print(csv_name)
 results             = dict(
                            fold             = [],
                            score            = [],
+                           r2               = [],
                            n_sample         = [],
                            source           = [],
                            sub_name         = [],
@@ -107,6 +108,7 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     # save the results
     results['fold'].append(fold)
     results['score'].append(scores)
+    results['r2'].append(r2_score(y_test,y_pred,))
     results['n_sample'].append(X_test.shape[0])
     results['source'].append('same')
     results['sub_name'].append(np.unique(groups[test])[0])
