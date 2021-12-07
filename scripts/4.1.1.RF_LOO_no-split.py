@@ -77,12 +77,13 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     acc_train_      = accuraies[train_]
     
     # make the model
-    model = GridSearchCV(build_RF(),
+    model = GridSearchCV(build_RF(bootstrap = True,
+                                  oob_score = False,),
                         {'n_estimators':np.logspace(0,3,4).astype(int),
-                          'max_depth':np.arange(X_.shape[1] * 2) + 1},
+                          'max_depth':np.arange(n_features) + 1},
                          scoring    = 'explained_variance',
                          n_jobs     = -1,
-                         cv         = 5,
+                         cv         = 10,
                          verbose    = 1,
                          )
     # train the model and validate the model

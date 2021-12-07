@@ -11,7 +11,7 @@ from shutil import copyfile,rmtree
 
 template            = '4.1.1.RF_LOO_no-split.py'
 for jj,folder_name in enumerate(['confidence','accuracy','confidence-accuracy']):
-    experiment          = [folder_name,'LOO','SVM']
+    experiment          = [folder_name,'LOO','RF']
     data_dir            = '../data'
     working_df_name     = os.path.join(data_dir,experiment[0],experiment[1],'all_data.csv')
     df_def              = pd.read_csv(working_df_name,)
