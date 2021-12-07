@@ -59,6 +59,7 @@ print(csv_name)
 results             = dict(
                            fold             = [],
                            score            = [],
+                           r2               = [],
                            n_sample         = [],
                            source           = [],
                            sub_name         = [],
@@ -131,4 +132,4 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     results['feature_type'].append(target_attributes)
     
     results_to_save = pd.DataFrame(results)
-    # results_to_save.to_csv(csv_name,index = False)
+    results_to_save.to_csv(csv_name,index = False)

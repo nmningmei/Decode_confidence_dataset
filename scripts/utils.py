@@ -275,12 +275,12 @@ def build_RNN(time_steps = 7,confidence_range = 4,input_dim = 1,model_name = 'te
     lstm,state_h,state_c    = layers.LSTM(units             = 1,
                                           return_sequences  = True,
                                           return_state      = True,
-                                          kernel_regularizer= regularizers.L1L2(1e-3,1e-3),
+                                          # kernel_regularizer= regularizers.L1L2(1e-3,1e-3),
                                           name              = "lstm")(inputs)
     # from the LSTM layer, we will have an output with time steps by features, but 
     dimension_squeeze       = layers.Lambda(lambda x:tf.keras.backend.squeeze(x,2))(lstm)
     outputs                 = layers.Dense(1,
-                                           kernel_regularizer= regularizers.L1L2(1e-3,1e-3),
+                                           # kernel_regularizer= regularizers.L1L2(1e-3,1e-3),
                                            name             = "output",
                                            activation       = "sigmoid")(dimension_squeeze)
     model                   = Model(inputs,
