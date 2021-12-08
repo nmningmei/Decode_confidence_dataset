@@ -55,60 +55,67 @@ if not os.path.exists(saving_dir):
     os.makedirs(saving_dir)
 print(csv_name)
 
-results             = dict(
-                           fold             = [],
-                           score            = [],
-                           r2               = [],
-                           n_sample         = [],
-                           source           = [],
-                           sub_name         = [],
-                           best_params      = [],
-                           feature_type     = [],
-                           )
-for ii in range(n_features):
-    results[f'features T-{n_features - ii}'] = []
+if not os.path.exists(csv_name):
+    results             = dict(
+                               fold             = [],
+                               score            = [],
+                               r2               = [],
+                               n_sample         = [],
+                               source           = [],
+                               sub_name         = [],
+                               best_params      = [],
+                               feature_type     = [],
+                               )
+    for ii in range(n_features):
+        results[f'features T-{n_features - ii}'] = []
+else:
+    temp = pd.read_csv(csv_name)
+    results = {}
+    for col_name in temp.columns:
+        results[col_name] = list(temp[col_name].values)
 print(cv.get_n_splits(features,targets,groups=groups))
 for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     print(f'fold {fold}')
-    # leave out test data
-    X_,y_           = features[train_],targets[train_]
-    X_test, y_test  = features[test]  ,targets[test]
-    acc_test        = accuraies[test]
-    acc_train_      = accuraies[train_]
-    
-    # make the model
-    model = GridSearchCV(build_SVMRegressor(),
-                         {'C':np.logspace(0,5,6),
-                          'loss':['epsilon_insensitive', # L1 loss
-                                  'squared_epsilon_insensitive',# L2 loss
-                                  ]},
-                         scoring    = 'explained_variance',
-                         n_jobs     = -1,
-                         cv         = 10,
-                         verbose    = 1,
-                         )
-    # train the model and validate the model
-    model.fit(X_,y_)
-    gc.collect()
-    # test the model
-    y_pred = model.predict(X_test)
-    scores = explained_variance_score(y_test,y_pred,)
-    
-    # get the weights
-    properties = model.best_estimator_.coef_
-    # get parameters
-    params = model.best_estimator_.get_params()
-    
-    # save the results
-    results['fold'].append(fold)
-    results['score'].append(scores)
-    results['r2'].append(r2_score(y_test,y_pred,))
-    results['n_sample'].append(X_test.shape[0])
-    results['source'].append('same')
-    results['sub_name'].append(np.unique(groups[test])[0])
-    [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties)]
-    results['best_params'].append('|'.join(f'{key}:{value}' for key,value in params.items()))
-    results['feature_type'].append(target_attributes)
+    if fold not in results['fold']:
+        # leave out test data
+        X_,y_           = features[train_],targets[train_]
+        X_test, y_test  = features[test]  ,targets[test]
+        acc_test        = accuraies[test]
+        acc_train_      = accuraies[train_]
+        
+        # make the model
+        model = GridSearchCV(build_SVMRegressor(),
+                             {'C':np.logspace(0,5,6),
+                              'loss':['epsilon_insensitive', # L1 loss
+                                      'squared_epsilon_insensitive',# L2 loss
+                                      ]},
+                             scoring    = 'explained_variance',
+                             n_jobs     = -1,
+                             cv         = 10,
+                             verbose    = 1,
+                             )
+        # train the model and validate the model
+        model.fit(X_,y_)
+        gc.collect()
+        # test the model
+        y_pred = model.predict(X_test)
+        scores = explained_variance_score(y_test,y_pred,)
+        
+        # get the weights
+        properties = model.best_estimator_.coef_
+        # get parameters
+        params = model.best_estimator_.get_params()
+        
+        # save the results
+        results['fold'].append(fold)
+        results['score'].append(scores)
+        results['r2'].append(r2_score(y_test,y_pred,))
+        results['n_sample'].append(X_test.shape[0])
+        results['source'].append('same')
+        results['sub_name'].append(np.unique(groups[test])[0])
+        [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties)]
+        results['best_params'].append('|'.join(f'{key}:{value}' for key,value in params.items()))
+        results['feature_type'].append(target_attributes)
     
     results_to_save = pd.DataFrame(results)
     results_to_save.to_csv(csv_name,index = False)
