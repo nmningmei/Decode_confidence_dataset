@@ -44,7 +44,7 @@ df_sub = check_column_type(df_sub)
 
 if target_attributes == 'confidence-accuracy':
     features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
-else:
+elif target_attributes == 'confidence':
     features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / 4 # scale the features
 targets     = df_sub["targets"].values / 4 # scale the targets
 groups      = df_sub["sub"].values
