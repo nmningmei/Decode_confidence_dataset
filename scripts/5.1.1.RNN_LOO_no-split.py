@@ -87,6 +87,7 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         else:
             features    = features.reshape(features.shape[0],features.shape[-1],1)
             input_dim   = 1
+        
         # leave out test data
         X_,y_           = features[train_],targets[train_]
         X_test, y_test  = features[test]  ,targets[test]
