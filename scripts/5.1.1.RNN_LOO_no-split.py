@@ -28,7 +28,7 @@ working_data        = glob(os.path.join(working_dir, "*.csv"))
 working_df_name     = os.path.join(data_dir,target_attributes,experiment_type,'all_data.csv')
 saving_dir          = f'../results/{target_attributes}/{experiment_type}'
 batch_size          = 32
-n_features          = 7 if target_attributes != 'confidence-accuracy' else 14
+n_features          = 7
 time_steps          = 7
 confidence_range    = 4
 n_jobs              = -1
@@ -43,7 +43,7 @@ df_sub              = df_def[df_def['filename'] == filename]
 df_sub              = check_column_type(df_sub)
 
 if target_attributes == 'confidence-accuracy':
-    features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
+    features= df_sub[[f"feature{ii + 1}" for ii in range(n_features * 2)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
 elif target_attributes == 'confidence':
     features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / 4 # scale the features
 else:
@@ -77,17 +77,16 @@ else:
     for col_name in temp.columns:
         results[col_name] = list(temp[col_name].values)
 print(cv.get_n_splits(features,targets,groups=groups))
+# reshape for RNN
+if target_attributes == 'confidence-accuracy':
+    features    = np.swapaxes(features.reshape(features.shape[0],2,time_steps),1,2)
+    input_dim   = 2
+else:
+    features    = features.reshape(features.shape[0],features.shape[-1],1)
+    input_dim   = 1
 for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     print(f'fold {fold}')
     if fold not in results['fold']:
-        # reshape for RNN
-        if target_attributes == 'confidence-accuracy':
-            features    = np.swapaxes(features.reshape(features.shape[0],2,time_steps),1,2)
-            input_dim   = 2
-        else:
-            features    = features.reshape(features.shape[0],features.shape[-1],1)
-            input_dim   = 1
-        
         # leave out test data
         X_,y_           = features[train_],targets[train_]
         X_test, y_test  = features[test]  ,targets[test]
@@ -137,7 +136,7 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         results['n_sample'].append(X_test.shape[0])
         results['source'].append('same')
         results['sub_name'].append(np.unique(groups[test])[0])
-        [results[f'features T-{time_steps - ii}'].append(item) for ii,item in enumerate(properties)]
+        [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties)]
         results['best_params'].append(params)
         results['feature_type'].append(target_attributes)
     

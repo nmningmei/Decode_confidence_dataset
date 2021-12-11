@@ -286,7 +286,7 @@ def build_RNN(time_steps = 7,confidence_range = 4,input_dim = 1,model_name = 'te
     model                   = Model(inputs,
                                     outputs)
     
-    model.compile(optimizer     = optimizers.SGD(lr = 1e-2),
+    model.compile(optimizer     = optimizers.SGD(learning_rate = 1e-2),
                   loss          = losses.mean_absolute_error,
                   metrics       = ['mse'])
     # early stopping
