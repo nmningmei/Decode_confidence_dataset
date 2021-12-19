@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Dec 10 16:47:34 2021
+Created on Sun Dec 19 12:54:01 2021
 
 @author: nmei
 """
+
 import os
 
 import numpy   as np
@@ -27,7 +28,7 @@ def get_model_type(x):
         return 'Recurrent Neural Network'
 
 if __name__ == "__main__":
-    working_dir = '../results/{}/LOO'
+    working_dir = '../results/{}/cross_domain'
     
     x_order = ['confidence','accuracy','confidence-accuracy']
     
@@ -35,6 +36,7 @@ if __name__ == "__main__":
                    'Random Forest',
 #                   'Recurrent Neural Network',
                    ]
+    CD_order = ['Perception','Cognitive','Memory','Mixed']
     
     dfs = {}
     for folder_name in ['confidence','accuracy','confidence-accuracy']:
@@ -51,7 +53,7 @@ if __name__ == "__main__":
                     df[col_name] = df[col_name].apply(lambda x: -x)
             temp.append(df)
         dfs[folder_name] = pd.concat(temp)
-    
+        
     df_scores = pd.concat([df[['score','r2','feature_type','model_name']] for df in dfs.values()])
     fig,ax = plt.subplots(figsize = (8,5))
     ax = sns.barplot(x = 'feature_type',
@@ -127,3 +129,20 @@ if __name__ == "__main__":
                       sort = False,
                       ax = ax,
                       )
+    # cross domain scores
+    df_scores = pd.concat([df[['score','r2','feature_type','model_name',
+                               'source_data','target_data']] for df in dfs.values()])
+    g = sns.catplot(x = 'feature_type',
+                    y = 'score',
+                    hue = 'model_name',
+                    hue_order = model_names,
+                    row = 'target_data',
+                    row_order = CD_order,
+                    col = 'source_data',
+                    col_order = CD_order,
+                    data = df_scores,
+                    kind = 'bar',
+                    aspect = 1.5,
+                    seed = 12345,
+                    capsize = .1,
+                    )

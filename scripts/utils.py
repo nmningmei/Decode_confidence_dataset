@@ -176,6 +176,12 @@ def check_column_type(df_sub):
     for name in df_sub.columns:
         if name == 'filename':
             pass
+        elif name == 'temp':
+            pass
+        elif name == 'domain':
+            pass
+        elif name == 'sub':
+            df_sub[name] = df_sub[name].astype(str)
         else:
             df_sub[name] = df_sub[name].astype(int)
     return df_sub
@@ -298,6 +304,48 @@ def build_RNN(time_steps = 7,confidence_range = 4,input_dim = 1,model_name = 'te
                                   patience      = 5,
                                   frequency     = 1,)
     return model,callbacks
+
+def get_domains_maps():
+    temp = {'4-point':'Perception', 
+            'cognitive-4-rating':'Cognitive', 
+            'mem_4-point':'Memory', 
+            'mixed_4-point':'Mixed'}
+    return temp
+
+def get_feature_targets(df_sub,
+                        n_features = 7,
+                        time_steps = 7,
+                        target_attributes = 'confidence',
+                        group_col = 'sub',
+                        ):
+    """
+    Extract features and targets from the DataFrames
+    
+    Input
+    ---------
+    df_sub: pandas.DataFrame
+    n_features: int, default = 7
+    time_steps: int, default = 7
+    target_attributes: str, default = 'confidence'
+    group_col: str, default = 'sub'
+    
+    Output
+    ---------
+    features: ndarray, (n_samples, n_features)
+    targets: ndarray, (nsamples,)
+    groups: ndarray, (nsamples,)
+    accuracies: ndarray, (nsamples,)
+    """
+    if target_attributes == 'confidence-accuracy':
+        features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
+    elif target_attributes == 'confidence':
+        features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / 4 # scale the features
+    else:
+        features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
+    targets     = df_sub["targets"].values# / 4 # scale the targets
+    groups      = df_sub[group_col].values
+    accuracies  = df_sub['accuracy'].values
+    return features, targets, groups, accuracies
 
 def append_dprime_metadprime(df,df_metadprime):
     temp = []
