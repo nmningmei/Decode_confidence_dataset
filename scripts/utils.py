@@ -181,7 +181,7 @@ def check_column_type(df_sub):
         elif name == 'domain':
             pass
         elif name == 'sub':
-            df_sub[name] = df_sub[name].astype(str)
+            df_sub[name] = df_sub[name].astype(int)
         else:
             df_sub[name] = df_sub[name].astype(int)
     return df_sub
@@ -246,9 +246,9 @@ def convert_object_to_float(df):
                 print(f'column {name} contains strings')
     return df
 
-def build_SVMRegressor():
+def build_SVMRegressor(max_iter = int(1e3),):
     from sklearn.svm import LinearSVR
-    svm = LinearSVR(random_state = 12345,)
+    svm = LinearSVR(random_state = 12345,max_iter = max_iter,)
     return svm
 
 def build_RF(n_jobs             = 1,
@@ -317,6 +317,8 @@ def get_feature_targets(df_sub,
                         time_steps = 7,
                         target_attributes = 'confidence',
                         group_col = 'sub',
+                        normalize_features = True,
+                        normalize_targets = True,
                         ):
     """
     Extract features and targets from the DataFrames
@@ -328,6 +330,8 @@ def get_feature_targets(df_sub,
     time_steps: int, default = 7
     target_attributes: str, default = 'confidence'
     group_col: str, default = 'sub'
+    normalize_features: bool, default = True
+    normalize_targets: bool, default = True
     
     Output
     ---------
@@ -336,15 +340,26 @@ def get_feature_targets(df_sub,
     groups: ndarray, (nsamples,)
     accuracies: ndarray, (nsamples,)
     """
-    if target_attributes == 'confidence-accuracy':
-        features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
-    elif target_attributes == 'confidence':
-        features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / 4 # scale the features
+    if normalize_features:
+        if target_attributes == 'confidence-accuracy':
+            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
+        elif target_attributes == 'confidence':
+            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / 4 # scale the features
+        else:
+            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
     else:
-        features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
-    targets     = df_sub["targets"].values# / 4 # scale the targets
-    groups      = df_sub[group_col].values
-    accuracies  = df_sub['accuracy'].values
+         if target_attributes == 'confidence-accuracy':
+            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
+         elif target_attributes == 'confidence':
+            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
+         else:
+            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
+    if normalize_targets:
+        targets         = df_sub["targets"].values / 4 # scale the targets
+    else:
+        targets         = df_sub["targets"].values
+    groups              = df_sub[group_col].values
+    accuracies          = df_sub['accuracy'].values
     return features, targets, groups, accuracies
 
 def append_dprime_metadprime(df,df_metadprime):

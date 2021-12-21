@@ -12,7 +12,12 @@ from glob import glob
 import pandas as pd
 import numpy as np
 
-from utils import check_column_type,build_RF
+from utils import (check_column_type,
+                   build_RF,
+                   get_feature_targets
+                   )
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import LeaveOneGroupOut,GridSearchCV
 from sklearn.metrics import explained_variance_score,r2_score
 from sklearn.inspection import permutation_importance
@@ -20,12 +25,13 @@ from sklearn.inspection import permutation_importance
 model_name          = 'RF'
 experiment_type     = 'LOO'
 target_attributes   = 'confidence' # change folder name
+domain              = 'Perception' # change domain
 split_data          = 'no-split'
 data_dir            = '../data'
 model_dir           = '../models/{}_{}_{}_{}'.format(*[model_name,experiment_type,target_attributes,split_data])
-working_dir         = '../data/4-point'
-working_data        = glob(os.path.join(working_dir, "*.csv"))
-working_df_name     = os.path.join(data_dir,target_attributes,experiment_type,'all_data.csv')
+working_dir         = '../data/dataset/'
+working_data        = glob(os.path.join(working_dir, f"{domain}.csv"))
+working_df_name     = os.path.join(data_dir,target_attributes,f'{domain}.csv')
 saving_dir          = f'../results/{target_attributes}/{experiment_type}'
 batch_size          = 32
 n_features          = 7 if target_attributes != 'confidence-accuracy' else 14
@@ -34,23 +40,23 @@ confidence_range    = 4
 n_jobs              = -1
 verbose             = 1
 debug               = True
-
-df_def          = pd.read_csv(working_df_name,)
-
+df_def              = pd.read_csv(working_df_name,)
+unique_filenames    = pd.unique(df_def['filename'])
+idx                 = 0 # change index
 # pick one of the csv files
-filename = '../data/4-point/data_Bang_2019_Exp1.csv' # change file name
-df_sub = df_def[df_def['filename'] == filename]
-df_sub = check_column_type(df_sub)
+filename            = unique_filenames[idx]
+df_sub              = df_def[df_def['filename'] == filename]
+df_sub              = check_column_type(df_sub)
 
-if target_attributes == 'confidence-accuracy':
-    features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
-elif target_attributes == 'confidence':
-    features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / 4 # scale the features
-else:
-    features= df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
-targets     = df_sub["targets"].values / 4 # scale the targets
-groups      = df_sub["sub"].values
-accuraies   = df_sub['accuracy'].values
+features, targets, groups, accuracies = get_feature_targets(df_sub,
+                                                            n_features          = n_features,
+                                                            time_steps          = time_steps,
+                                                            target_attributes   = target_attributes,
+                                                            group_col           = 'sub',
+                                                            normalize_features  = False,
+                                                            normalize_targets   = True,
+                                                            )
+
 kk          = filename.split('/')[-1].split(".csv")[0]
 cv          = LeaveOneGroupOut()
 csv_name    = os.path.join(saving_dir,f'results_{kk}_{model_name}_{target_attributes}.csv')
@@ -68,6 +74,8 @@ if not os.path.exists(csv_name):
                                sub_name         = [],
                                best_params      = [],
                                feature_type     = [],
+                               source_data      = [],
+                               target_data      = [],
                                )
     for ii in range(n_features):
         results[f'features T-{n_features - ii}'] = []
@@ -83,14 +91,17 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         # leave out test data
         X_,y_           = features[train_],targets[train_]
         X_test, y_test  = features[test]  ,targets[test]
-        acc_test        = accuraies[test]
-        acc_train_      = accuraies[train_]
+        acc_test        = accuracies[test]
+        acc_train_      = accuracies[train_]
         
         # make the model
-        model = GridSearchCV(build_RF(bootstrap = True,
-                                      oob_score = False,),
-                            {'n_estimators':np.logspace(0,3,4).astype(int),
-                              'max_depth':np.arange(n_features) + 1},
+        pipeline = make_pipeline(StandardScaler(),
+                                 build_RF(bootstrap = True,
+                                          oob_score = False,))
+        
+        model = GridSearchCV(pipeline,
+                            {'randomforestregressor__n_estimators':np.logspace(0,3,4).astype(int),
+                              'randomforestregressor__max_depth':np.arange(n_features) + 1},
                              scoring    = 'explained_variance',
                              n_jobs     = -1,
                              cv         = 10,
@@ -111,19 +122,24 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
                                             n_repeats = 5,
                                             n_jobs = -1,
                                             random_state = 12345)
+        gc.collect()
         # get parameters
-        params = model.best_estimator_.get_params()
+        params = model.best_estimator_.steps[-1][-1].get_params()
         
         # save the results
-        results['fold'].append(fold)
-        results['score'].append(scores)
-        results['r2'].append(r2_score(y_test,y_pred,))
-        results['n_sample'].append(X_test.shape[0])
-        results['source'].append('same')
-        results['sub_name'].append(np.unique(groups[test])[0])
+        results['fold'                          ].append(fold)
+        results['score'                         ].append(scores)
+        results['r2'                            ].append(r2_score(y_test,y_pred,))
+        results['n_sample'                      ].append(X_test.shape[0])
+        results['source'                        ].append('same')
+        results['sub_name'                      ].append(np.unique(groups[test])[0])
         [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties['importances_mean'])]
-        results['best_params'].append('|'.join(f'{key}:{value}' for key,value in params.items()))
-        results['feature_type'].append(target_attributes)
-    
-    results_to_save = pd.DataFrame(results)
+        results['best_params'                   ].append('|'.join(f'{key}:{value}' for key,value in params.items()))
+        results['feature_type'                  ].append(target_attributes)
+        results['source_data'                   ].append(domain)
+        results['target_data'                   ].append(domain)
+        
+        results_to_save = pd.DataFrame(results)
+    else:
+        results_to_save = pd.DataFrame(results)
     results_to_save.to_csv(csv_name,index = False)
