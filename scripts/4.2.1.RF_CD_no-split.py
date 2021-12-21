@@ -11,8 +11,13 @@ import os,gc
 import pandas as pd
 import numpy as np
 
-from utils import check_column_type,get_feature_targets,build_RF,get_domains_maps
-from sklearn.model_selection import LeaveOneGroupOut,GridSearchCV,ShuffleSplit
+from utils import (check_column_type,
+                   get_feature_targets,
+                   build_RF,
+                   get_domains_maps)
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import LeaveOneGroupOut,GridSearchCV
 from sklearn.metrics import explained_variance_score,r2_score
 from sklearn.inspection import permutation_importance
 
@@ -23,12 +28,12 @@ for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.
     
     model_name          = 'RF'
     experiment_type     = 'cross_domain'
-    target_attributes   = 'accuracy' # change folder name
+    target_attributes   = 'confidence-accuracy' # change folder name
     split_data          = 'no-split'
     data_dir            = '../data'
     source_data         = domains[_idx_source][0]
     
-    working_df_name     = os.path.join(data_dir,target_attributes,experiment_type,'all_data.csv')
+    working_df_name     = os.path.join(data_dir,target_attributes,f'{source_data}.csv')
     saving_dir          = f'../results/{target_attributes}/{experiment_type}'
     batch_size          = 32
     n_features          = 7 if target_attributes != 'confidence-accuracy' else 14
@@ -38,14 +43,15 @@ for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.
     verbose             = 1
     debug               = True
     
-    df_def              = pd.read_csv(working_df_name,)
-    df_source           = df_def[df_def['domain'] == source_data]
+    df_source           = pd.read_csv(working_df_name,)
     df_source           = check_column_type(df_source)
     features_source,targets_source,groups_source,accuracies_source = get_feature_targets(df_source,
-                                                                                         n_features = n_features,
-                                                                                         time_steps = time_steps,
-                                                                                         target_attributes = target_attributes,
-                                                                                         group_col = 'filename',)
+                                                                                         n_features         = n_features,
+                                                                                         time_steps         = time_steps,
+                                                                                         target_attributes  = target_attributes,
+                                                                                         group_col          = 'filename',
+                                                                                         normalize_features = False,
+                                                                                         normalize_targets  = True,)
     cv                  = LeaveOneGroupOut()
     
     idxs_train,idxs_test = [],[]
@@ -57,13 +63,16 @@ for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.
     
     # train the decoder on all the source data
     # make the model
-    model = GridSearchCV(build_RF(bootstrap = True,
-                                  oob_score = False,),
-                        {'n_estimators':np.logspace(0,3,4).astype(int),
-                          'max_depth':np.arange(n_features) + 1},
+    pipeline = make_pipeline(StandardScaler(),
+                             build_RF(bootstrap = True,
+                                      oob_score = False,))
+    
+    model = GridSearchCV(pipeline,
+                        {'randomforestregressor__n_estimators':np.logspace(0,3,4).astype(int),
+                          'randomforestregressor__max_depth':np.arange(n_features) + 1},
                          scoring    = 'explained_variance',
                          n_jobs     = -1,
-                         cv         = ShuffleSplit(n_splits = 10,test_size = 0.1,random_state = 12345),
+                         cv         = 10,
                          verbose    = 1,
                          )
     gc.collect()
@@ -82,14 +91,18 @@ for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.
                                 target_data,
                                 ])
         
-        df_target           = df_def[df_def['domain'] == target_data]
+        df_target           = pd.read_csv(os.path.join(data_dir,target_attributes,f'{target_data}.csv'))
         df_target           = check_column_type(df_target)
-        
+        df_target['temp']   = df_target['filename'].apply(lambda x: x.split('/')[-1].split('.')[0])
+        df_target['sub']    = df_target['temp'] + '-' + df_target['sub'].astype(str)
         
         features_target,targets_target,groups_target,accuracies_target = get_feature_targets(df_target,
-                                                                                             n_features = n_features,
-                                                                                             time_steps = time_steps,
-                                                                                             target_attributes = target_attributes,
+                                                                                             n_features         = n_features,
+                                                                                             time_steps         = time_steps,
+                                                                                             target_attributes  = target_attributes,
+                                                                                             group_col          = 'sub',
+                                                                                             normalize_features = False,
+                                                                                             normalize_targets  = True,
                                                                                              )
         
         csv_name    = os.path.join(saving_dir,f'results_{model_name}_{target_attributes}_{source_data}_{target_data}.csv')
@@ -140,22 +153,23 @@ for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.
                                                     n_repeats = 5,
                                                     n_jobs = -1,
                                                     random_state = 12345)
+                gc.collect()
                 # get parameters
-                params = model.best_estimator_.get_params()
+                params = model.best_estimator_.steps[-1][-1].get_params()
                 
                 # save the results
-                results['fold'].append(fold)
-                results['score'].append(scores)
-                results['r2'].append(r2_score(y_test,y_pred,))
-                results['n_sample'].append(X_test.shape[0])
-                results['source'].append('same')
-                results['sub_name'].append(np.unique(groups_target[test])[0])
+                results['fold'                          ].append(fold)
+                results['score'                         ].append(scores)
+                results['r2'                            ].append(r2_score(y_test,y_pred,))
+                results['n_sample'                      ].append(X_test.shape[0])
+                results['source'                        ].append('different')
+                results['sub_name'                      ].append(X_test.shape[0])
                 [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties['importances_mean'])]
-                results['best_params'].append('|'.join(f'{key}:{value}' for key,value in params.items()))
-                results['feature_type'].append(target_attributes)
-                results['source_data'].append(get_domains_maps()[source_data])
-                results['target_data'].append(get_domains_maps()[target_data])
-            
+                results['best_params'                   ].append('|'.join(f'{key}:{value}' for key,value in params.items()))
+                results['feature_type'                  ].append(target_attributes)
+                results['source_data'                   ].append(source_data)
+                results['target_data'                   ].append(target_data)
+                
             results_to_save = pd.DataFrame(results)
             results_to_save.to_csv(csv_name,index = False)
             # a.append(results_to_save)

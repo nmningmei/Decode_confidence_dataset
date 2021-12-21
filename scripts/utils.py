@@ -181,7 +181,10 @@ def check_column_type(df_sub):
         elif name == 'domain':
             pass
         elif name == 'sub':
-            df_sub[name] = df_sub[name].astype(int)
+            try:
+                df_sub[name] = df_sub[name].astype(int)
+            except:
+                df_sub[name] = df_sub[name].astype(str)
         else:
             df_sub[name] = df_sub[name].astype(int)
     return df_sub
