@@ -97,9 +97,9 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         pipeline = make_pipeline(StandardScaler(),
                                  build_SVMRegressor())
         
-        model = GridSearchCV(pipeline,
-                             {'linearsvr__C':np.logspace(0,5,6),
-                              'linearsvr__loss':['epsilon_insensitive', # L1 loss
+        model = GridSearchCV(build_SVMRegressor(),
+                             {'C':np.logspace(0,5,6),
+                              'loss':['epsilon_insensitive', # L1 loss
                                                  'squared_epsilon_insensitive',# L2 loss
                                                  ]},
                              scoring    = 'explained_variance',
@@ -115,9 +115,9 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         scores      = explained_variance_score(y_test,y_pred,)
         
         # get the weights
-        properties  = model.best_estimator_.steps[-1][-1].coef_
+        properties  = model.best_estimator_.coef_
         # get parameters
-        params      = model.best_estimator_.steps[-1][-1].get_params()
+        params      = model.best_estimator_.get_params()
         
         # save the results
         results['fold'                          ].append(fold)
