@@ -52,7 +52,7 @@ features, targets, groups, accuracies = get_feature_targets(df_sub,
                                                             time_steps          = time_steps,
                                                             target_attributes   = target_attributes,
                                                             group_col           = 'sub',
-                                                            normalize_features  = False,
+                                                            normalize_features  = True,
                                                             normalize_targets   = True,
                                                             )
 

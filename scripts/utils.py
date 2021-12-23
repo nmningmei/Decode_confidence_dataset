@@ -343,24 +343,13 @@ def get_feature_targets(df_sub,
     groups: ndarray, (nsamples,)
     accuracies: ndarray, (nsamples,)
     """
+    features            = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
+    targets             = df_sub["targets"].values
     if normalize_features:
-        if target_attributes == 'confidence-accuracy':
-            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / np.concatenate([[4]*time_steps,[1]*time_steps])
-        elif target_attributes == 'confidence':
-            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values / 4 # scale the features
-        else:
-            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
-    else:
-         if target_attributes == 'confidence-accuracy':
-            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
-         elif target_attributes == 'confidence':
-            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
-         else:
-            features    = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
+        # get the largest value of each column
+        features        = features / features.max(0)
     if normalize_targets:
-        targets         = df_sub["targets"].values / 4 # scale the targets
-    else:
-        targets         = df_sub["targets"].values
+        targets         = targets / targets.max(0)
     groups              = df_sub[group_col].values
     accuracies          = df_sub['accuracy'].values
     return features, targets, groups, accuracies
