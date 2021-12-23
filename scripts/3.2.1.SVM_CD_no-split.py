@@ -52,7 +52,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                                                                              time_steps         = time_steps,
                                                                                              target_attributes  = target_attributes,
                                                                                              group_col          = 'sub',
-                                                                                             normalize_features = False,
+                                                                                             normalize_features = True,
                                                                                              normalize_targets  = True,)
         cv                  = LeaveOneGroupOut()
         
@@ -68,9 +68,9 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
         pipeline = make_pipeline(StandardScaler(),
                                  build_SVMRegressor())
         
-        model = GridSearchCV(pipeline,
-                             {'linearsvr__C':np.logspace(0,5,6),
-                              'linearsvr__loss':['epsilon_insensitive', # L1 loss
+        model = GridSearchCV(build_SVMRegressor(),
+                             {'C':np.logspace(0,5,6),
+                              'loss':['epsilon_insensitive', # L1 loss
                                                  'squared_epsilon_insensitive',# L2 loss
                                                  ]},
                              scoring    = 'explained_variance',
@@ -104,7 +104,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                                                                                  time_steps         = time_steps,
                                                                                                  target_attributes  = target_attributes,
                                                                                                  group_col          = 'sub',
-                                                                                                 normalize_features = False,
+                                                                                                 normalize_features = True,
                                                                                                  normalize_targets  = True,
                                                                                                  )
             
@@ -149,9 +149,9 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                     scores          = explained_variance_score(y_test,y_pred,)
                     
                     # get the weights
-                    properties      = model.best_estimator_.steps[-1][-1].coef_
+                    properties      = model.best_estimator_.coef_
                     # get parameters
-                    params          = model.best_estimator_.steps[-1][-1].get_params()
+                    params          = model.best_estimator_.get_params()
                     
                     # save the results
                     results['fold'                          ].append(fold)

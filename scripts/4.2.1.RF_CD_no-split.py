@@ -67,9 +67,9 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                  build_RF(bootstrap = True,
                                           oob_score = False,))
         
-        model = GridSearchCV(pipeline,
-                            {'randomforestregressor__n_estimators':np.logspace(0,3,4).astype(int),
-                              'randomforestregressor__max_depth':np.arange(n_features) + 1},
+        model = GridSearchCV(build_RF(bootstrap = True,oob_score = False,),
+                            {'n_estimators':np.logspace(0,3,4).astype(int),
+                             'max_depth':np.arange(n_features) + 1},
                              scoring    = 'explained_variance',
                              n_jobs     = -1,
                              cv         = zip(idxs_train,idxs_test),
@@ -101,7 +101,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                                                                                  time_steps         = time_steps,
                                                                                                  target_attributes  = target_attributes,
                                                                                                  group_col          = 'sub',
-                                                                                                 normalize_features = False,
+                                                                                                 normalize_features = True,
                                                                                                  normalize_targets  = True,
                                                                                                  )
             
@@ -155,7 +155,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                                         random_state = 12345)
                     gc.collect()
                     # get parameters
-                    params = model.best_estimator_.steps[-1][-1].get_params()
+                    params = model.best_estimator_.get_params()
                     
                     # save the results
                     results['fold'                          ].append(fold)

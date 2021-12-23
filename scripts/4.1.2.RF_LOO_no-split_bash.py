@@ -34,7 +34,7 @@ for kk,folder_name in enumerate(['confidence','accuracy','confidence-accuracy'])
     experiment          = [folder_name,'LOO','RF']
     data_dir            = '../data'
     node                = 1
-    core                = 16
+    core                = 12
     mem                 = 4
     cput                = 20
     for jj,domain in enumerate(['Perception','Cognitive','Memory','Mixed']):
