@@ -61,7 +61,8 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
             idxs_train.append(train)
             idxs_test.append(test)
         if len(idxs_train) > 300:
-            idxs_train = idxs_train[np.random.choice(len(idxs_train),size = 100,replace = False)]
+            _idx = np.random.choice(len(idxs_train),size = 300,replace = False)
+            idxs_train = [idxs_train[ii] for ii in _idx]
         
         # train the decoder on all the source data
         # make the model
