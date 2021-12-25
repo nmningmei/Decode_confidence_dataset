@@ -97,7 +97,7 @@ with open(f'{bash_folder}/qsub_jobs.py','a') as f:
         if ii == 0:
             f.write(f'\nos.system("{line}")\n')
         else:
-            f.write(f'time.sleep(.3)\nos.system("{line}")\n')
+            f.write(f'time.sleep(1)\nos.system("{line}")\n')
     f.close()
 
 
