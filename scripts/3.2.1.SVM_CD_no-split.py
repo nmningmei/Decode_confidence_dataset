@@ -150,7 +150,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                     scores          = explained_variance_score(y_test,y_pred,)
                     
                     # get the weights
-                    properties      = model.best_estimator_.coef_
+                    properties      = model.best_estimator_.steps[-1][-1].coef_
                     # get parameters
                     params          = model.best_estimator_.get_params()
                     

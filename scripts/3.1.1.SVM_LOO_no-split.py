@@ -115,7 +115,7 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         scores      = explained_variance_score(y_test,y_pred,)
         
         # get the weights
-        properties  = model.best_estimator_.coef_
+        properties  = model.best_estimator_.steps[-1][-1].coef_
         # get parameters
         params      = model.best_estimator_.get_params()
         
