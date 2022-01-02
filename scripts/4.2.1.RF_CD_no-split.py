@@ -52,7 +52,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                                                                              time_steps         = time_steps,
                                                                                              target_attributes  = target_attributes,
                                                                                              group_col          = 'sub',
-                                                                                             normalize_features = True,
+                                                                                             normalize_features = False,
                                                                                              normalize_targets  = True,)
         cv                  = LeaveOneGroupOut()
         
@@ -70,9 +70,9 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                  build_RF(bootstrap = True,
                                           oob_score = False,))
         
-        model = GridSearchCV(build_RF(bootstrap = True,oob_score = False,),
-                            {'n_estimators':np.logspace(0,3,4).astype(int),
-                             'max_depth':np.arange(n_features) + 1},
+        model = GridSearchCV(pipeline,
+                            {'randomforestregressor__n_estimators':np.logspace(0,3,4).astype(int),
+                             'randomforestregressor__max_depth':np.arange(n_features) + 1},
                              scoring    = 'explained_variance',
                              n_jobs     = -1,
                              cv         = zip(idxs_train,idxs_test),
@@ -104,7 +104,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                                                                                  time_steps         = time_steps,
                                                                                                  target_attributes  = target_attributes,
                                                                                                  group_col          = 'sub',
-                                                                                                 normalize_features = True,
+                                                                                                 normalize_features = False,
                                                                                                  normalize_targets  = True,
                                                                                                  )
             

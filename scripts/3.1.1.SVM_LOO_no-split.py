@@ -52,7 +52,7 @@ features, targets, groups, accuracies = get_feature_targets(df_sub,
                                                             time_steps          = time_steps,
                                                             target_attributes   = target_attributes,
                                                             group_col           = 'sub',
-                                                            normalize_features  = True,
+                                                            normalize_features  = False,
                                                             normalize_targets   = True,
                                                             )
 
@@ -97,9 +97,9 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         pipeline = make_pipeline(StandardScaler(),
                                  build_SVMRegressor())
         
-        model = GridSearchCV(build_SVMRegressor(),
-                             {'C':np.logspace(0,5,6),
-                              'loss':['epsilon_insensitive', # L1 loss
+        model = GridSearchCV(pipeline,
+                             {'linearsvr__C':np.logspace(0,5,6),
+                              'linearsvr__loss':['epsilon_insensitive', # L1 loss
                                                  'squared_epsilon_insensitive',# L2 loss
                                                  ]},
                              scoring    = 'explained_variance',

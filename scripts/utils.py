@@ -346,10 +346,10 @@ def get_feature_targets(df_sub,
     features            = df_sub[[f"feature{ii + 1}" for ii in range(n_features)]].values
     targets             = df_sub["targets"].values
     if normalize_features:
-        # get the largest value of each column
-        features        = features / features.max(0)
+        # rescale the features between 0 and 1
+        features        = features / features.max()
     if normalize_targets:
-        targets         = targets / targets.max(0)
+        targets         = targets / targets.max()
     groups              = df_sub[group_col].values
     accuracies          = df_sub['accuracy'].values
     return features, targets, groups, accuracies
