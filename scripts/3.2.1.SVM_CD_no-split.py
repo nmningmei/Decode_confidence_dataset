@@ -28,10 +28,10 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
         
         model_name          = 'SVM'
         experiment_type     = 'cross_domain'
-        # target_attributes   = 'confidence-accuracy' # change folder name
         split_data          = 'no-split'
         data_dir            = '../data'
         source_data         = domains[_idx_source][0]
+        # print(source_data,target_attributes)
         
         working_df_name     = os.path.join(data_dir,target_attributes,f'{source_data}.csv')
         saving_dir          = f'../results/{target_attributes}/{experiment_type}'
@@ -60,6 +60,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
         for train,test in cv.split(features_source,targets_source,groups = groups_source):
             idxs_train.append(train)
             idxs_test.append(test)
+        np.random.seed(12345)
         if len(idxs_train) > 300:
             _idx = np.random.choice(len(idxs_train),size = 300,replace = False)
             idxs_train = [idxs_train[ii] for ii in _idx]
