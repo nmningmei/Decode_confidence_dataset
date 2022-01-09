@@ -45,15 +45,13 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
         
         df_source           = pd.read_csv(working_df_name,)
         df_source           = check_column_type(df_source)
-        df_source['temp']   = df_source['filename'].apply(lambda x: x.split('/')[-1].split('.')[0])
-        df_source['sub']    = df_source['temp'] + '-' + df_source['sub'].astype(str)
         features_source,targets_source,groups_source,accuracies_source = get_feature_targets(df_source,
                                                                                              n_features         = n_features,
                                                                                              time_steps         = time_steps,
                                                                                              target_attributes  = target_attributes,
                                                                                              group_col          = 'sub',
                                                                                              normalize_features = False,
-                                                                                             normalize_targets  = True,)
+                                                                                             normalize_targets  = False,)
         cv                  = LeaveOneGroupOut()
         
         idxs_train,idxs_test = [],[]
@@ -61,8 +59,8 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
             idxs_train.append(train)
             idxs_test.append(test)
         np.random.seed(12345)
-        if len(idxs_train) > 300:
-            _idx = np.random.choice(len(idxs_train),size = 300,replace = False)
+        if len(idxs_train) > 100:
+            _idx = np.random.choice(len(idxs_train),size = 100,replace = False)
             idxs_train = [idxs_train[ii] for ii in _idx]
         
         # train the decoder on all the source data
@@ -98,8 +96,6 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
             
             df_target           = pd.read_csv(os.path.join(data_dir,target_attributes,f'{target_data}.csv'))
             df_target           = check_column_type(df_target)
-            df_target['temp']   = df_target['filename'].apply(lambda x: x.split('/')[-1].split('.')[0])
-            df_target['sub']    = df_target['temp'] + '-' + df_target['sub'].astype(str)
             
             features_target,targets_target,groups_target,accuracies_target = get_feature_targets(df_target,
                                                                                                  n_features         = n_features,
@@ -107,7 +103,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                                                                                                  target_attributes  = target_attributes,
                                                                                                  group_col          = 'sub',
                                                                                                  normalize_features = False,
-                                                                                                 normalize_targets  = True,
+                                                                                                 normalize_targets  = False,
                                                                                                  )
             
             csv_name    = os.path.join(saving_dir,f'results_{model_name}_{target_attributes}_{source_data}_{target_data}.csv')
@@ -143,7 +139,7 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
                 if fold not in results['fold']:
                     # leave out test data
                     
-                    X_test, y_test  = features_target[test]  ,targets_target[test]
+                    X_test, y_test  = features_target[test],targets_target[test]
                     acc_test        = accuracies_target[test]
                     
                     # test the model

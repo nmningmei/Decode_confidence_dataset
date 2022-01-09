@@ -54,7 +54,7 @@ features, targets, groups, accuracies = get_feature_targets(df_sub,
                                                             target_attributes   = target_attributes,
                                                             group_col           = 'sub',
                                                             normalize_features  = False,
-                                                            normalize_targets   = True,
+                                                            normalize_targets   = False,
                                                             )
 
 kk          = filename.split('/')[-1].split(".csv")[0]
@@ -89,11 +89,18 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     print(f'fold {fold}')
     if fold not in results['fold']:
         # leave out test data
-        X_,y_           = features[train_],targets[train_]
+        X_,y_,g_train   = features[train_],targets[train_],groups[train_]
         X_test, y_test  = features[test]  ,targets[test]
         acc_test        = accuracies[test]
         acc_train_      = accuracies[train_]
-        
+        _train,_test    = [],[]
+        for temp in cv.split(X_,y_,groups = g_train):
+            _train.append(temp[0])
+            _test.append(temp[1])
+        np.random.seed(12345)
+        if len(_train) > 100:
+            _idx = np.random.choice(len(_train),size = 100,replace = False)
+            _train = [_train[item] for item in _idx]
         # make the model
         pipeline = make_pipeline(StandardScaler(),
                                  build_RF(bootstrap = True,

@@ -45,8 +45,6 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
         
         df_source           = pd.read_csv(working_df_name,)
         df_source           = check_column_type(df_source)
-        df_source['temp']   = df_source['filename'].apply(lambda x: x.split('/')[-1].split('.')[0])
-        df_source['sub']    = df_source['temp'] + '-' + df_source['sub'].astype(str)
         features_source,targets_source,groups_source,accuracies_source = get_feature_targets(df_source,
                                                                                              n_features         = n_features,
                                                                                              time_steps         = time_steps,
@@ -60,8 +58,8 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
         for train,test in cv.split(features_source,targets_source,groups = groups_source):
             idxs_train.append(train)
             idxs_test.append(test)
-        if len(idxs_train) > 300:
-            _idx = np.random.choice(len(idxs_train),size = 300,replace = False)
+        if len(idxs_train) > 100:
+            _idx = np.random.choice(len(idxs_train),size = 100,replace = False)
             idxs_train = [idxs_train[ii] for ii in _idx]
         
         # train the decoder on all the source data
@@ -96,8 +94,6 @@ for target_attributes in ['confidence','accuracy','confidence-accuracy']:
             
             df_target           = pd.read_csv(os.path.join(data_dir,target_attributes,f'{target_data}.csv'))
             df_target           = check_column_type(df_target)
-            df_target['temp']   = df_target['filename'].apply(lambda x: x.split('/')[-1].split('.')[0])
-            df_target['sub']    = df_target['temp'] + '-' + df_target['sub'].astype(str)
             
             features_target,targets_target,groups_target,accuracies_target = get_feature_targets(df_target,
                                                                                                  n_features         = n_features,
