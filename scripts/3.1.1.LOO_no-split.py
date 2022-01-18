@@ -22,13 +22,12 @@ from utils import (check_column_type,
                    get_feature_targets
                    )
 from sklearn.model_selection import LeaveOneGroupOut
-from sklearn.metrics import r2_score
 
 model_name          = 'SVM' # change model name
 experiment_type     = 'LOO'
 target_attributes   = 'confidence' # change folder name
-domain              = 'Memory' # change domain
-reg_clf             = 'regression' # change here
+domain              = 'Perception' # change domain
+reg_clf             = 'classification' # change type
 split_data          = 'no-split'
 data_dir            = '../data'
 model_dir           = '../models/{}_{}_{}_{}'.format(*[model_name,experiment_type,target_attributes,split_data])
@@ -72,7 +71,6 @@ if not os.path.exists(csv_name):
     results             = dict(
                                fold             = [],
                                score            = [],
-                               r2               = [],
                                n_sample         = [],
                                source           = [],
                                sub_name         = [],
@@ -80,6 +78,7 @@ if not os.path.exists(csv_name):
                                feature_type     = [],
                                source_data      = [],
                                target_data      = [],
+                               special          = [],
                                )
     for ii in range(n_features):
         results[f'features T-{n_features - ii}'] = []
@@ -134,19 +133,33 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
                                              )
         # get parameters
         params      = pipeline.best_estimator_.get_params()
-        asdf
+        
         # save the results
-        results['fold'                          ].append(fold)
-        results['score'                         ].append(scores)
-        results['r2'                            ].append(r2_score(y_test,y_pred,))
-        results['n_sample'                      ].append(X_test.shape[0])
-        results['source'                        ].append('same')
-        results['sub_name'                      ].append(np.unique(groups[test])[0])
-        [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties)]
-        results['best_params'                   ].append('|'.join(f'{key}:{value}' for key,value in params.items()))
-        results['feature_type'                  ].append(target_attributes)
-        results['source_data'                   ].append(domain)
-        results['target_data'                   ].append(domain)
+        if model_name == 'SVM' and reg_clf == 'classification':
+            for ii_row,row in enumerate(properties):
+                results['fold'                          ].append(fold)
+                results['score'                         ].append(scores)
+                results['n_sample'                      ].append(X_test.shape[0])
+                results['source'                        ].append('same')
+                results['sub_name'                      ].append(np.unique(groups[test])[0])
+                [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(row)]
+                results['best_params'                   ].append('|'.join(f'{key}:{value}' for key,value in params.items()))
+                results['feature_type'                  ].append(target_attributes)
+                results['source_data'                   ].append(domain)
+                results['target_data'                   ].append(domain)
+                results['special'                       ].append(ii_row + 1)
+        else:
+            results['fold'                          ].append(fold)
+            results['score'                         ].append(scores)
+            results['n_sample'                      ].append(X_test.shape[0])
+            results['source'                        ].append('same')
+            results['sub_name'                      ].append(np.unique(groups[test])[0])
+            [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(properties)]
+            results['best_params'                   ].append('|'.join(f'{key}:{value}' for key,value in params.items()))
+            results['feature_type'                  ].append(target_attributes)
+            results['source_data'                   ].append(domain)
+            results['target_data'                   ].append(domain)
+            results['special'                       ].append('None')
         
         results_to_save = pd.DataFrame(results)
     else:

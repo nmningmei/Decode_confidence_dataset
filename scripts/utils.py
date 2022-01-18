@@ -15,6 +15,7 @@ try:
     import tensorflow as tf
     from tensorflow.keras.preprocessing.sequence import TimeseriesGenerator
     from tensorflow.keras       import layers, Model, optimizers, losses, regularizers
+    from tensorflow.keras.utils import to_categorical
 except:
     pass
 
@@ -23,9 +24,16 @@ from tqdm import tqdm
 from joblib import Parallel,delayed
 
 # from sklearn.cluster import KMeans
-from sklearn.metrics import roc_auc_score
-
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
 from scipy.special import softmax
+from sklearn.svm import LinearSVC,LinearSVR
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.multiclass import OneVsRestClassifier
+from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
+from sklearn.model_selection import LeaveOneGroupOut,GridSearchCV
+from sklearn.metrics import make_scorer,explained_variance_score,roc_auc_score
+from sklearn.inspection import permutation_importance
 
 gc.collect()
 
@@ -249,17 +257,41 @@ def convert_object_to_float(df):
                 print(f'column {name} contains strings')
     return df
 
+def build_SVMClassifier(max_iter = int(1e3)):
+    
+    svm = LinearSVC(random_state = 12345,class_weight='balanced',max_iter = max_iter)
+    svm = CalibratedClassifierCV(svm,cv = 5,n_jobs = 1)
+    svm = OneVsRestClassifier(svm,n_jobs = 1)
+    return svm
+
 def build_SVMRegressor(max_iter = int(1e3),):
-    from sklearn.svm import LinearSVR
     svm = LinearSVR(random_state = 12345,max_iter = max_iter,)
     return svm
 
-def build_RF(n_jobs             = 1,
+def build_RF_classifier(
+             n_jobs             = 1,
+             max_depth          = 7,
+             n_estimators       = 500,
+             oob_score          = False,
+             bootstrap          = True,
+             ):
+    rf = RandomForestClassifier(n_estimators    = n_estimators,
+                                class_weight    = 'balanced',
+                                criterion       = 'entropy',
+                                max_depth       = max_depth,
+                                n_jobs          = n_jobs,
+                                bootstrap       = bootstrap,
+                                oob_score       = oob_score,
+                                random_state    = 12345,
+                                )
+    return rf
+
+def build_RF_regressor(
+             n_jobs             = 1,
              max_depth          = 3,
              n_estimators       = 100,
              oob_score          = True,
              bootstrap          = True):
-    from sklearn.ensemble import RandomForestRegressor
     rf = RandomForestRegressor(n_estimators     = n_estimators,
                                # criterion        = 'squred_error',
                                max_depth        = max_depth,
@@ -270,7 +302,45 @@ def build_RF(n_jobs             = 1,
                                )
     return rf
 
-def build_RNN(time_steps = 7,confidence_range = 4,input_dim = 1,model_name = 'temp.h5'):
+def build_RNN_classifier(time_steps = 7,confidence_range = 4,input_dim = 4,model_name = 'temp.h5'):
+    # reset the GPU memory
+    tf.keras.backend.clear_session()
+    try:
+        tf.random.set_random_seed(12345) # tf 1.0
+    except:
+        tf.random.set_seed(12345) # tf 2.0
+    # build a 3-layer RNN model
+    inputs                  = layers.Input(shape     = (time_steps,input_dim),# time steps by features 
+                                           name      = 'inputs')
+    # the recurrent layer
+    lstm,state_h,state_c    = layers.LSTM(units             = 1,
+                                          return_sequences  = True,
+                                          return_state      = True,
+                                          # kernel_regularizer= regularizers.L1L2(1e-3,1e-3),
+                                          name              = "lstm")(inputs)
+    # from the LSTM layer, we will have an output with time steps by features, but 
+    dimension_squeeze       = layers.Lambda(lambda x:tf.keras.backend.squeeze(x,2))(lstm)
+    outputs                 = layers.Dense(4,
+                                           # kernel_regularizer= regularizers.L1L2(1e-3,1e-3),
+                                           name             = "output",
+                                           activation       = "softmax")(dimension_squeeze)
+    model                   = Model(inputs,
+                                    outputs)
+    
+    model.compile(optimizer     = optimizers.SGD(learning_rate = 1e-2),
+                  loss          = losses.mean_absolute_error,
+                  metrics       = ['mse'])
+    # early stopping
+    callbacks = make_CallBackList(model_name    = model_name,
+                                  monitor       = 'val_loss',
+                                  mode          = 'min',
+                                  verbose       = 0,
+                                  min_delta     = 1e-4,
+                                  patience      = 5,
+                                  frequency     = 1,)
+    return model,callbacks
+
+def build_RNN_regressor(time_steps = 7,confidence_range = 4,input_dim = 1,model_name = 'temp.h5'):
     # reset the GPU memory
     tf.keras.backend.clear_session()
     try:
@@ -307,6 +377,237 @@ def build_RNN(time_steps = 7,confidence_range = 4,input_dim = 1,model_name = 'te
                                   patience      = 5,
                                   frequency     = 1,)
     return model,callbacks
+
+def pipeline_arguments(model_name = 'temp.h5'):
+    xargs = {
+        'svm_classification':dict(max_iter = 1e3),
+        'svm_regression':dict(max_iter = 1e3),
+        'rf_classification':dict(n_jobs             = 1,
+                                 max_depth          = 7,
+                                 n_estimators       = 500,
+                                 oob_score          = False,
+                                 bootstrap          = True,),
+        'rf_regression':dict(n_jobs             = 1,
+                             max_depth          = 7,
+                             n_estimators       = 500,
+                             oob_score          = False,
+                             bootstrap          = True,),
+        'rnn_classification':dict(time_steps        = 7,
+                                  confidence_range  = 4,
+                                  input_dim         = 4,
+                                  model_name        = model_name,
+                                  ),
+        'rnn_regression':dict(time_steps            = 7,
+                              confidence_range      = 4,
+                              input_dim             = 4,
+                              model_name            = model_name
+                              ),
+        }
+    return xargs
+
+def pipelines(xargs):
+    pipeline_dict = {
+        'svm_classification':make_pipeline(
+                                StandardScaler(),
+                                build_SVMClassifier(**xargs['svm_classification']),
+                                ),
+        'svm_regression':make_pipeline(
+                                StandardScaler(),
+                                build_SVMRegressor(**xargs['svm_regression']),
+                                ),
+        'rf_classification':make_pipeline(
+                                StandardScaler(),
+                                build_RF_classifier(**xargs['rf_classification']),
+                                ),
+        'rf_regression':make_pipeline(
+                                StandardScaler(),
+                                build_RF_regressor(**xargs['rf_regression']),
+                                ),
+        'rnn_classification':build_RNN_classifier(**xargs['rnn_classification']),
+        'rnn_regression':build_RNN_regressor(**xargs['rnn_regression']),
+        }
+    return pipeline_dict
+
+def model_fit(pipeline,
+              cv,
+              X_train,
+              y_train,
+              X_valid = None,
+              y_valid = None,
+              n_features = 7,
+              model_name = 'svm',
+              reg_clf = 'classification',
+              **xargs):
+    if model_name == 'svm' and reg_clf == 'classification':
+        model = GridSearchCV(pipeline,
+                                {'onevsrestclassifier__estimator__base_estimator__C':np.logspace(0,5,6),
+                                 'onevsrestclassifier__estimator__base_estimator__loss':['epsilon_insensitive', # L1 loss
+                                                    'squared_epsilon_insensitive',# L2 loss
+                                                    ]},
+                                scoring    = 'accuracy',
+                                n_jobs     = -1,
+                                cv         = cv,
+                                verbose    = 1,
+                                )
+        model.fit(X_train,y_train)
+        gc.collect()
+        return model
+    elif model_name == 'svm' and reg_clf == 'regression':
+        model = GridSearchCV(pipeline,
+                                {'linearsvr__C':np.logspace(0,5,6),
+                                 'linearsvr__loss':['epsilon_insensitive', # L1 loss
+                                                    'squared_epsilon_insensitive',# L2 loss
+                                                    ]},
+                                scoring    = 'explained_variance',
+                                n_jobs     = -1,
+                                cv         = cv,
+                                verbose    = 1,
+                                )
+        model.fit(X_train,y_train)
+        gc.collect()
+        return model
+    elif model_name == 'rf' and reg_clf == 'classification':
+        model = GridSearchCV(pipeline,
+                            {'randomforestclassifier__n_estimators':np.logspace(0,3,4).astype(int),
+                             'randomforestclassifier__max_depth':np.arange(n_features) + 1},
+                             scoring    = 'accuracy',
+                             n_jobs     = -1,
+                             cv         = cv,
+                             verbose    = 1,
+                             )
+        model.fit(X_train,y_train)
+        gc.collect()
+        return model
+    elif model_name == 'rf' and reg_clf == 'regression':
+        model = GridSearchCV(pipeline,
+                            {'randomforestregressor__n_estimators':np.logspace(0,3,4).astype(int),
+                             'randomforestregressor__max_depth':np.arange(n_features) + 1},
+                             scoring    = 'explained_variance',
+                             n_jobs     = -1,
+                             cv         = cv,
+                             verbose    = 1,
+                             )
+        model.fit(X_train,y_train)
+        gc.collect()
+        return model
+    elif model_name == 'rnn' and reg_clf == 'classification':
+        pipeline.fit(X_train,
+                     y_train,
+                     validation_data   = (X_valid,y_valid),
+                     shuffle           = True,
+                     **xargs
+                     )
+        return pipeline
+    elif model_name == 'rnn' and reg_clf == 'regression':
+        pipeline.fit(X_train,
+                     y_train,
+                     validation_data   = (X_valid,y_valid),
+                     shuffle           = True,
+                     **xargs
+                     )
+        return pipeline
+
+def model_prediction(pipeline,X_test,reg_clf = 'classification',is_rnn = False,):
+    if is_rnn:
+        y_pred = pipeline.predict(X_test)
+    else:
+        if reg_clf == 'classification':
+            y_pred = pipeline.predict_proba(X_test)
+        elif reg_clf == 'regression':
+            y_pred = pipeline.predict(X_test)
+        else:
+            raise NotImplementedError
+    return y_pred
+
+def model_evaluation(y_true,y_pred,
+                     confidence_range = 4,reg_clf = 'classification',is_rnn = False,
+                     ):
+    if reg_clf == 'classification':
+        score = classification_func(y_true,y_pred,
+                                    confidence_range = confidence_range,
+                                    need_normalize = True,
+                                    one_hot_y_true = True,
+                                    )
+    elif reg_clf == 'regression':
+        score = explained_variance_score(y_true,y_pred)
+    else:
+        raise NotImplementedError
+    return score
+
+def get_model_attributions(pipeline,
+                           X_test = None,y_test = None,
+                           model_name = 'svm',
+                           reg_clf = 'classification',
+                           ):
+    if model_name == 'svm' and reg_clf == 'classification':
+        OVR = pipeline.best_estimator_.steps[-1][-1]
+        for cali_est in OVR.estimators_:
+            coefs = []
+            for est in cali_est.calibrated_classifiers_:
+                coefs.append(est.base_estimator.coef_)
+        coefs = np.array(coefs)
+        return coefs
+    elif model_name == 'svm' and reg_clf == 'regression':
+        coefs = pipeline.best_estimator_.steps[-1][-1].coef_
+        return coefs
+    elif model_name == 'rf' and reg_clf == 'classification':
+        feature_importance = permutation_importance(
+                               pipeline.best_estimator_,
+                               X_test,
+                               y_test,
+                               scoring = 'accuracy',
+                               n_repeats = 5,
+                               n_jobs = -1,
+                               random_state = 12345,
+                               )
+        return feature_importance['importances_mean']
+    elif model_name == 'rf' and reg_clf == 'regression':
+        feature_importance = permutation_importance(
+                               pipeline.best_estimator_,
+                               X_test,
+                               y_test,
+                               scoring = 'explained_variance',
+                               n_repeats = 5,
+                               n_jobs = -1,
+                               random_state = 12345,
+                               )
+        return feature_importance['importances_mean']
+    elif model_name == 'rnn' and reg_clf == 'classification':
+        pass
+    elif model_name == 'rnn' and reg_clf == 'regression':
+        pass
+    else:
+        raise NotImplementedError
+
+def classification_func(y_true,
+                        y_pred,
+                        confidence_range = 4,
+                        need_normalize = False,
+                        one_hot_y_true = False,
+                        **xargs):
+    """
+    Customized scoring function
+    
+    Parameters
+    ---------------
+    y_true : list or numpy.ndarray, shape (n_samples, confidence_range)
+    y_pred : list or numpy.ndarray, shape (n_samples, confidence_range)
+    confidence_range : int
+    
+    Return
+    ---------------
+    score : list, shape (confidence_range,)
+    """
+    if need_normalize:
+        y_pred = softmax(np.array(y_pred),axis = 1)
+    if one_hot_y_true:
+        y_true = to_categorical(y_true - 1, num_classes = confidence_range)
+    # print(y_pred.shape)
+    y_true = np.concatenate([y_true,np.eye(confidence_range)]) # to avoid the bias classification results
+    # there is a logical problem but it works
+    y_pred = np.concatenate([y_pred,np.ones((confidence_range,confidence_range))/confidence_range])
+    score = roc_auc_score(y_true,y_pred)
+    return score
 
 def get_domains_maps():
     temp = {'4-point':'Perception', 
