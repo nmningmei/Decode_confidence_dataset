@@ -260,7 +260,7 @@ def convert_object_to_float(df):
 def build_SVMClassifier(max_iter = int(1e3)):
     
     svm = LinearSVC(random_state = 12345,class_weight='balanced',max_iter = max_iter)
-    svm = CalibratedClassifierCV(svm,cv = 5,n_jobs = 1)
+    svm = CalibratedClassifierCV(svm,cv = 5,)
     svm = OneVsRestClassifier(svm,n_jobs = 1)
     return svm
 
@@ -544,7 +544,7 @@ def get_model_attributions(pipeline,
         for cali_est in OVR.estimators_:
             coefs = []
             for est in cali_est.calibrated_classifiers_:
-                coefs.append(est.base_estimator.coef_)
+                coefs.append(est.base_estimator.coef_[0])
         coefs = np.array(coefs)
         return coefs
     elif model_name == 'svm' and reg_clf == 'regression':

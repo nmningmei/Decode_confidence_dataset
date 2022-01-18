@@ -23,7 +23,7 @@ from utils import (check_column_type,
                    )
 from sklearn.model_selection import LeaveOneGroupOut
 
-model_name          = 'SVM' # change model name
+model_name          = 'RF' # change model name
 experiment_type     = 'LOO'
 target_attributes   = 'confidence' # change folder name
 domain              = 'Perception' # change domain
@@ -142,7 +142,7 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
                 results['n_sample'                      ].append(X_test.shape[0])
                 results['source'                        ].append('same')
                 results['sub_name'                      ].append(np.unique(groups[test])[0])
-                [results[f'features T-{n_features - ii}'].append(item) for ii,item in enumerate(row)]
+                [results[f'features T-{n_features - ii_item}'].append(item) for ii_item,item in enumerate(row)]
                 results['best_params'                   ].append('|'.join(f'{key}:{value}' for key,value in params.items()))
                 results['feature_type'                  ].append(target_attributes)
                 results['source_data'                   ].append(domain)
