@@ -304,7 +304,10 @@ def build_RF_regressor(
 
 def build_RNN_classifier(time_steps = 7,confidence_range = 4,input_dim = 4,model_name = 'temp.h5'):
     # reset the GPU memory
-    tf.keras.backend.clear_session()
+    try:
+        tf.keras.backend.clear_session()
+    except:
+        pass
     try:
         tf.random.set_random_seed(12345) # tf 1.0
     except:
@@ -423,8 +426,8 @@ def pipelines(xargs):
                                 StandardScaler(),
                                 build_RF_regressor(**xargs['rf_regression']),
                                 ),
-        'rnn_classification':build_RNN_classifier(**xargs['rnn_classification']),
-        'rnn_regression':build_RNN_regressor(**xargs['rnn_regression']),
+        'rnn_classification':None,#build_RNN_classifier(**xargs['rnn_classification']),
+        'rnn_regression':None,#build_RNN_regressor(**xargs['rnn_regression']),
         }
     return pipeline_dict
 
