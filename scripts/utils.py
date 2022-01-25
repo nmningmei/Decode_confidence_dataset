@@ -26,7 +26,6 @@ from joblib import Parallel,delayed
 # from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
-from scipy.special import softmax
 from sklearn.svm import LinearSVC,LinearSVR
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.multiclass import OneVsRestClassifier
@@ -34,6 +33,8 @@ from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
 from sklearn.model_selection import LeaveOneGroupOut,GridSearchCV
 from sklearn.metrics import make_scorer,explained_variance_score,roc_auc_score
 from sklearn.inspection import permutation_importance
+
+from scipy.special import softmax
 
 gc.collect()
 
@@ -601,7 +602,7 @@ def classification_func(y_true,
     ---------------
     score : list, shape (confidence_range,)
     """
-    from tensorflow.utils import to_categorical
+    from tensorflow.keras.utils import to_categorical
     if need_normalize:
         y_pred = softmax(np.array(y_pred),axis = 1)
     if one_hot_y_true:

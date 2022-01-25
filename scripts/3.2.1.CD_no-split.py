@@ -147,14 +147,14 @@ if True:
                     y_pred          = model_prediction(pipeline,X_test,reg_clf = reg_clf,is_rnn = is_rnn,)
                     # evaluate the model
                     scores          = model_evaluation(y_test,y_pred,
-                                                       confidence_range = 4,
-                                                       reg_clf = reg_clf,
-                                                       is_rnn = is_rnn,
+                                                       confidence_range = y_pred.shape[1],
+                                                       reg_clf          = reg_clf,
+                                                       is_rnn           = is_rnn,
                                                        )
                     # get the weights
                     properties      = get_model_attributions(pipeline,X_test,y_test,
                                                              model_name = model_name.lower(),
-                                                             reg_clf = reg_clf,
+                                                             reg_clf    = reg_clf,
                                                              )
                     # get parameters
                     params          = pipeline.best_estimator_.get_params()
