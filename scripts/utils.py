@@ -601,6 +601,7 @@ def classification_func(y_true,
     ---------------
     score : list, shape (confidence_range,)
     """
+    from tensorflow.utils import to_categorical
     if need_normalize:
         y_pred = softmax(np.array(y_pred),axis = 1)
     if one_hot_y_true:
