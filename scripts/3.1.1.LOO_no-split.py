@@ -110,11 +110,11 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         pipeline = pipelines(xargs)[f'{model_name.lower()}_{reg_clf}']
         # fit the model
         pipeline = model_fit(pipeline,
-                             cv = zip(_train,_test),
-                             X_train = X_,
-                             y_train = y_,
+                             cv         = zip(_train,_test),
+                             X_train    = X_,
+                             y_train    = y_,
                              model_name = model_name.lower(),
-                             reg_clf = reg_clf,
+                             reg_clf    = reg_clf,
                              n_features = n_features,
                              )
         
@@ -122,14 +122,14 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         y_pred      = model_prediction(pipeline,X_test,reg_clf = reg_clf,is_rnn = is_rnn,)
         # evaludate the model
         scores      = model_evaluation(y_test,y_pred,
-                                       confidence_range = 4,
-                                       reg_clf = reg_clf,
-                                       is_rnn = is_rnn,
+                                       confidence_range = y_pred.shape[1],
+                                       reg_clf          = reg_clf,
+                                       is_rnn           = is_rnn,
                                        )
         # get the weights
         properties  = get_model_attributions(pipeline,X_test,y_test,
                                              model_name = model_name.lower(),
-                                             reg_clf = reg_clf,
+                                             reg_clf    = reg_clf,
                                              )
         # get parameters
         params      = pipeline.best_estimator_.get_params()
