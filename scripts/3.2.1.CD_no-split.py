@@ -146,8 +146,9 @@ if True:
                     # test the model
                     y_pred          = model_prediction(pipeline,X_test,reg_clf = reg_clf,is_rnn = is_rnn,)
                     # evaluate the model
+                    CR_dim      = y_pred.shape[1] if reg_clf == 'classification' else 4
                     scores          = model_evaluation(y_test,y_pred,
-                                                       confidence_range = y_pred.shape[1],
+                                                       confidence_range = CR_dim,
                                                        reg_clf          = reg_clf,
                                                        is_rnn           = is_rnn,
                                                        )
