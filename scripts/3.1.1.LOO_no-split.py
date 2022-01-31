@@ -23,7 +23,7 @@ from utils import (check_column_type,
                    )
 from sklearn.model_selection import LeaveOneGroupOut
 
-model_name          = 'RF' # change model name
+model_name          = 'SVM' # change model name
 experiment_type     = 'LOO'
 target_attributes   = 'confidence' # change folder name
 domain              = 'Perception' # change domain
@@ -44,7 +44,7 @@ verbose             = 1
 debug               = True
 df_def              = pd.read_csv(working_df_name,)
 unique_filenames    = pd.unique(df_def['filename'])
-idx                 = 0 # change index
+idx                 = 3 # change index
 is_rnn              = True if model_name == 'RNN' else False
 # pick one of the csv files
 filename            = unique_filenames[idx]
@@ -121,8 +121,9 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
         # test the model
         y_pred      = model_prediction(pipeline,X_test,reg_clf = reg_clf,is_rnn = is_rnn,)
         # evaludate the model
+        CR_dim      = y_pred.shape[1] if reg_clf == 'classification' else 4
         scores      = model_evaluation(y_test,y_pred,
-                                       confidence_range = y_pred.shape[1],
+                                       confidence_range = CR_dim,
                                        reg_clf          = reg_clf,
                                        is_rnn           = is_rnn,
                                        )
