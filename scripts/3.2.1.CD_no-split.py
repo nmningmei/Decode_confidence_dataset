@@ -65,8 +65,8 @@ if True:
             idxs_train.append(train)
             idxs_test.append(test)
         np.random.seed(12345)
-        if len(idxs_train) > 100:
-            _idx = np.random.choice(len(idxs_train),size = 100,replace = False)
+        if len(idxs_train) > 50:
+            _idx = np.random.choice(len(idxs_train),size = 50,replace = False)
             idxs_train = [idxs_train[ii] for ii in _idx]
         
         # train the decoder on all the source data
@@ -75,11 +75,11 @@ if True:
         pipeline = pipelines(xargs)[f'{model_name.lower()}_{reg_clf}']
         # fit the model
         pipeline = model_fit(pipeline,
-                             cv = zip(idxs_train,idxs_test),
-                             X_train = features_source,
-                             y_train = targets_source,
+                             cv         = zip(idxs_train,idxs_test),
+                             X_train    = features_source,
+                             y_train    = targets_source,
                              model_name = model_name.lower(),
-                             reg_clf = reg_clf,
+                             reg_clf    = reg_clf,
                              n_features = n_features,
                              )
         

@@ -28,7 +28,7 @@ def get_model_type(x):
         return 'Recurrent Neural Network'
 
 if __name__ == "__main__":
-    working_dir = '../results/{}/*'
+    working_dir = '../results/regression/{}/*'
     figure_dir = '../figures/'
     
     x_order = ['confidence','accuracy','confidence-accuracy']
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         # load the data
         temp = []
         for f in working_data:
-            df = pd.read_csv(f)
+            df = pd.read_csv(f).dropna()
             df['model_name'] = df['best_params'].apply(get_model_type)
             col_names = [item for item in df.columns if ('features' in item)]
             if '_RNN_' in f:
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             temp.append(df)
         dfs[folder_name] = pd.concat(temp)
         
-    df_scores = pd.concat([df[['score','r2','feature_type','model_name']] for df in dfs.values()])
+    df_scores = pd.concat([df[['score','feature_type','model_name']] for df in dfs.values()])
     fig,ax = plt.subplots(figsize = (8,5))
     ax = sns.barplot(x = 'feature_type',
                      order = x_order,
@@ -102,16 +102,16 @@ if __name__ == "__main__":
                       )
     
     ax = axes.flatten()[2]
-    df1 = dfs[x_order[2]][['fold', 'score', 'r2', 'n_sample', 'source', 'sub_name', 'best_params',
+    df1 = dfs[x_order[2]][['fold', 'score', 'n_sample', 'source', 'sub_name', 'best_params',
                            'feature_type', 'features T-14', 'features T-13', 'features T-12',
                            'features T-11', 'features T-10', 'features T-9', 'features T-8',
                            'model_name']]
-    df1.columns = ['fold', 'score', 'r2', 'n_sample', 'source', 'sub_name', 'best_params',
+    df1.columns = ['fold', 'score', 'n_sample', 'source', 'sub_name', 'best_params',
                    'feature_type', 'features T-7', 'features T-6', 'features T-5',
                    'features T-4', 'features T-3', 'features T-2', 'features T-1',
                    'model_name']
     df1['feature_type'] = 'confidence'
-    df2 = dfs[x_order[2]][['fold', 'score', 'r2', 'n_sample', 'source', 'sub_name', 'best_params',
+    df2 = dfs[x_order[2]][['fold', 'score', 'n_sample', 'source', 'sub_name', 'best_params',
                            'feature_type', 'features T-7', 'features T-6', 'features T-5',
                            'features T-4', 'features T-3', 'features T-2', 'features T-1',
                            'model_name']]
@@ -131,7 +131,7 @@ if __name__ == "__main__":
                       ax = ax,
                       )
     # cross domain scores
-    df_scores = pd.concat([df[['score','r2','feature_type','model_name',
+    df_scores = pd.concat([df[['score','feature_type','model_name',
                                'source_data','target_data']] for df in dfs.values()])
     g = sns.catplot(x = 'feature_type',
                     y = 'score',
