@@ -28,7 +28,7 @@ source: https://cdn-images-1.medium.com/max/1600/1*i0o8mjFfCn-uD79-F1Cqkw.png
 ## Classification
 <img src="https://github.com/nmningmei/Decode_confidence_dataset/blob/main/figures/cross%20classification%20results.jpg" width="100%" />
 ## Regression
-<img scr="https://github.com/nmningmei/Decode_confidence_dataset/blob/main/figures/cross%20regression%20results.jpg" width="100%" />
+<img src="https://github.com/nmningmei/Decode_confidence_dataset/blob/main/figures/cross%20regression%20results.jpg" width="100%" />
 
 
 
