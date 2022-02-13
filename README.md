@@ -22,35 +22,13 @@ source: https://image.slideserve.com/867897/linear-support-vector-machine-svm-l.
 <img src="https://cdn-images-1.medium.com/max/1600/1*i0o8mjFfCn-uD79-F1Cqkw.png">
 source: https://cdn-images-1.medium.com/max/1600/1*i0o8mjFfCn-uD79-F1Cqkw.png
 
-# RNN model - as an alternative model, but we do not perform model selection. An RNN model contains such prior: there exists temporal relationship between the features from consective time points and adding these relationships to the model would benefit the decoding. 
-<p float="left">
-  <img src="https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/RNN%20model%20confidence%20database.jpg" width="40%" /> <img src="https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/external-content.duckduckgo.com.jpg" width="40%" />
-</p>
 
+# Results
 
-# Results - confidence
-## Decoding scores (within domain)
-Using 7 trials back             |  Split to past and recent
-:-------------------------:|:-------------------------:
-![t7s](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/LOO/scores.jpg)  |  ![prs](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/LOO/scores_split.jpg)
-
-
-## Feature attribution (within domain)
-Using 7 trials back - SVM             |  Using 7 trials back - RF
-:-------------------------:|:-------------------------:
-![t7w](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/LOO/features.jpg)  |  ![t7f](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/LOO/feature_importance.jpg)
-
-
-## Decoding scores (cross domain)
-Using 7 trials back             |  Split to past and recent
-:-------------------------:|:-------------------------:
-![t7sc](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/cross_domain/scores.jpg)  |  ![prsc](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/cross_domain/scores_split.jpg)
-
-
-## Feature attribution (cross domain)
-Using 7 trials back - SVM             |  Using 7 trials back - RF
-:-------------------------:|:-------------------------:
-![t7wc](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/cross_domain/features.jpg)  |  ![t7fc](https://github.com/nmningmei/decoding_confidence_dataset/blob/main/figures/confidence/cross_domain/feature_importance.jpg)
+## Classification
+[!clf-simple](https://github.com/nmningmei/Decode_confidence_dataset/blob/main/figures/cross%20classification%20results.jpg)
+## Regression
+[!reg-simple](https://github.com/nmningmei/Decode_confidence_dataset/blob/main/figures/cross%20regression%20results.jpg)
 
 
 
