@@ -5,10 +5,12 @@ Created on Mon Nov 16 12:20:10 2020
 
 @author: nmei
 
-experiment            | target_column
-'confidence'          | ['Confience']
-'accuracy'            | ['accuracy']
-'confidence-accuracy' | ['Confidence','accuracy']
+experiment              | target_column
+'confidence'            | ['Confience']
+'accuracy'              | ['accuracy']
+'confidence-accuracy'   | ['Confidence','accuracy']
+'RT'                    | ['RT']
+'confidence-RT'         | ['Confidence','RT']
 
 preprocess steps:
     1. concatenate all the study within a domain
@@ -23,8 +25,13 @@ from utils import preprocess,get_domains_maps
 
 # experiment              = 'confidence-accuracy'
 # target_column           = ['Confidence','accuracy']
-for experiment,target_column in zip(['confidence','accuracy','confidence-accuracy'],
-                                    [['Confidence'],['accuracy'],['Confidence','accuracy']]):
+for experiment,target_column in zip(['confidence','accuracy','confidence-accuracy','RT','confidence-RT'],
+                                    [['Confidence'],
+                                     ['accuracy'],
+                                     ['Confidence','accuracy'],
+                                     ['RT'],
+                                     ['Confidence','RT'],
+                                     ]):
     data_dir                = '../data'
     model_dir               = '../models/{experiment}'
     for working_dir in os.listdir('../data/datasets'):

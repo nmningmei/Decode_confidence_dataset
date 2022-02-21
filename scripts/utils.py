@@ -80,13 +80,20 @@ def preprocess(working_data,
             df_temp['accuracy'] = df_temp['Accuracy'].values.copy()
         else:
             df_temp['accuracy'] = np.array(df_temp['Stimulus'].values == df_temp['Response'].values,dtype = int)
+        if 'RT_dec' not in df_temp.columns:
+            df_temp['RT_dec']  = np.nan
+        
         df_temp['filename'] = f
+        df_temp['RT'] = df_temp['RT_dec'].copy()
+        
         if len(target_columns) == 2:
             df_temp = df_temp[np.concatenate([['Subj_idx','filename',],target_columns])]
         elif 'accuracy' not in target_columns:
-            df_temp = df_temp[np.concatenate([['Subj_idx','filename','accuracy'],target_columns])]
+            df_temp = df_temp[np.concatenate([['Subj_idx','filename','accuracy','RT'],target_columns])]
+        elif 'RT' not in target_columns:
+            df_temp = df_temp[np.concatenate([['Subj_idx','filename','accuracy','RT'],target_columns])]
         else:
-            df_temp = df_temp[['Subj_idx','filename','accuracy']]
+            df_temp = df_temp[['Subj_idx','filename','accuracy','RT']]
         df_for_concat.append(df_temp)
     df_concat = pd.concat(df_for_concat)
     
@@ -95,6 +102,7 @@ def preprocess(working_data,
               filename  = [],
               targets   = [],
               accuracy  = [],
+              RT        = [],
               )
     if len(target_columns) == 1:
         for ii in range(time_steps):
@@ -109,6 +117,7 @@ def preprocess(working_data,
         
         values      = df_sub[target_columns].values
         accuracy    = df_sub['accuracy'].values
+        rt          = df_sub['RT'].values
         # tensorflow.keras.preprocessing.TimeseriesGenerator
         data_gen    = TimeseriesGenerator(values,
                                           values,
@@ -117,11 +126,14 @@ def preprocess(working_data,
                                           batch_size    = 1,
                                           )
         t.set_description(f'{filename} sub-{sub} {np.mean(accuracy[time_steps:]):.2f}')
-        for (features_,targets_),accuracy_ in zip(list(data_gen),accuracy[time_steps:]):
+        for (features_,targets_),accuracy_,rt_ in zip(list(data_gen),
+                                                      accuracy[time_steps:],
+                                                      rt[time_steps:],):
             df["sub"        ].append(sub)
             df["filename"   ].append(filename)
             df["targets"    ].append(targets_.flatten()[0])
             df["accuracy"   ].append(accuracy_)
+            df["RT"         ].append(rt_)
             if len(target_columns) == 1:
                 features_ = features_.flatten()
             elif len(target_columns) == 2:
@@ -131,7 +143,7 @@ def preprocess(working_data,
     df = pd.DataFrame(df)
     # re-order the columns
     df = df[np.concatenate([
-             ['filename', 'sub','accuracy'],
+             ['filename', 'sub','accuracy','RT'],
              [f'feature{ii + 1}' for ii in range(time_steps * len(target_columns))],
              ['targets']
              ])]
