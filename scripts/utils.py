@@ -151,6 +151,8 @@ def preprocess(working_data,
         """
         REMOVING FEATURES AND TARGETS DIFFERENT FROM 1-4
         """
+        if 'RT' not in target_columns:
+            df_temp = df_temp.drop('RT',1)
         df_temp = df.dropna()
         ###################### parallelize the for-loop to multiple CPUs ############################
         ###################### it is faster than df_temp.apply           ############################

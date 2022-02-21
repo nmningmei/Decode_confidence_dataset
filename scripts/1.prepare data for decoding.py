@@ -25,7 +25,12 @@ from utils import preprocess,get_domains_maps
 
 # experiment              = 'confidence-accuracy'
 # target_column           = ['Confidence','accuracy']
-for experiment,target_column in zip(['confidence','accuracy','confidence-accuracy','RT','confidence-RT'],
+for experiment,target_column in zip(['confidence',
+                                     'accuracy',
+                                     'confidence-accuracy',
+                                     'RT',
+                                     'confidence-RT',
+                                     ],
                                     [['Confidence'],
                                      ['accuracy'],
                                      ['Confidence','accuracy'],
@@ -43,8 +48,8 @@ for experiment,target_column in zip(['confidence','accuracy','confidence-accurac
         n_jobs              = -1
         verbose             = 1
         
-        if 'RT' not in experiment and working_dir != 'cognitive-4-rating':
-            df_def              = preprocess(working_data,target_columns = target_columns,n_jobs = n_jobs)
-            if not os.path.exists(os.path.join(data_dir,f'{experiment}')):
-                os.makedirs(os.path.join(data_dir,f'{experiment}'))
-            df_def.to_csv(working_df_name,index = False)
+        # if 'RT' not in experiment and working_dir != 'cognitive-4-rating':
+        df_def              = preprocess(working_data,target_columns = target_columns,n_jobs = n_jobs)
+        if not os.path.exists(os.path.join(data_dir,f'{experiment}')):
+            os.makedirs(os.path.join(data_dir,f'{experiment}'))
+        df_def.to_csv(working_df_name,index = False)
