@@ -40,9 +40,9 @@ for experiment,target_column in zip(['confidence',
     data_dir                = '../data'
     model_dir               = '../models/{experiment}'
     for working_dir in ['mixed_4-point',
-                        #'mem_4-point',
-                        #'4-point',
-                        #'cognitive-4-rating'
+                        'mem_4-point',
+                        '4-point',
+                        'cognitive-4-rating'
                         ]:
         working_data        = glob(os.path.join('../data/datasets',working_dir, "*.csv"))
         working_df_name     = os.path.join(data_dir,f'{experiment}',f'{get_domains_maps()[working_dir]}.csv')

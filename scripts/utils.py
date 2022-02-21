@@ -86,14 +86,15 @@ def preprocess(working_data,
         df_temp['filename'] = f
         df_temp['RT'] = df_temp['RT_dec'].copy()
         
-        if len(target_columns) == 2:
-            df_temp = df_temp[np.concatenate([['Subj_idx','filename',],target_columns])]
-        elif 'accuracy' not in target_columns:
-            df_temp = df_temp[np.concatenate([['Subj_idx','filename','accuracy','RT'],target_columns])]
-        elif 'RT' not in target_columns:
-            df_temp = df_temp[np.concatenate([['Subj_idx','filename','accuracy','RT'],target_columns])]
-        else:
-            df_temp = df_temp[['Subj_idx','filename','accuracy','RT']]
+        # if len(target_columns) == 2:
+        #     picked_columns = np.concatenate([['Subj_idx','filename','RT'],target_columns])
+        # elif 'accuracy' in target_columns:
+        #     picked_columns = np.concatenate([['Subj_idx','filename','RT'],target_columns])
+        # elif 'RT' in target_columns:
+        #     picked_columns = np.concatenate([['Subj_idx','filename','accuracy',],target_columns])
+        # else:
+        picked_columns = ['Subj_idx','filename','accuracy','RT','Confidence']
+        df_temp = df_temp[picked_columns]
         df_for_concat.append(df_temp)
     df_concat = pd.concat(df_for_concat)
     
@@ -114,7 +115,7 @@ def preprocess(working_data,
     t = tqdm(df_concat.groupby(['Subj_idx','filename']),)
     for (sub,filename), df_sub in t:
     #    print(sub,filename)
-        
+        df_sub      = df_sub.loc[:,~df_sub.columns.duplicated()]
         values      = df_sub[target_columns].values
         accuracy    = df_sub['accuracy'].values
         rt          = df_sub['RT'].values
