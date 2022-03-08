@@ -25,7 +25,7 @@ from sklearn.model_selection import LeaveOneGroupOut
 
 model_name          = 'SVM' # change model name
 experiment_type     = 'LOO'
-target_attributes   = 'confidence' # change folder name
+target_attributes   = 'RT' # change folder name
 domain              = 'Perception' # change domain
 reg_clf             = 'classification' # change type
 split_data          = 'no-split'
@@ -102,8 +102,8 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
             _train.append(temp[0])
             _test.append(temp[1])
         np.random.seed(12345)
-        if len(_train) > 100:
-            _idx = np.random.choice(len(_train),size = 100,replace = False)
+        if len(_train) > 50:
+            _idx = np.random.choice(len(_train),size = 50,replace = False)
             _train = [_train[item] for item in _idx]
         # make the model
         xargs = pipeline_arguments()

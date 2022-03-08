@@ -26,7 +26,7 @@ from sklearn.model_selection import LeaveOneGroupOut
 
 domains = np.array(list(get_domains_maps().values()))
 
-target_attributes = 'confidence-accuracy' # change attributes
+target_attributes = 'confidence-RT' # change attributes
 if True:
     for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.random.rand(4),
                                                              groups = domains):
