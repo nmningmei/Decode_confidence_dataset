@@ -42,7 +42,7 @@ if True:
         working_df_name     = os.path.join(data_dir,target_attributes,f'{source_data}.csv')
         saving_dir          = f'../results/{reg_clf}/{target_attributes}/{experiment_type}'
         batch_size          = 32
-        n_features          = 7 if target_attributes != 'confidence-accuracy' else 14
+        n_features          = 7 if target_attributes != 'confidence-RT' else 14
         time_steps          = 7
         confidence_range    = 4
         n_jobs              = -1

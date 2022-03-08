@@ -117,11 +117,12 @@ def preprocess(working_data,
     #    print(sub,filename)
         df_sub      = df_sub.loc[:,~df_sub.columns.duplicated()]
         values      = df_sub[target_columns].values
+        targets     = df_sub['Confidence'].values
         accuracy    = df_sub['accuracy'].values
         rt          = df_sub['RT'].values
         # tensorflow.keras.preprocessing.TimeseriesGenerator
         data_gen    = TimeseriesGenerator(values,
-                                          values,
+                                          targets,
                                           length        = time_steps,
                                           sampling_rate = 1,
                                           batch_size    = 1,
