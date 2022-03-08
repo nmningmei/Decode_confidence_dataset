@@ -25,7 +25,7 @@ from sklearn.model_selection import LeaveOneGroupOut
 
 model_name          = 'SVM' # change model name
 experiment_type     = 'LOO'
-target_attributes   = 'RT' # change folder name
+target_attributes   = 'confidence-RT' # change folder name
 domain              = 'Perception' # change domain
 reg_clf             = 'classification' # change type
 split_data          = 'no-split'
@@ -166,4 +166,4 @@ for fold,(train_,test) in enumerate(cv.split(features,targets,groups=groups)):
     else:
         results_to_save = pd.DataFrame(results)
         
-    # results_to_save.to_csv(csv_name,index = False)
+    results_to_save.to_csv(csv_name,index = False)

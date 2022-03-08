@@ -30,9 +30,9 @@ with open(f'{bash_folder}/qsub_jobs.py','w') as f:
     f.write("""import os\nimport time""")
 
 collections = []
-for mm,folder_name in enumerate(['confidence',
-                                 'accuracy',
-                                 'confidence-accuracy',
+for mm,folder_name in enumerate([#'confidence',
+                                 #'accuracy',
+                                 #'confidence-accuracy',
                                  'RT',
                                  'confidence-RT']):
     for ll,model_name in enumerate(['SVM','RF']):

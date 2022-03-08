@@ -129,8 +129,9 @@ def preprocess(working_data,
                                           )
         t.set_description(f'{filename} sub-{sub} {np.mean(accuracy[time_steps:]):.2f}')
         for (features_,targets_),accuracy_,rt_ in zip(list(data_gen),
-                                                      accuracy[time_steps:],
-                                                      rt[time_steps:],):
+                                                      accuracy[time_steps:],# acc of current trial
+                                                      rt[time_steps:],# rt of current trial
+                                                      ):
             df["sub"        ].append(sub)
             df["filename"   ].append(filename)
             df["targets"    ].append(targets_.flatten()[0])
@@ -210,8 +211,10 @@ def check_column_type(df_sub):
                 df_sub[name] = df_sub[name].astype(int)
             except:
                 df_sub[name] = df_sub[name].astype(str)
+        elif name == 'targets':
+            df_sub[name] = df_sub['name'].astype(int)
         else:
-            df_sub[name] = df_sub[name].astype(int)
+            df_sub[name] = df_sub[name].astype(float)
     return df_sub
 
 # the most important helper function: early stopping and model saving
