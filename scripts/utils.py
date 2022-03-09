@@ -212,7 +212,7 @@ def check_column_type(df_sub):
             except:
                 df_sub[name] = df_sub[name].astype(str)
         elif name == 'targets':
-            df_sub[name] = df_sub['name'].astype(int)
+            df_sub[name] = df_sub[name].astype(int)
         else:
             df_sub[name] = df_sub[name].astype(float)
     return df_sub
