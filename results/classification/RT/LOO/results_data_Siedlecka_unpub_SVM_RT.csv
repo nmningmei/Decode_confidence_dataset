@@ -14,7 +14,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0010447261057882507,-0.014649861147623752,-0.007513303957395437,0.0007327417751537082,-0.01639134162047823,-0.007977905978659218,-0.010796169802505102
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0010447261057882,-0.0146498611476237,-0.0075133039573954,0.0007327417751537,-0.0163913416204782,-0.0079779059786592,-0.0107961698025051
 0,0.6426723506653514,208,same,AU0903,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -30,7 +30,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.005077934129691529,-0.008799000621154848,-0.004784223689429668,0.004452086791406592,-0.00866640334221805,-0.004413268878329858,0.0026485563952265458
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0050779341296915,-0.0087990006211548,-0.0047842236894296,0.0044520867914065,-0.008666403342218,-0.0044132688783298,0.0026485563952265
 0,0.6426723506653514,208,same,AU0903,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -46,7 +46,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.005707489299756865,-0.00863031665571406,-0.004607239979426392,-0.006447086682566096,-0.011174614127869534,6.087052415624602e-05,0.0059901731075470135
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0057074892997568,-0.008630316655714,-0.0046072399794263,-0.006447086682566,-0.0111746141278695,6.087052415624602e-05,0.005990173107547
 0,0.6426723506653514,208,same,AU0903,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -62,7 +62,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0069423692076583405,-0.003372699543870842,-0.0010545820159665335,0.006044592183585653,-0.005079532484680173,-0.0012235906268951205,0.009023161208651443
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0069423692076583,-0.0033726995438708,-0.0010545820159665,0.0060445921835856,-0.0050795324846801,-0.0012235906268951,0.0090231612086514
 0,0.6426723506653514,208,same,AU0903,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -78,7 +78,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.023178272222697294,0.006150573428685383,0.008860468695092131,0.012722255117868671,0.002753492955087264,0.004421206233259521,0.013053764295761385
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0231782722226972,0.0061505734286853,0.0088604686950921,0.0127222551178686,0.0027534929550872,0.0044212062332595,0.0130537642957613
 1,0.6537058442932654,201,same,Ak1804,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -97,7 +97,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.17403480241032854,-0.03565130363392005,-0.0415927599319469,-0.026281670190571878,-0.06141994853999965,0.07131307897176821,0.07928882060588907
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.1740348024103285,-0.03565130363392,-0.0415927599319469,-0.0262816701905718,-0.0614199485399996,0.0713130789717682,0.079288820605889
 1,0.6537058442932654,201,same,Ak1804,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -116,7 +116,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.04696786635723793,-0.011714005585825025,0.01314632864543306,-0.05075274302862786,-0.029493288004501014,-0.1227337203507359,0.3131561345655331
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0469678663572379,-0.011714005585825,0.013146328645433,-0.0507527430286278,-0.029493288004501,-0.1227337203507359,0.3131561345655331
 1,0.6537058442932654,201,same,Ak1804,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -135,7 +135,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.03022060551374099,0.016283754253519273,0.06445598876683367,-0.10133786960905691,-0.03537773536339383,-0.00967502617011455,0.08788450977267367
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.0302206055137409,0.0162837542535192,0.0644559887668336,-0.1013378696090569,-0.0353777353633938,-0.0096750261701145,0.0878845097726736
 1,0.6537058442932654,201,same,Ak1804,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -154,7 +154,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.017551392169161753,-0.10262055475512216,0.05763487835776392,-0.20692505165945085,-0.09812936668075187,-0.1525904228470657,0.07782238614629251
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0175513921691617,-0.1026205547551221,0.0576348783577639,-0.2069250516594508,-0.0981293666807518,-0.1525904228470657,0.0778223861462925
 1,0.6537058442932654,201,same,Ak1804,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -173,7 +173,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,-0.012147275864943186,-0.22228209510625477,-0.04928554970571974,0.10196814137661939,-0.08467626575600182,-0.0719696170948891,0.14095061608486265
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,-0.0121472758649431,-0.2222820951062547,-0.0492855497057197,0.1019681413766193,-0.0846762657560018,-0.0719696170948891,0.1409506160848626
 2,0.5362432918351945,98,same,IJ0305,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -189,7 +189,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0010688770149888378,-0.012221907225789648,-0.006244946175946866,0.0011311127266231532,-0.01601943280486362,-0.005156249710561596,-0.007006651362002136
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0010688770149888,-0.0122219072257896,-0.0062449461759468,0.0011311127266231,-0.0160194328048636,-0.0051562497105615,-0.0070066513620021
 2,0.5362432918351945,98,same,IJ0305,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -205,7 +205,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.005006636381114162,-0.01291557082155138,-0.009029452327318353,0.004712585304061225,-0.016242954075313124,-0.010271796684117986,-0.005472650239448439
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.0050066363811141,-0.0129155708215513,-0.0090294523273183,0.0047125853040612,-0.0162429540753131,-0.0102717966841179,-0.0054726502394484
 2,0.5362432918351945,98,same,IJ0305,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -221,7 +221,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.0004679281945169557,-0.010680974960968722,-0.011537471386051634,-0.003181430317115268,-0.015768975539143727,0.0015578732112680029,0.0020747764812531636
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.0004679281945169,-0.0106809749609687,-0.0115374713860516,-0.0031814303171152,-0.0157689755391437,0.001557873211268,0.0020747764812531
 2,0.5362432918351945,98,same,IJ0305,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -237,7 +237,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,-0.0005569458635792116,-0.009037412342560716,-0.005188937425377001,0.006072653997345936,-0.012303877536804501,-0.007088605600546253,0.004977126659845231
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,-0.0005569458635792,-0.0090374123425607,-0.005188937425377,0.0060726539973459,-0.0123038775368045,-0.0070886056005462,0.0049771266598452
 2,0.5362432918351945,98,same,IJ0305,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -253,8 +253,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.01392930871320947,0.0028331955549704578,0.003493442252049157,0.013501800451050296,-0.0023963123475577576,0.004423111269564626,0.010627021474381318
-3,0.43513368489786913,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0139293087132094,0.0028331955549704,0.0034934422520491,0.0135018004510502,-0.0023963123475577,0.0044231112695646,0.0106270214743813
+3,0.4351336848978691,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -272,8 +272,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.003710508221653707,0.024585469777719336,0.05835131467705775,-0.007238750316139103,-0.056730651501389104,0.006666655907135459,-0.019232218331502925
-3,0.43513368489786913,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0037105082216537,0.0245854697777193,0.0583513146770577,-0.0072387503161391,-0.0567306515013891,0.0066666559071354,-0.0192322183315029
+3,0.4351336848978691,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -291,8 +291,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.004459088582723409,-0.009492128631628006,0.08677575249051284,-0.04766094084228351,-0.008039427863893674,0.013898899955814337,0.08064273566944143
-3,0.43513368489786913,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.0044590885827234,-0.009492128631628,0.0867757524905128,-0.0476609408422835,-0.0080394278638936,0.0138988999558143,0.0806427356694414
+3,0.4351336848978691,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -310,8 +310,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.019036952667073566,-0.000547528195991763,0.07358248043923608,-0.08181898669169786,-0.1509455693372656,0.0071216194752560524,-0.06419233957612677
-3,0.43513368489786913,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0190369526670735,-0.0005475281959917,0.073582480439236,-0.0818189866916978,-0.1509455693372656,0.007121619475256,-0.0641923395761267
+3,0.4351336848978691,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -329,8 +329,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,-0.07691876622972944,-0.0032896315086212054,0.09082362590037275,-0.006865223693140632,-0.06522259736530472,-0.07933606539555578,-0.027963767135014965
-3,0.43513368489786913,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,-0.0769187662297294,-0.0032896315086212,0.0908236259003727,-0.0068652236931406,-0.0652225973653047,-0.0793360653955557,-0.0279637671350149
+3,0.4351336848978691,200,same,Lea,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -348,7 +348,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.008464930106008997,0.04686992334862824,0.11178457885504328,-0.02495371488907073,-0.04617088204034435,-0.04264391140496963,-0.04583051779906017
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0084649301060089,0.0468699233486282,0.1117845788550432,-0.0249537148890707,-0.0461708820403443,-0.0426439114049696,-0.0458305177990601
 4,0.6273014090033653,209,same,MB2410,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -364,7 +364,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,5.231878593804902e-13,1.6672882156735527e-13,4.590745334835726e-13,1.184097182746267e-12,2.4886541376632795e-13,-9.12439746549471e-13,-9.451045062145313e-13
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,5.231878593804903e-13,1.667288215673553e-13,4.590745334835726e-13,1.1840971827462669e-12,2.48865413766328e-13,-9.12439746549471e-13,-9.451045062145313e-13
 4,0.6273014090033653,209,same,MB2410,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -380,7 +380,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-9.31801658218777e-13,7.359557302401024e-14,1.0130203231272783e-12,7.042329318630352e-14,-5.239217077258068e-13,-1.5683125628250675e-14,1.9816959424726156e-12
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-9.31801658218777e-13,7.359557302401024e-14,1.0130203231272785e-12,7.042329318630352e-14,-5.239217077258069e-13,-1.5683125628250675e-14,1.981695942472616e-12
 4,0.6273014090033653,209,same,MB2410,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -396,7 +396,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-6.046168498718857e-13,-6.240036660619614e-13,4.054628953038998e-13,2.8982334016111624e-13,-2.672790487002089e-13,-5.794008484743756e-14,-1.681278592104371e-13
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-6.046168498718858e-13,-6.240036660619615e-13,4.054628953038998e-13,2.8982334016111624e-13,-2.672790487002089e-13,-5.794008484743756e-14,-1.6812785921043712e-13
 4,0.6273014090033653,209,same,MB2410,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -412,7 +412,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,7.962738753405147e-13,-2.502112848640832e-13,-2.5890874262935807e-13,3.208489428786046e-16,-1.5829015386481614e-14,3.0783447382718145e-13,3.943691634923194e-13
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,7.962738753405147e-13,-2.502112848640832e-13,-2.589087426293581e-13,3.208489428786046e-16,-1.5829015386481614e-14,3.0783447382718145e-13,3.943691634923194e-13
 4,0.6273014090033653,209,same,MB2410,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -428,7 +428,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,2.4554193962687824e-13,-9.326602467294851e-13,-4.579863155625433e-13,2.8244224867668216e-13,-6.406283115464858e-13,1.3275098045439662e-13,9.813366065539405e-14
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,2.4554193962687824e-13,-9.326602467294853e-13,-4.579863155625434e-13,2.8244224867668216e-13,-6.406283115464858e-13,1.3275098045439662e-13,9.813366065539405e-14
 5,0.6317720781439898,100,same,NG,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -444,7 +444,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0013507351133685273,-0.01315271191914745,-0.005103412776456351,-0.001017598987977636,-0.018477715841781695,-0.010519297527346356,-0.004889974989132421
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0013507351133685,-0.0131527119191474,-0.0051034127764563,-0.0010175989879776,-0.0184777158417816,-0.0105192975273463,-0.0048899749891324
 5,0.6317720781439898,100,same,NG,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -460,7 +460,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.00039508694697733607,-0.011309686726307635,-0.01033910692926116,0.0024963005137777594,-0.013368160118547384,-0.008257520145819116,-0.005824996433635619
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.0003950869469773,-0.0113096867263076,-0.0103391069292611,0.0024963005137777,-0.0133681601185473,-0.0082575201458191,-0.0058249964336356
 5,0.6317720781439898,100,same,NG,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -476,7 +476,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,4.962234306391309e-05,-0.010788898539773151,-0.011244465355770332,-0.00980401647874427,-0.015163078117007062,-0.005295114227217333,0.005406032957764712
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,4.962234306391309e-05,-0.0107888985397731,-0.0112444653557703,-0.0098040164787442,-0.015163078117007,-0.0052951142272173,0.0054060329577647
 5,0.6317720781439898,100,same,NG,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -492,7 +492,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.002617011246192483,-0.0068465773112273975,-0.004868805991393219,0.002961237799713486,-0.012740278063518561,-0.009102510800260867,0.007193873893622465
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0026170112461924,-0.0068465773112273,-0.0048688059913932,0.0029612377997134,-0.0127402780635185,-0.0091025108002608,0.0071938738936224
 5,0.6317720781439898,100,same,NG,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -508,7 +508,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.01763565379793836,0.004494575479557592,0.003628599962026853,0.009592603984880684,-0.003016168956878062,-0.0005587502811611025,0.014150133913262477
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0176356537979383,0.0044945754795575,0.0036285999620268,0.0095926039848806,-0.003016168956878,-0.0005587502811611,0.0141501339132624
 6,0.4735426328817092,154,same,PD1907,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -524,7 +524,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0021765739626090044,-0.010756517671432887,-1.3243755420197553e-05,0.0031944981103714373,-0.013125846462814079,-0.0024234499687863305,-0.006512471055284313
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.002176573962609,-0.0107565176714328,-1.3243755420197552e-05,0.0031944981103714,-0.013125846462814,-0.0024234499687863,-0.0065124710552843
 6,0.4735426328817092,154,same,PD1907,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -540,7 +540,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.0004538085133874812,-0.010344148860079741,-0.009279849675997789,0.002538192634483747,-0.012456228714252213,-0.006273922488948791,-0.005084385809797253
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.0004538085133874,-0.0103441488600797,-0.0092798496759977,0.0025381926344837,-0.0124562287142522,-0.0062739224889487,-0.0050843858097972
 6,0.4735426328817092,154,same,PD1907,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -556,7 +556,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0025689649498543306,-0.011002664791527518,-0.006453008547461125,-0.005861886162608165,-0.01310513371832423,-0.0007835655309092187,0.003985601879030058
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0025689649498543,-0.0110026647915275,-0.0064530085474611,-0.0058618861626081,-0.0131051337183242,-0.0007835655309092,0.00398560187903
 6,0.4735426328817092,154,same,PD1907,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -572,7 +572,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.005290974256874597,-0.0028877121752674995,0.0008421604828527987,0.007913330955170491,-0.005940321598080837,-0.0002475957973225596,0.005073044337393946
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0052909742568745,-0.0028877121752674,0.0008421604828527,0.0079133309551704,-0.0059403215980808,-0.0002475957973225,0.0050730443373939
 6,0.4735426328817092,154,same,PD1907,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -588,7 +588,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.020311833725892316,0.0066849487067003385,0.009522101209052341,0.013414307960870304,0.0020364149975455963,0.007011822059191656,0.011551379103624282
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0203118337258923,0.0066849487067003,0.0095221012090523,0.0134143079608703,0.0020364149975455,0.0070118220591916,0.0115513791036242
 7,0.6138809774309738,209,same,P_10848,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -607,7 +607,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.05606223579484536,-0.12579588643235162,-0.1254826001727454,0.02465094506487245,0.12966224702990445,-0.15928443197852285,0.007616989372147612
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0560622357948453,-0.1257958864323516,-0.1254826001727454,0.0246509450648724,0.1296622470299044,-0.1592844319785228,0.0076169893721476
 7,0.6138809774309738,209,same,P_10848,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -626,7 +626,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.13068792396231013,-0.0026277650671500613,-0.02697800745552696,0.038545723784898796,0.1159850789867737,-0.07577144608070521,-0.028346881057378856
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,-0.1306879239623101,-0.00262776506715,-0.0269780074555269,0.0385457237848987,0.1159850789867737,-0.0757714460807052,-0.0283468810573788
 7,0.6138809774309738,209,same,P_10848,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -645,7 +645,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.10615134998728815,0.009159837282638562,-0.09480487568100283,0.019924745865016517,-0.03152098277494102,-0.07579440418048505,0.024980944841776737
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.1061513499872881,0.0091598372826385,-0.0948048756810028,0.0199247458650165,-0.031520982774941,-0.075794404180485,0.0249809448417767
 7,0.6138809774309738,209,same,P_10848,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -664,7 +664,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,-0.01522238938881415,0.04856548360449368,-0.05467940277647415,-0.25883468544456856,0.1655415290270899,0.027985694262227467,0.09073550894144124
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,-0.0152223893888141,0.0485654836044936,-0.0546794027764741,-0.2588346854445685,0.1655415290270899,0.0279856942622274,0.0907355089414412
 7,0.6138809774309738,209,same,P_10848,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=100.0,
                                                                               class_weight='balanced',
                                                                               loss='epsilon_insensitive',
@@ -683,7 +683,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.023197727877700802,0.12456525558233096,0.1763039038617842,-0.06334251805177395,0.1111487620637201,0.06494405378778192,0.018147519844538225
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0231977278777008,0.1245652555823309,0.1763039038617842,-0.0633425180517739,0.1111487620637201,0.0649440537877819,0.0181475198445382
 8,0.5424088398369418,170,same,an1312,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -699,7 +699,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0021178708858126333,-0.012917151279137376,-0.0031060009993339986,0.0004285522802655448,-0.015134427016093799,-0.004763908135199878,-0.004246627168700994
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0021178708858126,-0.0129171512791373,-0.0031060009993339,0.0004285522802655,-0.0151344270160937,-0.0047639081351998,-0.0042466271687009
 8,0.5424088398369418,170,same,an1312,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -715,7 +715,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.001201192593382557,-0.007822532139494172,-0.008864237379555488,0.002200463695035186,-0.012987363000990546,-0.009430677605303509,-0.0004541367517243438
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0012011925933825,-0.0078225321394941,-0.0088642373795554,0.0022004636950351,-0.0129873630009905,-0.0094306776053035,-0.0004541367517243
 8,0.5424088398369418,170,same,an1312,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -731,7 +731,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0028693424610406787,-0.01337080388307754,-0.010036108461506857,-0.005864241337282019,-0.015075241769709709,-0.0007457912943545799,0.003096291132512982
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0028693424610406,-0.0133708038830775,-0.0100361084615068,-0.005864241337282,-0.0150752417697097,-0.0007457912943545,0.0030962911325129
 8,0.5424088398369418,170,same,an1312,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -747,7 +747,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0036562704268257996,-0.00604074364876762,-0.0021157762075031013,0.0017434041896817471,-0.006964812465387215,-0.0022114256361142077,0.009230630073110702
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0036562704268257,-0.0060407436487676,-0.0021157762075031,0.0017434041896817,-0.0069648124653872,-0.0022114256361142,0.0092306300731107
 8,0.5424088398369418,170,same,an1312,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -763,7 +763,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.020181129777402423,0.0034951896426537285,0.00641041291865903,0.010051904280434946,0.0001490938070031291,0.003534060129685038,0.012551779940460486
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0201811297774024,0.0034951896426537,0.006410412918659,0.0100519042804349,0.0001490938070031,0.003534060129685,0.0125517799404604
 9,0.6224002467556391,209,same,do2205,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -779,7 +779,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0067152190972934005,-0.00811420318894616,-0.004603921462186679,0.0007714195340338657,-0.016195398095814422,0.00018288227865688147,-0.0023808149500942153
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0067152190972934,-0.0081142031889461,-0.0046039214621866,0.0007714195340338,-0.0161953980958144,0.0001828822786568,-0.0023808149500942
 9,0.6224002467556391,209,same,do2205,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -795,7 +795,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.008485273004120998,-0.0034376726333209583,-0.010034296466911476,0.00470359128987172,-0.011743905536291456,0.000543650403695948,-0.0008050287695254396
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0084852730041209,-0.0034376726333209,-0.0100342964669114,0.0047035912898717,-0.0117439055362914,0.0005436504036959,-0.0008050287695254
 9,0.6224002467556391,209,same,do2205,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -811,7 +811,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.00029158674129016205,-0.013398055562647615,-0.009879050646964368,-0.007766328807311695,-0.016427585684574437,-0.0035493967635054366,0.0018729386855823058
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,-0.0002915867412901,-0.0133980555626476,-0.0098790506469643,-0.0077663288073116,-0.0164275856845744,-0.0035493967635054,0.0018729386855823
 9,0.6224002467556391,209,same,do2205,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -827,7 +827,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.008259539157763073,-0.003503974257831558,-0.00565643281572669,0.0012900809279855357,-0.012097422613585969,-0.0011785277082110343,0.011087093527561723
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.008259539157763,-0.0035039742578315,-0.0056564328157266,0.0012900809279855,-0.0120974226135859,-0.001178527708211,0.0110870935275617
 9,0.6224002467556391,209,same,do2205,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -843,7 +843,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.024919979364462393,0.008581171408667957,0.004947118746986123,0.011677756698367178,0.00022288005506496448,0.01011107194112931,0.014307481369592246
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0249199793644623,0.0085811714086679,0.0049471187469861,0.0116777566983671,0.0002228800550649,0.0101110719411293,0.0143074813695922
 10,0.4387231377957345,100,same,katost,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -859,7 +859,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0033544688955282806,-0.010563201288566648,-0.0036429176482822524,0.002557110923680988,-0.014568969656180035,-0.0029305946219741353,-0.003843009783107497
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0033544688955282,-0.0105632012885666,-0.0036429176482822,0.0025571109236809,-0.01456896965618,-0.0029305946219741,-0.0038430097831074
 10,0.4387231377957345,100,same,katost,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -875,7 +875,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.00304275872326089,-0.00573599676979602,-0.008187472816373359,0.003638689028235782,-0.01120502943848744,-0.0058969087834845,0.0015349686638167475
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0030427587232608,-0.005735996769796,-0.0081874728163733,0.0036386890282357,-0.0112050294384874,-0.0058969087834845,0.0015349686638167
 10,0.4387231377957345,100,same,katost,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -891,7 +891,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.008428027528196644,-0.009129254933799506,-0.005482878565969683,-0.001541262442381942,-0.013876316795180544,-0.002945337619107652,0.0006654730197184976
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0084280275281966,-0.0091292549337995,-0.0054828785659696,-0.0015412624423819,-0.0138763167951805,-0.0029453376191076,0.0006654730197184
 10,0.4387231377957345,100,same,katost,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -907,7 +907,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.002710102085381245,-0.004558852988110615,-0.004056643013616133,-0.00030255352735001403,-0.0072794902710637535,0.00030839984340857253,0.009808635473152647
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0027101020853812,-0.0045588529881106,-0.0040566430136161,-0.00030255352735,-0.0072794902710637,0.0003083998434085,0.0098086354731526
 10,0.4387231377957345,100,same,katost,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -923,7 +923,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.021731200047572723,0.006107800362379496,0.006228469993497673,0.012131338040336833,0.0014949850184190368,0.005935754883093656,0.013670859992412203
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0217312000475727,0.0061078003623794,0.0062284699934976,0.0121313380403368,0.001494985018419,0.0059357548830936,0.0136708599924122
 11,0.6542616514058834,172,same,km0610,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -939,7 +939,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.005128515524147359,-0.0074391544507787545,-0.0024483496522092773,-0.0011424562577391681,-0.01654401516611324,-0.0026358732936378974,-0.00207418334952818
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0051285155241473,-0.0074391544507787,-0.0024483496522092,-0.0011424562577391,-0.0165440151661132,-0.0026358732936378,-0.0020741833495281
 11,0.6542616514058834,172,same,km0610,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -955,7 +955,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0020407192878169047,-0.004350627247897016,-0.009466307899096764,0.0011873528622057515,-0.012633849744281155,-0.005935585767347532,0.003953189806347384
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0020407192878169,-0.004350627247897,-0.0094663078990967,0.0011873528622057,-0.0126338497442811,-0.0059355857673475,0.0039531898063473
 11,0.6542616514058834,172,same,km0610,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -971,7 +971,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.003343135755081476,-0.01190933508648703,-0.0076831870499468125,-0.004655387626418598,-0.014540684353034985,-0.0015165850508054813,0.004588794217532023
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0033431357550814,-0.011909335086487,-0.0076831870499468,-0.0046553876264185,-0.0145406843530349,-0.0015165850508054,0.004588794217532
 11,0.6542616514058834,172,same,km0610,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -987,7 +987,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.005461020001337571,-0.002467967631866029,-0.004088683097580646,7.173266187902337e-05,-0.00975248560267862,-0.0019139533230541407,0.01094447344976199
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0054610200013375,-0.002467967631866,-0.0040886830975806,7.173266187902337e-05,-0.0097524856026786,-0.0019139533230541,0.0109444734497619
 11,0.6542616514058834,172,same,km0610,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1003,7 +1003,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.022335694742583737,0.008307917313741114,0.005994233830254261,0.00993027814724395,-0.0009779020717382042,0.005694991186885768,0.01641625436381117
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0223356947425837,0.0083079173137411,0.0059942338302542,0.0099302781472439,-0.0009779020717382,0.0056949911868857,0.0164162543638111
 12,0.5095113571676071,49,same,kma25,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1019,7 +1019,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0001778489277167879,-0.012980957282170011,-0.004707831234231033,-0.0023913302461693116,-0.012003325329451456,-0.002767701091389116,-0.0029864240664274067
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0001778489277167,-0.01298095728217,-0.004707831234231,-0.0023913302461693,-0.0120033253294514,-0.0027677010913891,-0.0029864240664274
 12,0.5095113571676071,49,same,kma25,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1035,7 +1035,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0016344559533655757,-0.006909331562160431,-0.00784232631756481,-0.00016011445806997702,-0.009339696606487745,-0.005704951402349985,0.0017518637111113582
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0016344559533655,-0.0069093315621604,-0.0078423263175648,-0.0001601144580699,-0.0093396966064877,-0.0057049514023499,0.0017518637111113
 12,0.5095113571676071,49,same,kma25,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1051,7 +1051,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0038569481052738164,-0.013937411485990982,-0.008473937032468898,-0.005252210781234772,-0.01135692862757009,-0.0013321297273418832,0.0023451722668275843
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0038569481052738,-0.0139374114859909,-0.0084739370324688,-0.0052522107812347,-0.01135692862757,-0.0013321297273418,0.0023451722668275
 12,0.5095113571676071,49,same,kma25,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1067,7 +1067,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.002454714526896064,-0.0037379963945386365,-0.002680244305540908,0.00020499821456334565,-0.005622753713628576,0.0002001639413778739,0.008584463240812761
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.002454714526896,-0.0037379963945386,-0.0026802443055409,0.0002049982145633,-0.0056227537136285,0.0002001639413778,0.0085844632408127
 12,0.5095113571676071,49,same,kma25,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1083,7 +1083,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.01916907771158484,0.004713757323851797,0.0067331043757671944,0.00809036784535552,0.004011558240485496,0.006933645557955405,0.015382611608538602
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0191690777115848,0.0047137573238517,0.0067331043757671,0.0080903678453555,0.0040115582404854,0.0069336455579554,0.0153826116085386
 13,0.6809398638137703,148,same,mJ2510,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1101,7 +1101,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0034849525310003144,-0.005134696221825857,-0.0027297888488645623,0.006160234604131569,-0.007051897130761878,-0.0024873279681840916,-0.005352652112807459
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,-0.0034849525310003,-0.0051346962218258,-0.0027297888488645,0.0061602346041315,-0.0070518971307618,-0.002487327968184,-0.0053526521128074
 13,0.6809398638137703,148,same,mJ2510,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1119,7 +1119,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.002387325608340338,-0.0054419349056601726,-0.007480447936383834,0.009655956556497522,-0.010809749021825077,-0.006126876792406762,0.0043734654970160585
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0023873256083403,-0.0054419349056601,-0.0074804479363838,0.0096559565564975,-0.010809749021825,-0.0061268767924067,0.004373465497016
 13,0.6809398638137703,148,same,mJ2510,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1137,7 +1137,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.006447271954981781,-0.012368440149314383,-0.007514500394500246,0.0036067155054111174,-0.009950572219286288,-0.006057391356895977,0.003740671777685519
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0064472719549817,-0.0123684401493143,-0.0075145003945002,0.0036067155054111,-0.0099505722192862,-0.0060573913568959,0.0037406717776855
 13,0.6809398638137703,148,same,mJ2510,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1155,7 +1155,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0065972105479282965,-0.008854863063808291,-0.006209733083408968,-0.00030999127316986414,-0.009811207956561773,-0.002637129192759529,0.008651449707548614
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0065972105479282,-0.0088548630638082,-0.0062097330834089,-0.0003099912731698,-0.0098112079565617,-0.0026371291927595,0.0086514497075486
 13,0.6809398638137703,148,same,mJ2510,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1173,7 +1173,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.023776854859952117,0.0259060049835371,0.01263496947430743,0.014827413024628207,-0.006669510770213987,0.014615295592245933,0.011953674790372511
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0237768548599521,0.0259060049835371,0.0126349694743074,0.0148274130246282,-0.0066695107702139,0.0146152955922459,0.0119536747903725
 14,0.6205985397256681,101,same,madu,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1189,7 +1189,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0007794483526911851,-0.011624033064720169,-0.0038876114172309126,-0.0013633683075257369,-0.014262328998028602,-0.004219797673627733,-0.0008380572812850757
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0007794483526911,-0.0116240330647201,-0.0038876114172309,-0.0013633683075257,-0.0142623289980286,-0.0042197976736277,-0.000838057281285
 14,0.6205985397256681,101,same,madu,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1205,7 +1205,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0009926171401167094,-0.0060747356314174855,-0.010288475681508317,0.00167248564514591,-0.009605236925087435,-0.004107775779490024,0.0025947369831769928
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0009926171401167,-0.0060747356314174,-0.0102884756815083,0.0016724856451459,-0.0096052369250874,-0.00410777577949,0.0025947369831769
 14,0.6205985397256681,101,same,madu,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1221,7 +1221,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0032312686343809877,-0.01830630657225581,-0.009491887028922128,-0.004800092186625185,-0.01530837454157037,-0.006183179234888496,0.003120125965799713
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0032312686343809,-0.0183063065722558,-0.0094918870289221,-0.0048000921866251,-0.0153083745415703,-0.0061831792348884,0.0031201259657997
 14,0.6205985397256681,101,same,madu,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1237,7 +1237,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0020055341015561647,-0.002243447001445303,-0.004910020346881892,-0.0013048374504961633,-0.007905723072432447,0.0013986282217801703,0.009301719339478381
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0020055341015561,-0.0022434470014453,-0.0049100203468818,-0.0013048374504961,-0.0079057230724324,0.0013986282217801,0.0093017193394783
 14,0.6205985397256681,101,same,madu,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1253,7 +1253,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0189211928205288,0.005097203627504211,0.005754555174757908,0.010106595165592112,0.0009162971509140424,0.00573668049507547,0.016229544796715185
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0189211928205288,0.0050972036275042,0.0057545551747579,0.0101065951655921,0.000916297150914,0.0057366804950754,0.0162295447967151
 15,0.6229785074280982,99,same,mg1504,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1271,7 +1271,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.001979542517441915,-0.013990606489585042,-0.003242172143769399,0.001207541876064757,-0.01890440986557589,-0.005183043627580279,0.000931802759124468
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0019795425174419,-0.013990606489585,-0.0032421721437693,0.0012075418760647,-0.0189044098655758,-0.0051830436275802,0.0009318027591244
 15,0.6229785074280982,99,same,mg1504,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1289,7 +1289,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0014494500489011886,-0.006322820492357751,-0.012730351470425992,0.014169822334546861,-0.015624968004348013,-0.005221740436249278,0.0007127218105155368
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0014494500489011,-0.0063228204923577,-0.0127303514704259,0.0141698223345468,-0.015624968004348,-0.0052217404362492,0.0007127218105155
 15,0.6229785074280982,99,same,mg1504,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1307,7 +1307,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0036585157241569442,-0.013091261430633317,-0.012105811720904991,0.006380405547652657,-0.017435690465919543,-7.240150459537929e-05,0.004258065419919879
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0036585157241569,-0.0130912614306333,-0.0121058117209049,0.0063804055476526,-0.0174356904659195,-7.240150459537929e-05,0.0042580654199198
 15,0.6229785074280982,99,same,mg1504,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1325,7 +1325,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.003567754210664936,-0.00486511826257298,-0.0017805090490515486,0.0008613378748340367,-0.005538047417728319,0.0024881344419341775,0.011408564792240965
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0035677542106649,-0.0048651182625729,-0.0017805090490515,0.000861337874834,-0.0055380474177283,0.0024881344419341,0.0114085647922409
 15,0.6229785074280982,99,same,mg1504,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(C=10.0,
                                                                               class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
@@ -1343,7 +1343,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.01691134557891996,0.0025744550549976018,0.0016258428911927938,0.011216694056176577,-0.0014227951610389406,0.004948288471498523,0.01527125354869643
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0169113455789199,0.0025744550549976,0.0016258428911927,0.0112166940561765,-0.0014227951610389,0.0049482884714985,0.0152712535486964
 16,0.4531903049358256,93,same,mk0309,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1359,7 +1359,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.003367059690178168,-0.010925333772337132,-0.0036754814888616326,0.0007847041141101011,-0.014164265743237599,-0.0030272535720395843,-0.004244189447157452
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0033670596901781,-0.0109253337723371,-0.0036754814888616,0.0007847041141101,-0.0141642657432375,-0.0030272535720395,-0.0042441894471574
 16,0.4531903049358256,93,same,mk0309,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1375,7 +1375,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.002914446278379854,-0.005533692295767713,-0.008216754284015684,0.00199121107040708,-0.011630316926961714,-0.006723654041717536,0.0018894678877912367
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0029144462783798,-0.0055336922957677,-0.0082167542840156,0.001991211070407,-0.0116303169269617,-0.0067236540417175,0.0018894678877912
 16,0.4531903049358256,93,same,mk0309,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1391,7 +1391,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.008863421266417038,-0.009234383829425047,-0.006162236265079501,-0.002840073856721286,-0.014465683308498477,-0.003253360232384391,0.001971556236154913
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.008863421266417,-0.009234383829425,-0.0061622362650795,-0.0028400738567212,-0.0144656833084984,-0.0032533602323843,0.0019715562361549
 16,0.4531903049358256,93,same,mk0309,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1407,7 +1407,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.004751181006678947,-0.0032597907215272913,-0.0014756572036217902,0.00021489791129001957,-0.004627257790172121,0.0010866832726567103,0.009619422817094134
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0047511810066789,-0.0032597907215272,-0.0014756572036217,0.00021489791129,-0.0046272577901721,0.0010866832726567,0.0096194228170941
 16,0.4531903049358256,93,same,mk0309,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1423,8 +1423,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.018990031986408553,0.0049433000425098805,0.004979977893958638,0.010195583610066535,8.351727449205792e-05,0.005269927830189603,0.012772251225957706
-17,0.47734028942755363,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0189900319864085,0.0049433000425098,0.0049799778939586,0.0101955836100665,8.351727449205792e-05,0.0052699278301896,0.0127722512259577
+17,0.4773402894275536,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
                                                                               random_state=12345),
@@ -1439,8 +1439,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0008812201721135338,-0.009591888417959727,-0.003360905170737026,0.00046179015705043744,-0.013772658849217282,-0.007741547087565617,-0.005564466099015979
-17,0.47734028942755363,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0008812201721135,-0.0095918884179597,-0.003360905170737,0.0004617901570504,-0.0137726588492172,-0.0077415470875656,-0.0055644660990159
+17,0.4773402894275536,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
                                                                               random_state=12345),
@@ -1455,8 +1455,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.002011309288755449,-0.0032379734126325157,-0.009051435345105255,0.0037424726303531735,-0.009534491961231328,-0.008534584165194477,-0.0026826951435704577
-17,0.47734028942755363,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0020113092887554,-0.0032379734126325,-0.0090514353451052,0.0037424726303531,-0.0095344919612313,-0.0085345841651944,-0.0026826951435704
+17,0.4773402894275536,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
                                                                               random_state=12345),
@@ -1471,8 +1471,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.003325780374210381,-0.015657453480666817,-0.00959639735679112,-0.0027460963083689375,-0.014880358915396364,-0.009188051844057785,-0.002016553726384489
-17,0.47734028942755363,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0033257803742103,-0.0156574534806668,-0.0095963973567911,-0.0027460963083689,-0.0148803589153963,-0.0091880518440577,-0.0020165537263844
+17,0.4773402894275536,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
                                                                               random_state=12345),
@@ -1487,8 +1487,8 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.002042211163990986,-0.0022257309150928123,-0.0039656675291570385,-0.0007348209232020462,-0.006087516522325583,0.0007150173335363473,0.009393869360047411
-17,0.47734028942755363,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0020422111639909,-0.0022257309150928,-0.003965667529157,-0.000734820923202,-0.0060875165223255,0.0007150173335363,0.0093938693600474
+17,0.4773402894275536,77,same,snowboardzistka,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
                                                                               random_state=12345),
@@ -1503,7 +1503,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.01946671802022144,0.006748940310615186,0.006136297757763607,0.01047321049045545,-7.968005729670996e-05,0.0021764492972857034,0.011410924027515134
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0194667180202214,0.0067489403106151,0.0061362977577636,0.0104732104904554,-7.968005729670996e-05,0.0021764492972857,0.0114109240275151
 18,0.629940015935265,156,same,st0704,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1519,7 +1519,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0030229854218516944,-0.012226952316898732,-0.005645053641209795,0.0021640472646518106,-0.016449571427596957,-0.006159771405822068,-0.009098052086702054
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0030229854218516,-0.0122269523168987,-0.0056450536412097,0.0021640472646518,-0.0164495714275969,-0.006159771405822,-0.009098052086702
 18,0.629940015935265,156,same,st0704,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1535,7 +1535,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.002516158749489581,-0.006967806088668324,-0.011171473412329947,0.003800962609061997,-0.013784335131095104,-0.009887146587604291,-0.004798719959855014
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0025161587494895,-0.0069678060886683,-0.0111714734123299,0.0038009626090619,-0.0137843351310951,-0.0098871465876042,-0.004798719959855
 18,0.629940015935265,156,same,st0704,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1551,7 +1551,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.005961704849781216,-0.012249290138740166,-0.010992106203725895,-0.0005719115900382046,-0.016043939220903452,-0.004836226296551821,-0.0026576589545037367
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0059617048497812,-0.0122492901387401,-0.0109921062037258,-0.0005719115900382,-0.0160439392209034,-0.0048362262965518,-0.0026576589545037
 18,0.629940015935265,156,same,st0704,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1567,7 +1567,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0042690197795176715,-0.005737089450809878,-0.00478668792833831,-0.0023299817767994035,-0.009599500277680298,-0.003508345547760107,0.005878945364209433
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0042690197795176,-0.0057370894508098,-0.0047866879283383,-0.0023299817767994,-0.0095995002776802,-0.0035083455477601,0.0058789453642094
 18,0.629940015935265,156,same,st0704,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1583,7 +1583,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.020019109120539152,0.006043312865717509,0.006393711111543187,0.013599700229046304,0.0021871130353602534,0.006665035616317807,0.013741354794340634
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0200191091205391,0.0060433128657175,0.0063937111115431,0.0135997002290463,0.0021871130353602,0.0066650356163178,0.0137413547943406
 19,0.5249198161176616,209,same,wp3004,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1599,7 +1599,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.018138206534796798,0.002509924704017381,0.006706743687450884,0.009161555757996584,-0.0013157179086562474,0.007050504492074716,0.007891527418118284
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,1,0.0181382065347967,0.0025099247040173,0.0067067436874508,0.0091615557579965,-0.0013157179086562,0.0070505044920747,0.0078915274181182
 19,0.5249198161176616,209,same,wp3004,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1615,7 +1615,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.017946362576648542,0.0061101362289622116,0.004723569944542061,0.015179939366496925,0.0017663264085135933,0.008128139173045152,0.011169416509383445
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,2,0.0179463625766485,0.0061101362289622,0.004723569944542,0.0151799393664969,0.0017663264085135,0.0081281391730451,0.0111694165093834
 19,0.5249198161176616,209,same,wp3004,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1631,7 +1631,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.012508933853916177,-0.004891869136015841,0.00033684014929294295,0.0033986202905892143,-0.006018135494728472,-0.0023244649151631554,0.005070137061730935
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,3,0.0125089338539161,-0.0048918691360158,0.0003368401492929,0.0033986202905892,-0.0060181354947284,-0.0023244649151631,0.0050701370617309
 19,0.5249198161176616,209,same,wp3004,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1647,7 +1647,7 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.02880208949282027,0.017551479952413414,0.013075145526794405,0.012079078093911635,0.00702797852324632,0.019974933480921424,0.023968241761585272
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,4,0.0288020894928202,0.0175514799524134,0.0130751455267944,0.0120790780939116,0.0070279785232463,0.0199749334809214,0.0239682417615852
 19,0.5249198161176616,209,same,wp3004,"memory:None|steps:[('standardscaler', StandardScaler()), ('onevsrestclassifier', OneVsRestClassifier(estimator=CalibratedClassifierCV(base_estimator=LinearSVC(class_weight='balanced',
                                                                               loss='squared_epsilon_insensitive',
                                                                               max_iter=1000.0,
@@ -1663,4 +1663,4 @@ fold,score,n_sample,source,sub_name,best_params,feature_type,source_data,target_
                                                 loss='squared_epsilon_insensitive',
                                                 max_iter=1000.0,
                                                 random_state=12345),
-                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.01648511540754652,0.003942596724867274,0.004446000755533813,0.010043063252897968,0.0016534586281760314,0.003186050841946535,0.016321950284064055
+                       cv=5)|onevsrestclassifier__n_jobs:1",RT,Memory,Memory,5,0.0164851154075465,0.0039425967248672,0.0044460007555338,0.0100430632528979,0.001653458628176,0.0031860508419465,0.016321950284064
