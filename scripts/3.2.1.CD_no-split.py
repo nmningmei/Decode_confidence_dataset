@@ -25,14 +25,15 @@ from utils import (check_column_type,
 from sklearn.model_selection import LeaveOneGroupOut
 
 domains = np.array(list(get_domains_maps().values()))
-
+filter_func = lambda x: np.logical_and(x > 0, 5 > x)
 target_attributes = 'confidence-RT' # change attributes
+
 if True:
     for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.random.rand(4),
                                                              groups = domains):
         
         model_name          = 'RF' # change model name
-        reg_clf             = 'regression' # change type
+        reg_clf             = 'classification' # change type
         experiment_type     = 'cross_domain'
         split_data          = 'no-split'
         data_dir            = '../data'
@@ -51,6 +52,8 @@ if True:
         
         df_source           = pd.read_csv(working_df_name,)
         df_source           = check_column_type(df_source)
+        conditions          = [df_source[col_name].apply(filter_func).values for col_name in df_source.columns if ('targets' == col_name)]
+        df_source           = df_source[conditions[0]]
         features_source,targets_source,groups_source,accuracies_source = get_feature_targets(df_source,
                                                                                              n_features         = n_features,
                                                                                              time_steps         = time_steps,
@@ -96,7 +99,8 @@ if True:
             
             df_target           = pd.read_csv(os.path.join(data_dir,target_attributes,f'{target_data}.csv'))
             df_target           = check_column_type(df_target)
-            
+            conditions          = [df_target[col_name].apply(filter_func).values for col_name in df_target.columns if ('targets' == col_name)]
+            df_target           = df_target[conditions[0]]
             features_target,targets_target,groups_target,accuracies_target = get_feature_targets(df_target,
                                                                                                  n_features         = n_features,
                                                                                                  time_steps         = time_steps,
@@ -146,7 +150,7 @@ if True:
                     # test the model
                     y_pred          = model_prediction(pipeline,X_test,reg_clf = reg_clf,is_rnn = is_rnn,)
                     # evaluate the model
-                    CR_dim      = y_pred.shape[1] if reg_clf == 'classification' else 4
+                    CR_dim          = y_pred.shape[1] if reg_clf == 'classification' else 4
                     scores          = model_evaluation(y_test,y_pred,
                                                        confidence_range = CR_dim,
                                                        reg_clf          = reg_clf,
