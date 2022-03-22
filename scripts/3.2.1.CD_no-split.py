@@ -26,13 +26,13 @@ from sklearn.model_selection import LeaveOneGroupOut
 
 domains = np.array(list(get_domains_maps().values()))
 filter_func = lambda x: np.logical_and(x > 0, 5 > x)
-target_attributes = 'RT' # change attributes
+target_attributes = 'confidence-RT' # change attributes
 
 if True:
     for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.random.rand(4),
                                                              groups = domains):
         
-        model_name          = 'RF' # change model name
+        model_name          = 'SVM' # change model name
         reg_clf             = 'regression' # change type
         experiment_type     = 'cross_domain'
         split_data          = 'no-split'
