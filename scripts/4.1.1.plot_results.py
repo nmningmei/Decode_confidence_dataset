@@ -31,13 +31,15 @@ ylabel_dict = {'regression':'Variance explained',
                'classification':'ROC AUC'}
 hline_dict = {'regression':0,
                'classification':0.5}
+ylim_dict = {'regression':(-.85,.4),
+             'classification':(0,.8)}
 
 if __name__ == "__main__":
     for major_type in ['regression','classification']:
         working_dir = f'../results/{major_type}/replace/*'
         figure_dir = '../figures/'
         
-        x_order = ['confidence','accuracy','confidence-accuracy']
+        x_order = ['confidence','accuracy','confidence-accuracy','RT','confidence-RT']
         
         model_names = ['Support Vector Machine',
                        'Random Forest',
@@ -46,7 +48,7 @@ if __name__ == "__main__":
         CD_order = ['Perception','Cognitive','Memory','Mixed']
         
         dfs = {}
-        for folder_name in ['confidence','accuracy','confidence-accuracy']:
+        for folder_name in x_order:
             working_data = glob(os.path.join(working_dir.replace('replace',folder_name),'*.csv'))
             
             # load the data
@@ -74,12 +76,13 @@ if __name__ == "__main__":
                         col_order   = CD_order,
                         data        = df_scores,
                         kind        = 'bar',
-                        aspect      = 1.5,
+                        aspect      = 2,
                         seed        = 12345,
                         capsize     = .1,
                         )
         (g.set(xlabel = '',
-              ylabel = ylabel_dict[major_type],)
+               ylabel = ylabel_dict[major_type],
+               ylim = ylim_dict[major_type])
           .set_titles("{col_name} --> {row_name}"))
         [ax.axhline(hline_dict[major_type],linestyle = '--',color = 'black',alpha = 0.7) for ax in g.axes.flatten()]
         g.savefig(os.path.join(figure_dir,f'cross {major_type} results.jpg'),
