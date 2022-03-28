@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 
 from utils import (check_column_type,
+                   n_feature_func,
                    pipeline_arguments,
                    pipelines,
                    model_fit,
@@ -36,7 +37,7 @@ working_data        = glob(os.path.join(working_dir, f"{domain}.csv"))
 working_df_name     = os.path.join(data_dir,target_attributes,f'{domain}.csv')
 saving_dir          = f'../results/{reg_clf}/{target_attributes}/{experiment_type}'
 batch_size          = 32
-n_features          = 7 if target_attributes != 'confidence-RT' else 14
+n_features          = n_feature_func(target_attributes)
 time_steps          = 7
 confidence_range    = 4
 n_jobs              = -1

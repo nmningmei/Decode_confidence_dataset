@@ -33,8 +33,10 @@ collections = []
 for mm,folder_name in enumerate([#'confidence',
                                  #'accuracy',
                                  #'confidence-accuracy',
-                                 'RT',
-                                 'confidence-RT']):
+                                 #'RT',
+                                 #'confidence-RT',
+                                 'all',
+                                 ]):
     for ll,model_name in enumerate(['SVM','RF']):
         for kk,reg_clf in enumerate(['classification','regression']):
             experiment          = [folder_name,'LOO',model_name]
@@ -42,7 +44,7 @@ for mm,folder_name in enumerate([#'confidence',
             node                = 1
             core                = 12
             mem                 = 4
-            cput                = 20
+            cput                = 24
             for jj,domain in enumerate(['Perception','Cognitive','Memory','Mixed']):
                 df_temp         = pd.read_csv(os.path.join(data_dir,folder_name,f'{domain}.csv'))
                 unique_files    = pd.unique(df_temp['filename'])

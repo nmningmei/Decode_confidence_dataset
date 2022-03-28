@@ -187,6 +187,18 @@ def str2int(x):
         x = np.nan
     return x
 
+def n_feature_func(target_attributes):
+    """
+    Determine the number of features
+    """
+    if'confidence-' in target_attributes:
+        n_features = 14
+    elif target_attributes == 'all':
+        n_features = 21
+    else:
+        n_features = 7
+    return n_features
+
 def meta_adequacy(x):
     """
     If  accuracy is 1 and Confidence is  1 then adequacy is  1 

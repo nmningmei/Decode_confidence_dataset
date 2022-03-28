@@ -33,8 +33,10 @@ collections = []
 for mm,folder_name in enumerate([#'confidence',
                                  #'accuracy',
                                  #'confidence-accuracy',
-                                 'RT',
-                                 'confidence-RT']):
+                                 #'RT',
+                                 #'confidence-RT',
+                                 'all',
+                                 ]):
     for ll,model_name in enumerate(['SVM','RF']):
         for kk,reg_clf in enumerate(['classification','regression']):
             experiment          = [folder_name,'CD',model_name]
@@ -42,7 +44,7 @@ for mm,folder_name in enumerate([#'confidence',
             node                = 1
             core                = 12
             mem                 = 4
-            cput                = 20
+            cput                = 24
             new_script_name = os.path.join(bash_folder,template.replace('.py',f'_{folder_name}_{model_name}_{reg_clf}.py'))
             with open(new_script_name,'w') as new_file:
                 with open(template,'r') as old_file:

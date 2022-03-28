@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 
 from utils import (check_column_type,
+                   n_feature_func,
                    get_domains_maps,
                    pipeline_arguments,
                    pipelines,
@@ -43,7 +44,7 @@ if True:
         working_df_name     = os.path.join(data_dir,target_attributes,f'{source_data}.csv')
         saving_dir          = f'../results/{reg_clf}/{target_attributes}/{experiment_type}'
         batch_size          = 32
-        n_features          = 7 if target_attributes != 'confidence-RT' else 14
+        n_features          = n_feature_func(target_attributes)
         time_steps          = 7
         confidence_range    = 4
         n_jobs              = -1
