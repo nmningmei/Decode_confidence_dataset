@@ -111,6 +111,9 @@ def preprocess(working_data,
     elif len(target_columns) == 2:
         for ii in range(time_steps * 2):
             df[f'feature{ii + 1}'] = []
+    elif len(target_columns)== 3:
+        for ii in range(time_steps * 3):
+            df[f'feature{ii + 1}'] = []
     
     t = tqdm(df_concat.groupby(['Subj_idx','filename']),)
     for (sub,filename), df_sub in t:
@@ -141,6 +144,8 @@ def preprocess(working_data,
                 features_ = features_.flatten()
             elif len(target_columns) == 2:
                 features_ = np.hstack([features_[0,:,0],features_[0,:,1]])
+            elif len(target_columns) == 3:
+                features_ = np.hstack([features_[0,:,0],features_[0,:,1],features_[0,:,2]])
             [df[f"feature{ii + 1}"].append(f) for ii,f in enumerate(features_)]
             
     df = pd.DataFrame(df)

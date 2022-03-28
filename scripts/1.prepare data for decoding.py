@@ -11,6 +11,7 @@ experiment              | target_column
 'confidence-accuracy'   | ['Confidence','accuracy']
 'RT'                    | ['RT']
 'confidence-RT'         | ['Confidence','RT']
+'all'                   | ['Confidence','accuracy','RT']
 
 preprocess steps:
     1. concatenate all the study within a domain
@@ -25,17 +26,19 @@ from utils import preprocess,get_domains_maps
 
 # experiment              = 'confidence-accuracy'
 # target_column           = ['Confidence','accuracy']
-for experiment,target_column in zip(['confidence',
-                                     'accuracy',
-                                     'confidence-accuracy',
-                                     'RT',
-                                     'confidence-RT',
+for experiment,target_column in zip([#'confidence',
+                                     #'accuracy',
+                                     #'confidence-accuracy',
+                                     #'RT',
+                                     #'confidence-RT',
+                                     'all',
                                      ],
-                                    [['Confidence'],
-                                     ['accuracy'],
-                                     ['Confidence','accuracy'],
-                                     ['RT'],
-                                     ['Confidence','RT'],
+                                    [#['Confidence'],
+                                     #['accuracy'],
+                                     #['Confidence','accuracy'],
+                                     #['RT'],
+                                     #['Confidence','RT'],
+                                     ['Confidence','accuracy','RT']
                                      ]):
     data_dir                = '../data'
     model_dir               = '../models/{experiment}'
@@ -46,7 +49,7 @@ for experiment,target_column in zip(['confidence',
                         ]:
         working_data        = glob(os.path.join('../data/datasets',working_dir, "*.csv"))
         working_df_name     = os.path.join(data_dir,f'{experiment}',f'{get_domains_maps()[working_dir]}.csv')
-        time_steps          = 7# if experiment != 'confidence-accuracy' else 14
+        time_steps          = 7 * len(target_column)# if experiment != 'confidence-accuracy' else 14
         confidence_range    = 4
         target_columns      = target_column
         n_jobs              = -1
