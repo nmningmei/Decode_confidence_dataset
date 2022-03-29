@@ -43,7 +43,7 @@ for mm,folder_name in enumerate([#'confidence',
             data_dir            = '../data'
             node                = 1
             core                = 12
-            mem                 = 4
+            mem                 = 5
             cput                = 24
             new_script_name = os.path.join(bash_folder,template.replace('.py',f'_{folder_name}_{model_name}_{reg_clf}.py'))
             with open(new_script_name,'w') as new_file:

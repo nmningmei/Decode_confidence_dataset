@@ -43,7 +43,7 @@ for mm,folder_name in enumerate([#'confidence',
             data_dir            = '../data'
             node                = 1
             core                = 12
-            mem                 = 4
+            mem                 = 5
             cput                = 24
             for jj,domain in enumerate(['Perception','Cognitive','Memory','Mixed']):
                 df_temp         = pd.read_csv(os.path.join(data_dir,folder_name,f'{domain}.csv'))
