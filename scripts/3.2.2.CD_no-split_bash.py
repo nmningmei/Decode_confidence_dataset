@@ -66,41 +66,41 @@ for mm,folder_name in enumerate([#'confidence',
                 new_file.close()
             
             new_batch_script_name = os.path.join(bash_folder,f'CD{mm+1}{ll+1}{kk+1}')
-#             content = f"""#!/bin/bash
-# #SBATCH --partition=regular
-# #SBATCH --job-name={mm+1}{ll+1}{kk+1}
-# #SBATCH --cpus-per-task={core}
-# #SBATCH --nodes={node}
-# #SBATCH --ntasks-per-node=1
-# #SBATCH --time={cput}:00:00
-# #SBATCH --mem-per-cpu={mem}G
-# #SBATCH --output=outputs/out_{mm+1}{ll+1}{kk+1}.txt
-# #SBATCH --error=outputs/err_{mm+1}{ll+1}{kk+1}.txt
-# #SBATCH --mail-user=nmei@bcbl.eu
-
-# source /scratch/ningmei/.bashrc
-# conda activate bcbl
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/scratch/ningmei/anaconda3/lib
-# module load FSL/6.0.0-foss-2018b
-# cd $SLURM_SUBMIT_DIR
-
-# pwd
-# python3 "{new_script_name.split('/')[-1]}"
-# """
             content = f"""#!/bin/bash
-#$ -cwd
-#$ -o outputs/out_{mm+1}{ll+1}{kk+1}.txt
-#$ -e outputs/err_{mm+1}{ll+1}{kk+1}.txt
-#$ -m be
-#$ -M nmei@bcbl.eu
-#$ -N S{mm+1}{ll+1}{kk+1}
-#$ -q long.q
-#$ -S /bin/bash
+#SBATCH --partition=regular
+#SBATCH --job-name={mm+1}{ll+1}{kk+1}
+#SBATCH --cpus-per-task={core}
+#SBATCH --nodes={node}
+#SBATCH --ntasks-per-node=1
+#SBATCH --time={cput}:00:00
+#SBATCH --mem-per-cpu={mem}G
+#SBATCH --output=outputs/out_{mm+1}{ll+1}{kk+1}.txt
+#SBATCH --error=outputs/err_{mm+1}{ll+1}{kk+1}.txt
+#SBATCH --mail-user=nmei@bcbl.eu
 
-module load python/python3.6 fsl/6.0.0
+source /scratch/ningmei/.bashrc
+conda activate bcbl
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/scratch/ningmei/anaconda3/lib
+module load FSL/6.0.0-foss-2018b
+cd $SLURM_SUBMIT_DIR
 
+pwd
 python3 "{new_script_name.split('/')[-1]}"
 """
+#             content = f"""#!/bin/bash
+# #$ -cwd
+# #$ -o outputs/out_{mm+1}{ll+1}{kk+1}.txt
+# #$ -e outputs/err_{mm+1}{ll+1}{kk+1}.txt
+# #$ -m be
+# #$ -M nmei@bcbl.eu
+# #$ -N S{mm+1}{ll+1}{kk+1}
+# #$ -q long.q
+# #$ -S /bin/bash
+
+# module load python/python3.6 fsl/6.0.0
+
+# python3 "{new_script_name.split('/')[-1]}"
+# """
             with open(new_batch_script_name,'w') as f:
                 f.write(content)
                 f.close()
