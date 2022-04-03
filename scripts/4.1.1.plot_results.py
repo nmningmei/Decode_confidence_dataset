@@ -39,7 +39,7 @@ if __name__ == "__main__":
         working_dir = f'../results/{major_type}/replace/*'
         figure_dir = '../figures/'
         
-        x_order = ['confidence','accuracy','confidence-accuracy','RT','confidence-RT']
+        x_order = ['confidence','accuracy','confidence-accuracy','RT','confidence-RT','all']
         
         model_names = ['Support Vector Machine',
                        'Random Forest',
