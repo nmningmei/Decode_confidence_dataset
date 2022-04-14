@@ -30,15 +30,16 @@ filter_func = lambda x: np.logical_and(x > 0, 5 > x)
 target_attributes = 'all' # change attributes
 
 if True:
-    for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.random.rand(4),
-                                                             groups = domains):
-        
+    # for _idx_target,_idx_source in LeaveOneGroupOut().split(np.random.rand(4,10),np.random.rand(4),
+    #                                                          groups = domains):
+    if True:
         model_name          = 'RF' # change model name
-        reg_clf             = 'classification' # change type
+        reg_clf             = 'regression' # change type
         experiment_type     = 'cross_domain'
         split_data          = 'no-split'
         data_dir            = '../data'
-        source_data         = domains[_idx_source][0]
+        # source_data         = domains[_idx_source][0]
+        source_data         = 'Perception'
         # print(source_data,target_attributes)
         is_rnn              = True if model_name == 'RNN' else False
         working_df_name     = os.path.join(data_dir,target_attributes,f'{source_data}.csv')
@@ -70,7 +71,7 @@ if True:
             idxs_test.append(test)
         np.random.seed(12345)
         if len(idxs_train) > 50:
-            _idx = np.random.choice(len(idxs_train),size = 50,replace = False)
+            _idx = np.random.choice(len(idxs_train),size = 10,replace = False)
             idxs_train = [idxs_train[ii] for ii in _idx]
         
         # train the decoder on all the source data
@@ -88,7 +89,7 @@ if True:
                              )
         
         # a = []
-        for target_data in domains[_idx_target]:
+        for target_data in ['Cognitive', 'Memory', 'Mixed']:#domains[_idx_target]:
             model_dir           = '../models/{}_{}_{}_{}_{}_{}'.format(*[
                                     model_name,
                                     experiment_type,
