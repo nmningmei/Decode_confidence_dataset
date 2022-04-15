@@ -34,7 +34,7 @@ if True:
     #                                                          groups = domains):
     if True:
         model_name          = 'RF' # change model name
-        reg_clf             = 'regression' # change type
+        reg_clf             = 'classification' # change type
         experiment_type     = 'cross_domain'
         split_data          = 'no-split'
         data_dir            = '../data'
