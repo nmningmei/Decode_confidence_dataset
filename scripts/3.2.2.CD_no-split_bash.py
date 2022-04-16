@@ -44,7 +44,7 @@ for mm,folder_name in enumerate([#'confidence',
             experiment          = [folder_name,'CD',model_name]
             data_dir            = '../data'
             node                = 1
-            core                = 12
+            core                = 24
             mem                 = 5
             cput                = 24
             new_script_name = os.path.join(bash_folder,template.replace('.py',f'_{folder_name}_{model_name}_{reg_clf}.py'))

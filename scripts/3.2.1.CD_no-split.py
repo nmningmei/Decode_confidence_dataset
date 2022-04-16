@@ -71,7 +71,7 @@ if True:
             idxs_test.append(test)
         np.random.seed(12345)
         if len(idxs_train) > 50:
-            _idx = np.random.choice(len(idxs_train),size = 10,replace = False)
+            _idx = np.random.choice(len(idxs_train),size = 5,replace = False)
             idxs_train = [idxs_train[ii] for ii in _idx]
         
         # train the decoder on all the source data
