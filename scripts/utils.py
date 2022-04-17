@@ -509,7 +509,8 @@ def model_fit(pipeline,
     elif model_name == 'rf' and reg_clf == 'classification':
         model = GridSearchCV(pipeline,
                             {'randomforestclassifier__n_estimators':np.logspace(0,3,4).astype(int),
-                             'randomforestclassifier__max_depth':np.arange(n_features) + 1},
+                             'randomforestclassifier__max_depth':np.arange(n_features) + 1
+                             },
                              scoring    = 'accuracy',
                              n_jobs     = -1,
                              cv         = cv,
@@ -521,7 +522,8 @@ def model_fit(pipeline,
     elif model_name == 'rf' and reg_clf == 'regression':
         model = GridSearchCV(pipeline,
                             {'randomforestregressor__n_estimators':np.logspace(0,3,4).astype(int),
-                             'randomforestregressor__max_depth':np.arange(n_features) + 1},
+                             'randomforestregressor__max_depth':np.arange(n_features) + 1
+                             },
                              scoring    = 'explained_variance',
                              n_jobs     = -1,
                              cv         = cv,
