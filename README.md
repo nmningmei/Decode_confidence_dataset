@@ -1,4 +1,4 @@
-# Decoding analyses of the confidence dataset via linear support vector machine, random forest classifier and recurrent neural network models.
+# Decoding analyses of the confidence dataset via linear support vector machine, random forest classifier and recurrent neural network models (**for reviewers' questions**).
 
 # System Information
 - Platform:      Linux-3.10.0-514.el7.x86_64-x86_64-with-centos-7.3.1611-Core
