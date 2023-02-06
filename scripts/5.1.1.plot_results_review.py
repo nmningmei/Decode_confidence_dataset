@@ -10,7 +10,6 @@ import os,gc,re
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import seaborn.objects as so
 
 from glob import glob
 from matplotlib import pyplot as plt
@@ -24,6 +23,13 @@ palette = ['deepskyblue','tomato']
 x_order = ['confidence','accuracy',
            'confidence-accuracy','RT',
            'confidence-RT','all']
+feature_type_dict = {'confidence':'Confidence',
+                     'accuracy':'Accuracy',
+                     'confidence-accuracy':'Confidence-accuracy',
+                     'RT':'RT',
+                     'confidence-RT':'Confidence-RT',
+                     'all':'All'}
+x_map_order = [feature_type_dict[item] for item in x_order]
 model_names = ['Support Vector Machine',
                'Random Forest',
               #'Recurrent Neural Network',
@@ -37,7 +43,9 @@ ylim_dict = {'regression':(-.85,.5),
              'classification':(0,1.)}
 y_annotation = dict(regression = .45,
                     classification = .875)
-
+figure_dir = '../figures/final_figures'
+if not os.path.exists(figure_dir):
+    os.mkdir(figure_dir)
 def get_model_type(x:str):
     """
     
@@ -339,7 +347,7 @@ def figure2(working_data_past:list,
                     [.75,.77,.77,.75],
                     color = 'black',
                     )
-            ax.annotate('ooo',
+            ax.annotate('***',
                         xy = (x_center,.78),
                         ha = 'center',
                         fontsize = 14,
@@ -528,9 +536,9 @@ def figure5(working_dir:str,
                 col_axes.annotate(row['stars'],
                                   xy = (x,.68),
                                   ha = 'center',
-                                  fontsize = 14)
+                                  fontsize = 18)
             for ii,row in df_paired_sub.reset_index().iterrows():
-                sign = row['stars'].replace('*','o') if '*' in row['stars'] else row['stars']
+                sign = row['stars'] if '*' in row['stars'] else row['stars']
                 col_axes.plot([ii - .2,
                                ii - .2,
                                ii + .2,
@@ -541,7 +549,7 @@ def figure5(working_dir:str,
                 col_axes.annotate(sign,
                                   xy = (ii,.78),
                                   ha = 'center',
-                                  fontsize = 14,
+                                  fontsize = 18,
                                   )
     g.savefig(os.path.join(figure_dir,
                            f'{figure_name} {model_name}.jpg'),
@@ -601,8 +609,6 @@ def reviewer_plot(working_dir:str,
     return g,df_score,df_stat
 
 if __name__ == "__main__":
-    figure_dir = '../figures/final_figures'
-    
     """
     plot the RF model results as the main results
     """
@@ -869,7 +875,267 @@ if __name__ == "__main__":
     g,df_clf,df_stat_clf = reviewer_plot(working_dir,
                                          major_type,
                                          'supfigure6.2')
-
-
-
-
+    df_clf_original = df_clf.copy()
+    df_stat_clf_original = df_stat_clf.copy()
+    """
+    figure 7
+    """
+    model_name_select = 'Random Forest'
+    df_clf = df_clf_original[df_clf_original['model_name'] == model_name_select]
+    df_clf['feature_type'] = df_clf['feature_type'].map(feature_type_dict)
+    df_stat_clf = df_stat_clf_original[df_stat_clf_original['model_name'] == model_name_select]
+    
+    g = sns.catplot(x = 'feature_type',
+                    y = 'score',
+                    order = x_map_order,
+                    row = 'target_data',
+                    row_order = CD_order,
+                    col = 'source_data',
+                    col_order = CD_order,
+                    kind = 'bar',
+                    aspect = 1.5,
+                    data = df_clf,
+                    )
+    (g.set_axis_labels('','ROC AUC',
+                       fontsize = 32)
+      .set(ylim = (0.4,1.0))
+      .set_titles(r'{col_name} $\rightarrow$ {row_name}',
+                  ))
+    for ax in g.axes.flatten():
+        ax.axhline(0.5,linestyle = '--',
+                   color = 'black',
+                   alpha = .7,
+                   )
+        ax.set_title(ax.get_title(),
+                     fontsize = 32)
+    for ax in g.axes[-1]:
+        ax.set_xticklabels(x_map_order,
+                           rotation = 90,
+                           fontsize = 24,
+                           )
+    xtick_order = list(g.axes[-1][-1].xaxis.get_majorticklabels())
+    for row_axes,row_condition in zip(g.axes,CD_order):
+        for col_ax,col_condition in zip(row_axes,CD_order):
+            df_stat_sub = df_stat_clf[np.logical_and(
+                        df_stat_clf['source_data'] == col_condition,
+                        df_stat_clf['target_data'] == row_condition,)]
+            for xtick_obj in xtick_order:
+                position        = xtick_obj.get_position()
+                xtick_label     = xtick_obj.get_text()
+                df_sub_sub      = df_stat_sub[df_stat_sub['feature_type'].apply(lambda x:x.lower()) == xtick_label.lower()]
+                
+                if '*' in df_sub_sub['stars'].values[0]:
+                    col_ax.annotate(df_sub_sub['stars'].values[0],
+                                    xy = (position[0],y_annotation[major_type]),
+                                    ha = 'center',
+                                    fontsize = 24)
+    g.savefig(os.path.join(figure_dir,
+                           'figure7.jpg'),
+              dpi = 300,
+              bbox_inches = 'tight')
+    """
+    comparison
+    """
+    feature_type_selected = 'Confidence'
+    n_permutation = int(1e4)
+    from joblib import Parallel,delayed
+    df_comparison = df_clf[df_clf['feature_type'] == feature_type_selected]
+    df_comparison['within_cross'] = df_comparison['source_data'] == df_comparison['target_data']
+    within = df_comparison[df_comparison['within_cross'] == True]['score'].values
+    cross  = df_comparison[df_comparison['within_cross'] != True]['score'].values
+    experiment_difference = within.mean() - cross.mean()
+    
+    def _process(within,cross):
+        data_concat = np.concatenate([within,cross])
+        np.random.shuffle(data_concat)
+        new_within = data_concat[:within.shape[0]]
+        new_cross  = data_concat[within.shape[0]:]
+        new_diff = new_within.mean() - new_cross.mean()
+        return new_diff
+    res = Parallel(n_jobs = -1,verbose = 1)(delayed(_process)(**{
+                    'within':within,
+                    'cross':cross}) for _ in range(n_permutation))
+    res = np.array(res)
+    pval = (np.sum(np.abs(res) >= np.abs(experiment_difference)) + 1) / (n_permutation + 1)
+    
+    import pingouin as pg
+    df_comparison['group'] = df_comparison['source_data'] + '_' + df_comparison['target_data']
+    aov = pg.anova(data = df_comparison,dv = 'score',between = ['group'],
+                   effsize='n2')
+    posthoc = pg.pairwise_tukey(data = df_comparison,dv = 'score',between = ['group'])
+    
+    """
+    supfigure 7
+    """
+    model_name_select = 'Support Vector Machine'
+    df_clf = df_clf_original[df_clf_original['model_name'] == model_name_select]
+    df_clf['feature_type'] = df_clf['feature_type'].map(feature_type_dict)
+    df_stat_clf = df_stat_clf_original[df_stat_clf_original['model_name'] == model_name_select]
+    
+    g = sns.catplot(x = 'feature_type',
+                    y = 'score',
+                    order = x_map_order,
+                    row = 'target_data',
+                    row_order = CD_order,
+                    col = 'source_data',
+                    col_order = CD_order,
+                    kind = 'bar',
+                    aspect = 1.5,
+                    data = df_clf,
+                    )
+    (g.set_axis_labels('','ROC AUC',
+                       fontsize = 32)
+      .set(ylim = (0.4,1.0))
+      .set_titles(r'{col_name} $\rightarrow$ {row_name}',
+                  ))
+    for ax in g.axes.flatten():
+        ax.axhline(0.5,linestyle = '--',
+                   color = 'black',
+                   alpha = .7,
+                   )
+        ax.set_title(ax.get_title(),
+                     fontsize = 32)
+    for ax in g.axes[-1]:
+        ax.set_xticklabels(x_map_order,
+                           rotation = 90,
+                           fontsize = 24,
+                           )
+    xtick_order = list(g.axes[-1][-1].xaxis.get_majorticklabels())
+    for row_axes,row_condition in zip(g.axes,CD_order):
+        for col_ax,col_condition in zip(row_axes,CD_order):
+            df_stat_sub = df_stat_clf[np.logical_and(
+                        df_stat_clf['source_data'] == col_condition,
+                        df_stat_clf['target_data'] == row_condition,)]
+            for xtick_obj in xtick_order:
+                position        = xtick_obj.get_position()
+                xtick_label     = xtick_obj.get_text()
+                df_sub_sub      = df_stat_sub[df_stat_sub['feature_type'].apply(lambda x:x.lower()) == xtick_label.lower()]
+                
+                if '*' in df_sub_sub['stars'].values[0]:
+                    col_ax.annotate(df_sub_sub['stars'].values[0],
+                                    xy = (position[0],y_annotation[major_type]),
+                                    ha = 'center',
+                                    fontsize = 24)
+    g.savefig(os.path.join(figure_dir,
+                           'supfigure7.jpg'),
+              dpi = 300,
+              bbox_inches = 'tight')
+    """
+    figure 8
+    """
+    dfs = {}
+    for folder_name in x_order:
+        working_data = glob(os.path.join(
+            working_dir.replace('replace',folder_name),'*.csv'))
+        
+        # load the data
+        temp = []
+        for f in working_data:
+            df = pd.read_csv(f).dropna()
+            df['model_name'] = df['best_params'].apply(get_model_type)
+            col_names = [item for item in df.columns if ('features' in item)]
+            if '_RNN_' in f:
+                for col_name in col_names:
+                    df[col_name] = df[col_name].apply(lambda x: -x)
+            temp.append(df)
+        dfs[folder_name] = pd.concat(temp)
+    
+    df_feature_importance = dfs['all'].copy()
+    df_feature_importance = df_feature_importance[df_feature_importance['model_name'] == 'Random Forest']
+    
+    df_feature_importance.columns = [
+    'fold', 'score', 'n_sample', 'source', 'sub_name', 'best_params',
+    'feature_type', 'source_data', 'target_data', 'special',
+    'Confidence T-7',
+    'Confidence T-6',
+    'Confidence T-5',
+    'Confidence T-4',
+    'Confidence T-3',
+    'Confidence T-2',
+    'Confidence T-1',
+    'Accuracy T-7',
+    'Accuracy T-6',
+    'Accuracy T-5',
+    'Accuracy T-4',
+    'Accuracy T-3',
+    'Accuracy T-2',
+    'Accuracy T-1',
+    'RT T-7','RT T-6','RT T-5','RT T-4',
+    'RT T-3','RT T-2','RT T-1', 'model_name']
+    
+    df_for_plot = pd.melt(df_feature_importance,
+                          id_vars = ['score',
+                                     'sub_name',
+                                     'source_data',
+                                     'target_data',],
+                          value_vars = ['Confidence T-7',
+                                        'Confidence T-6',
+                                        'Confidence T-5',
+                                        'Confidence T-4',
+                                        'Confidence T-3',
+                                        'Confidence T-2',
+                                        'Confidence T-1',
+                                        'Accuracy T-7',
+                                        'Accuracy T-6',
+                                        'Accuracy T-5',
+                                        'Accuracy T-4',
+                                        'Accuracy T-3',
+                                        'Accuracy T-2',
+                                        'Accuracy T-1',
+                                        'RT T-7','RT T-6','RT T-5','RT T-4',
+                                        'RT T-3','RT T-2','RT T-1'],
+                          )
+    df_for_plot.columns = ['score',
+                           'sub_name',
+                           'source_data',
+                           'target_data',
+                           'trial',
+                           'feature_importance',
+                           ]
+    df_for_plot[' '] = df_for_plot['trial'].apply(lambda x: x.split(' ')[0])
+    df_for_plot['x'] = df_for_plot['trial'].apply(lambda x: 7 - int(x[-1]))
+    
+    g = sns.catplot(x = 'x',
+                    y = 'feature_importance',
+                    hue = ' ',
+                    hue_order = ['Confidence','Accuracy','RT'],
+                    row = 'target_data',
+                    row_order = CD_order,
+                    col = 'source_data',
+                    col_order = CD_order,
+                    data = df_for_plot,
+                    aspect = 1.5,
+                    kind = 'bar',
+                    palette = ['deepskyblue','tomato','green'],
+                    )
+    for row_axes,target in zip(g.axes,CD_order):
+        for col_ax,source in zip(row_axes,CD_order):
+            df_linear = df_for_plot[np.logical_and(
+                        df_for_plot['source_data'] == source,
+                        df_for_plot['target_data'] == target)]
+            for feature_selected,color in zip(['Confidence','Accuracy','RT'],
+                                              ['deepskyblue','tomato','green']):
+                df_for_fit = df_linear[df_linear[' '] == feature_selected]
+                sns.regplot(x = 'x',
+                            y = 'feature_importance',
+                            data = df_for_fit,
+                            seed = 12345,
+                            color = color,
+                            ax = col_ax,
+                            scatter = False,
+                            )
+    (g.set_axis_labels('Trial','Feature importance',
+                       fontsize = 30)
+      .set_titles(r'{col_name} $\rightarrow$ {row_name}',
+                  ))
+    for ax in g.axes.flatten():
+        ax.set_title(ax.get_title(),
+                     fontsize = 32)
+    for ax in g.axes[-1]:
+        ax.set_xticklabels([f'T-{7-ii}' for ii in range(7)],
+                           fontsize = 28,
+                           )
+    g.savefig(os.path.join(figure_dir,
+                           'figure8.jpg'),
+              dpi = 300,
+              bbox_inches = 'tight')
